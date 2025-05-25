@@ -167,6 +167,43 @@
         </div>
     </footer>
 
+    <script>
+        //hero slide animation - in index page
+        (function () {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dotsContainer = document.getElementById('hero-dots');
+            let current = 0, timer;
+
+            // Create dots
+            slides.forEach((_, i) => {
+                const btn = document.createElement('button');
+                btn.addEventListener('click', () => goTo(i));
+                dotsContainer.appendChild(btn);
+            });
+
+            const dots = dotsContainer.querySelectorAll('button');
+
+            function show(index) {
+                slides.forEach((s, i) => s.classList.toggle('active', i === index));
+                dots.forEach((d, i) => d.classList.toggle('active', i === index));
+                current = index;
+            }
+
+            function next() {
+                show((current + 1) % slides.length);
+            }
+
+            function goTo(i) {
+                clearInterval(timer);
+                show(i);
+                timer = setInterval(next, 5000);
+            }
+
+            // Initialize
+            show(0);
+            timer = setInterval(next, 5000);
+        })();
+    </script>
     <script src="script.js"></script>
 </body>
 

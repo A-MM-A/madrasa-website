@@ -9,41 +9,7 @@ menuToggle.addEventListener('click', () => {
 
 // ----------index page: start
 
-//hero slide animation - in index page
-(function () {
-    const slides = document.querySelectorAll('.hero-slide');
-    const dotsContainer = document.getElementById('hero-dots');
-    let current = 0, timer;
 
-    // Create dots
-    slides.forEach((_, i) => {
-        const btn = document.createElement('button');
-        btn.addEventListener('click', () => goTo(i));
-        dotsContainer.appendChild(btn);
-    });
-
-    const dots = dotsContainer.querySelectorAll('button');
-
-    function show(index) {
-        slides.forEach((s, i) => s.classList.toggle('active', i === index));
-        dots.forEach((d, i) => d.classList.toggle('active', i === index));
-        current = index;
-    }
-
-    function next() {
-        show((current + 1) % slides.length);
-    }
-
-    function goTo(i) {
-        clearInterval(timer);
-        show(i);
-        timer = setInterval(next, 5000);
-    }
-
-    // Initialize
-    show(0);
-    timer = setInterval(next, 5000);
-});
 
 
 // enroll popup - in index page
@@ -121,14 +87,18 @@ function goToStep(index) {
 
 
 //if chooses yes in medical info - in enroll form
-const medicalSelect = document.getElementById('medical');
-const infoGroup = document.getElementById('medical-info-group');
+document.addEventListener("DOMContentLoaded", function () {
+    const medicalSelect = document.getElementById("medical");
+    const medicalInfoGroup = document.getElementById("medical-info-group");
 
-medicalSelect.addEventListener('change', function () {
-    if (this.value === "1") {
-        infoGroup.style.display = "block";
-    } else {
-        infoGroup.style.display = "none";
+    if (medicalSelect && medicalInfoGroup) {
+        medicalSelect.addEventListener("change", function () {
+            if (medicalSelect.value === "1") {
+                medicalInfoGroup.style.display = "block";
+            } else {
+                medicalInfoGroup.style.display = "none";
+            }
+        });
     }
 });
 
