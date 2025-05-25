@@ -1,4 +1,4 @@
-// open menu toggle
+// open menu toggle - all files
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
 menuToggle.addEventListener('click', () => {
@@ -6,7 +6,74 @@ menuToggle.addEventListener('click', () => {
 });
 
 
-// next steps and previous in forms
+
+// ----------index page: start
+
+//hero slide animation - in index page
+(function () {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dotsContainer = document.getElementById('hero-dots');
+    let current = 0, timer;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(btn);
+    });
+    const dots = dotsContainer.querySelectorAll('button');
+
+    function show(index) {
+        slides.forEach((s, i) => s.classList.toggle('active', i === index));
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        current = index;
+    }
+
+    function next() {
+        show((current + 1) % slides.length);
+    }
+
+    function goTo(i) {
+        clearInterval(timer);
+        show(i);
+        timer = setInterval(next, 5000);
+    }
+
+    // Initialize
+    show(0);
+    timer = setInterval(next, 5000);
+})();
+
+
+// enroll popup - in index page
+  function openEnrollModal(e) {
+    e.preventDefault();
+    document.getElementById('enrollModal').style.display = 'flex';
+    document.body.classList.add('no-scroll');
+  }
+  function closeEnrollModal() {
+    document.getElementById('enrollModal').style.display = 'none';
+    document.body.classList.remove('no-scroll');
+  }
+  /* optional: close if click outside content */
+  document.getElementById('enrollModal')
+    .addEventListener('click', function(e) {
+      if (e.target === this) closeEnrollModal();
+    });
+// {/* <style>
+//   /* prevent background scroll when modal open */
+//   body.no-scroll { overflow: hidden; }
+// </style> */}
+
+
+
+// ----------index page: end
+
+
+
+
+// ----------enroll page: start
+// next steps and previous in forms - in enroll form 
 const steps = document.querySelectorAll(".form-step");
 const indicators = document.querySelectorAll(".step-indicator li");
 let currentStep = 0;
@@ -46,24 +113,7 @@ function goToStep(index) {
 }
 
 
-
-// open menu , ===
-// function toggleMenu() {
-//     document.querySelector(".nav-links").classList.toggle("active");
-// }
-
-// document.getElementById("enrollForm").addEventListener("submit", function (e) {
-//     e.preventDefault();
-//     alert("Enrollment submitted successfully!");
-// });
-
-// document.getElementById('menu-toggle').addEventListener('click', () => {
-//     document.getElementById('main-nav').classList.toggle('open');
-// });
-
-
-
-//if chooses yes in medical info
+//if chooses yes in medical info - in enroll form
 const medicalSelect = document.getElementById('medical');
 const infoGroup = document.getElementById('medical-info-group');
 
@@ -76,7 +126,7 @@ medicalSelect.addEventListener('change', function () {
 });
 
 
-//file preview
+//file preview - in enroll form
 document.querySelectorAll('.file-preview').forEach(input => {
     input.addEventListener('change', function () {
         const previewId = this.dataset.preview;
@@ -100,7 +150,7 @@ document.querySelectorAll('.file-preview').forEach(input => {
 });
 
 
-//fee price pop up
+//fee price pop up - in enroll form
 function showPricingPopup(event) {
     event.preventDefault();
     document.body.classList.add('popup-open');
@@ -112,3 +162,5 @@ function closePricingPopup() {
     document.body.classList.remove('popup-open');
 }
 
+
+// ----------enroll page: end

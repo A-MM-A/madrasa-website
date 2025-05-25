@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dar al‑Arqam Enrollment</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="media/favicon.ico" sizes="32x32" type="image/png">
+
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="media/logo.png" alt="Dar al-Arqam Logo" class="logo-image" />
+                <div class="logo-text">
+                    <h1>Dar al-Arqam</h1>
+                    <span>Qur’ān & Tarbīya</span>
+                </div>
+            </a>
+            <nav class="site-nav" id="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li><br>
+                    <li><a href="#" onclick="showPricingPopup(event)">Pricing</a></li><br>
+                    <li><a href="index.html">More Info</a></li><br>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <!-- <a href="#" class="btn donate">Donate</a> -->
+                <!-- <a href="enroll.html" class="btn enroll">Enroll Now</a> -->
+                <!-- <button class="btn icon-btn search-btn">🔍</button> -->
+                <button class="btn icon-btn mobile-menu" id="menu-toggle">☰</button>
+            </div>
+        </div>
+    </header>
+    
+
+    <main class="enroll-page">
+        <nav class="step-indicator">
+            <ol>
+                <li class="step current" onclick="goToStep(0)">Personal Info</li>
+                <li class="step disabled" onclick="goToStep(1)">Academic</li>
+                <li class="step disabled" onclick="goToStep(2)">Guardian</li>
+                <li class="step disabled" onclick="goToStep(3)">Medical Information</li>
+                <li class="step disabled" onclick="goToStep(4)">Documents</li>
+                <li class="step disabled" onclick="goToStep(5)">Payement</li>
+            </ol>
+        </nav>
+        <h1>Day Care & Qur’ān Application</h1>
+        <p class="description"></p>" <span class="required">*</span> " -> required fields.</p>
+
+        <form id="enrollForm">
+            <!-- Step 1 -->
+            <section class="form-step active">
+                <h2>Student's Information</h2><br>
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="fullName" required />
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Date of Birth <span class="required">*</span></label>
+                    <input type="date" id="birthDate" required />
+                </div>
+                <div class="form-group">
+                    <label for="Gender">Gender <span class="required">*</span></label>
+                    <select id="gender" name="Gender" required>
+                        <option value=""> -SELECT-</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Address">Residential Address <span class="required">*</span></label>
+                    <input type="text" id="Address" required />
+                </div>
+                <div class="form-group">
+                    <label for="Nationality">Nationality <span class="required">*</span></label>
+                    <select id="nation" name="Nationality" required>
+                        <option value=""> -SELECT-</option>
+                        <option value="0">Kenya</option>
+                        <option value="1">Somalia</option>
+                        <option value="1">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email </label>
+                    <input type="email" id="email" />
+                </div>
+                <div class="form-group">
+                    <label for="guardianPhone">Phone </label>
+                    <input type="tel" id="guardianPhone" />
+                </div>
+                <div class="form-buttons">
+                    <span></span>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
+                </div>
+            </section>
+
+            <!-- Step 2 -->
+            <section class="form-step">
+                <h2>Academic Background</h2><br>
+                <div class="form-group">
+                    <label for="quran-level">Current Qur’an Level <span class="required">*</span></label>
+                    <select id="quran-level" name="quran_level" required>
+                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0">0 Juzz Hafidh </option>
+                        <option value="1">1-3 Juzz Hafidh </option>
+                        <option value="2">4-10 Juzz Hafidh </option>
+                        <option value="3">10-20 Juzz Hafidh </option>
+                        <option value="4">20+ Juzz Hafidh </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="secular-level">Secular Level <span class="required">*</span></label>
+                    <select id="quran-level" name="quran_level" required>
+                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0">No Background Education</option>
+                        <option value="1">Primary Education</option>
+                        <option value="2">Secondary Education</option>
+                        <option value="3">Post-Secondary Education</option>
+                        <option value="4">University Education</option>
+                        <option value="4">Completed </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="secular-level-state">Are you still learning? <span class="required">*</span></label>
+                    <select id="quran-level" name="quran_level" required>
+                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0">No, Not learning anymore.</option>
+                        <option value="1">Yes, Still learning.</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="school">School Name </label>
+                    <input type="text" id="school" />
+                </div>
+                <div class="form-buttons">
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
+                </div>
+            </section>
+
+            <!-- Step 3 -->
+            <section class="form-step">
+                <h2>Parent/Guardian Information</h2><br>
+                <div class="form-group">
+                    <label for="representative">Who will be responsible for you? <span class="required">*</span></label>
+                    <select id="quran-level" name="quran_level" required>
+                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0">Myself</option>
+                        <option value="1">Parent</option>
+                        <option value="1">Guardian</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="guardianName"> Full Name <span class="required">*</span></label>
+                    <input type="text" id="guardianName" required />
+                </div>
+                <div class="form-group">
+                    <label for="Gender">Gender <span class="required">*</span></label>
+                    <select id="gender" name="Gender" required>
+                        <option value=""> -SELECT-</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Occupation"> Occupation <span class="required">*</span></label>
+                    <input type="text" id="Occupation" required />
+                </div>
+                <div class="form-group">
+                    <label for="Address">Residential Address <span class="required">*</span></label>
+                    <input type="text" id="Address" required />
+                </div>
+                <div class="form-group">
+                    <label for="Nationality">Nationality <span class="required">*</span></label>
+                    <select id="nation" name="Nationality" required>
+                        <option value=""> -SELECT-</option>
+                        <option value="0">Kenya</option>
+                        <option value="1">Somalia</option>
+                        <option value="1">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="id">ID / Passport Number <span class="required">*</span></label>
+                    <input type="text" id="id" required />
+                </div>
+                <div class="form-group">
+                    <label for="guardianPhone">Phone <span class="required">*</span></label>
+                    <input type="tel" id="guardianPhone" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" required />
+                </div>
+                <div class="form-buttons">
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
+                </div>
+            </section>
+
+            <!-- Step 4 -->
+            <section class="form-step">
+                <h2>Medical Information</h2><br>
+                <div class="form-group">
+                    <label for="medical">DOES YOUR CHILD HAVE ANY SERIOUS HEALTH CONDITIONS OR REQUIRE MEDICATION AT
+                        SCHOOL? <span class="required">*</span></label>
+                    <select id="medical" name="medical" required>
+                        <option value="">-SELECT-</option>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="medical-info-group" style="display: none;">
+                    <label for="medical-info">IF YES, PLEASE EXPLAIN.<span class="required">*</span></label>
+                    <input type="text" id="medical-info" name="medical_info" />
+                </div>
+                <div class="form-group">
+                    <label for="medical other">ARE THERE ANY OTHER MEDICAL CONCERNS? </label>
+                    <input type="text" id="medical other" />
+                </div>
+                <div class="form-buttons">
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
+                </div>
+            </section>
+
+            <!-- Step 5 -->
+            <section class="form-step">
+                <h2>Upload Documents</h2><br>
+                <div class="form-group">
+                    <label for="birth">Birth Certificate <span class="required">*</span></label>
+                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" required />
+                    <div id="preview-birth" class="preview-box"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="repID">Representative ID/Passport <span class="required">*</span></label>
+                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" required />
+                    <div id="preview-repID" class="preview-box"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="photo">Student's Passport Photo <span class="required">*</span></label>
+                    <input type="file" id="photo" class="file-preview" data-preview="preview-photo" required />
+                    <div id="preview-photo" class="preview-box"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="vaccine">Vaccination Record</label>
+                    <input type="file" id="vaccine" class="file-preview" data-preview="preview-vaccine" />
+                    <div id="preview-vaccine" class="preview-box"></div>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
+                </div>
+            </section>
+            <!-- Step 6 -->
+            <section class="form-step">
+                <h2>Payement</h2><br>
+                <div class="form-group">
+                    <label class="declaration">
+                        <input type="checkbox" name="agree" required />
+                        I confirm that all information is accurate and I agree to the program terms. <span
+                            class="required">*</span>
+                    </label>
+                </div>
+                <!-- <div class="form-group">
+                    <label for="birth">Birth Certificate <span class="required">*</span></label>
+                    <input type="file" id="birth" required />
+                </div> -->
+                <div class="form-buttons">
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="submit">Confirm</button>
+                </div>
+            </section>
+        </form>
+    </main>
+
+    <!-- Pricing Popup -->
+    <div id="pricingPopup" class="popup">
+        <div class="popup-content">
+            <img src="media/fee.jpg" alt="Pricing Info" />
+            <button onclick="closePricingPopup()">Done</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h1>Dar al-Arqam</h1>
+                <p>Qur’ān & Tarbīya Centre</p><br>
+                <p>&copy; 2025 Dar al-Arqam. All rights reserved.</p><br>
+                <p>
+                <h5><a href="#">By AMMA Foundation</a></h5>
+                </p>
+            </div>
+            <div>
+                <h2>Navigate</h2><br>
+                <ul>
+                    <li><a href="index.html">• Home</a></li>
+                    <li><a href="courses.html">• Courses</a></li>
+                    <li><a href="About.html">• About</a></li>
+                    <li><a href="events.html">• Events</a></li>
+                    <li><a href="contact.html">• Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>Connect</h2><br>
+                <ul>
+                    <li><a href="#">⁍ Facebook</a></li>
+                    <li><a href="#">⁍ Instagram</a></li>
+                    <li><a href="#">⁍ YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

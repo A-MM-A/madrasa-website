@@ -164,8 +164,167 @@ a {
     }
 }
 
+/* ---------------------------------------enroll now pop up */
+/* Modal overlay */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    overflow-y: auto;
+}
 
-/* Hero */
+/* Modal box */
+.modal-content {
+    background: var(--white);
+    width: 50%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    animation: modalFadeIn 0.4s ease-out;
+}
+
+/* Close “×” */
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--dark-gray);
+    cursor: pointer;
+}
+
+/* Modal title */
+.modal-content h2 {
+    margin-top: 0;
+    color: var(--dark-gray);
+    text-align: center;
+}
+
+/* Cards container */
+.cards-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Individual card */
+.enroll-card {
+    background: var(--light-green);
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.enroll-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Placeholder image area */
+.card-image {
+    width: 100%;
+    height: 240px;
+    background: var(--white);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card description */
+.card-desc h3 {
+    margin: 0.5rem 0;
+    color: var(--primary-green);
+}
+
+.card-desc p {
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    text-align: center;
+    flex-grow: 1;
+}
+
+/* Enroll button in card */
+.enroll-card button {
+    margin-top: 1rem;
+    background: var(--primary-green);
+    color: var(--white);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+}
+
+.enroll-card button:hover {
+    background: #035d48;
+    /* darker green */
+}
+
+/* Fade-in animation */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive: stack cards on small screens */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .cards-container {
+        flex-direction: column;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 20%;
+        background: var(--white);
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+
+/*---------------------------------------- Hero */
 .hero {
     background: var(--light-green);
     padding: 5rem 0;
@@ -392,7 +551,7 @@ a {
 
 
 /* --- Enrollment Page Specific Styles --- */
-.required{
+.required {
     color: red;
 }
 
