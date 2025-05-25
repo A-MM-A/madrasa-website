@@ -24,8 +24,6 @@
             background-color: white;
             margin: 4px 0;
         } */
-
-        
     </style>
 </head>
 
@@ -230,7 +228,7 @@
 
                 <div class="form-group" id="medical-info-group" style="display: none;">
                     <label for="medical-info">IF YES, PLEASE EXPLAIN.<span class="required">*</span></label>
-                    <input type="text" id="medical-info" name="medical_info"/>
+                    <input type="text" id="medical-info" name="medical_info" />
                 </div>
                 <div class="form-group">
                     <label for="medical other">ARE THERE ANY OTHER MEDICAL CONCERNS? </label>
@@ -279,8 +277,9 @@
                 <div class="form-group">
                     <label class="declaration">
                         <input type="checkbox" name="agree" required />
-                        I confirm that all information is accurate and I agree to the program terms. <span class="required">*</span>
-                      </label>
+                        I confirm that all information is accurate and I agree to the program terms. <span
+                            class="required">*</span>
+                    </label>
                 </div>
                 <!-- <div class="form-group">
                     <label for="birth">Birth Certificate <span class="required">*</span></label>
@@ -309,7 +308,9 @@
                 <h1>Dar al-Arqam</h1>
                 <p>Qur’ān & Tarbīya Centre</p><br>
                 <p>&copy; 2025 Dar al-Arqam. All rights reserved.</p><br>
-                <p><h5><a href="#">By AMMA Foundation</a></h5></p>
+                <p>
+                <h5><a href="#">By AMMA Foundation</a></h5>
+                </p>
             </div>
             <div>
                 <h2>Navigate</h2><br>
@@ -333,6 +334,8 @@
     </footer>
 
     <script>
+
+        // next steps and previous in forms
         const steps = document.querySelectorAll(".form-step");
         const indicators = document.querySelectorAll(".step-indicator li");
         let currentStep = 0;
@@ -371,6 +374,9 @@
             }
         }
 
+
+
+        // open menu , ===
         function toggleMenu() {
             document.querySelector(".nav-links").classList.toggle("active");
         }
@@ -384,6 +390,9 @@
             document.getElementById('main-nav').classList.toggle('open');
         });
 
+
+
+        //if chooses yes in medical info
         const medicalSelect = document.getElementById('medical');
         const infoGroup = document.getElementById('medical-info-group');
 
@@ -395,6 +404,8 @@
             }
         });
 
+
+        //file preview
         document.querySelectorAll('.file-preview').forEach(input => {
             input.addEventListener('change', function () {
                 const previewId = this.dataset.preview;
@@ -417,6 +428,8 @@
             });
         });
 
+
+        //fee price pop up
         function showPricingPopup(event) {
             event.preventDefault();
             document.body.classList.add('popup-open');
@@ -427,6 +440,9 @@
             document.getElementById('pricingPopup').style.display = 'none';
             document.body.classList.remove('popup-open');
         }
+
+
+
     </script>
 </body>
 
