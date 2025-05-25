@@ -28,27 +28,33 @@
 </head>
 
 <body>
-    <!-- Responsive Header -->
+    <!-- Header -->
     <header class="site-header">
         <div class="container header-inner">
             <a href="index.html" class="logo">
-                <img src="media/logo.png" alt="Dar al‑Arqam Logo" class="logo-image" />
+                <img src="media/logo.png" alt="Dar al-Arqam Logo" class="logo-image" />
                 <div class="logo-text">
-                    <h1>Dar al‑Arqam</h1>
+                    <h1>Dar al-Arqam</h1>
                     <span>Qur’ān & Tarbīya</span>
                 </div>
             </a>
             <nav class="site-nav" id="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li><br>
-                    <li><a href="#" onclick="showPricingPopup(event)">Pricing</a></li>
-                    <li><a href="index.html#info">More Info</a></li>
+                    <li><a href="#" onclick="showPricingPopup(event)">Pricing</a></li><br>
+                    <li><a href="index.html">More Info</a></li><br>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
-            <button class="btn icon-btn mobile-menu" id="menu-toggle">☰</button>
+            <div class="header-actions">
+                <!-- <a href="#" class="btn donate">Donate</a> -->
+                <!-- <a href="enroll.html" class="btn enroll">Enroll Now</a> -->
+                <!-- <button class="btn icon-btn search-btn">🔍</button> -->
+                <button class="btn icon-btn mobile-menu" id="menu-toggle">☰</button>
+            </div>
         </div>
     </header>
-
+    
 
     <main class="enroll-page">
         <nav class="step-indicator">
@@ -106,7 +112,7 @@
                 </div>
                 <div class="form-buttons">
                     <span></span>
-                    <button type="button" onclick="nextStep()">Next</button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
                 </div>
             </section>
 
@@ -149,8 +155,8 @@
                     <input type="text" id="school" />
                 </div>
                 <div class="form-buttons">
-                    <button type="button" onclick="prevStep()">Previous</button>
-                    <button type="button" onclick="nextStep()">Next</button>
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
                 </div>
             </section>
 
@@ -208,8 +214,8 @@
                     <input type="email" id="email" required />
                 </div>
                 <div class="form-buttons">
-                    <button type="button" onclick="prevStep()">Previous</button>
-                    <button type="button" onclick="nextStep()">Next</button>
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
                 </div>
             </section>
 
@@ -235,8 +241,8 @@
                     <input type="text" id="medical other" />
                 </div>
                 <div class="form-buttons">
-                    <button type="button" onclick="prevStep()">Previous</button>
-                    <button type="button" onclick="nextStep()">Next</button>
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
                 </div>
             </section>
 
@@ -267,8 +273,8 @@
                     <div id="preview-vaccine" class="preview-box"></div>
                 </div>
                 <div class="form-buttons">
-                    <button type="button" onclick="prevStep()">Previous</button>
-                    <button type="button" onclick="nextStep()">Submit & Pay</button>
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
+                    <button type="button" onclick="nextStep()"><a href="#">Next</a></button>
                 </div>
             </section>
             <!-- Step 6 -->
@@ -286,7 +292,7 @@
                     <input type="file" id="birth" required />
                 </div> -->
                 <div class="form-buttons">
-                    <button type="button" onclick="prevStep()">Previous</button>
+                    <button type="button" onclick="prevStep()"><a href="#">Previous</a></button>
                     <button type="submit">Confirm</button>
                 </div>
             </section>
@@ -333,117 +339,7 @@
         </div>
     </footer>
 
-    <script>
-
-        // next steps and previous in forms
-        const steps = document.querySelectorAll(".form-step");
-        const indicators = document.querySelectorAll(".step-indicator li");
-        let currentStep = 0;
-
-        function showStep(index) {
-            steps.forEach((step, i) => {
-                step.classList.toggle("active", i === index);
-                indicators[i].classList.toggle("current", i === index);
-                if (i < index) indicators[i].classList.add("completed");
-                else indicators[i].classList.remove("completed");
-                indicators[i].classList.toggle("disabled", i > currentStep);
-            });
-        }
-
-        function nextStep() {
-            const inputs = steps[currentStep].querySelectorAll("input");
-            for (const input of inputs) {
-                if (!input.checkValidity()) {
-                    input.reportValidity();
-                    return;
-                }
-            }
-            currentStep++;
-            showStep(currentStep);
-        }
-
-        function prevStep() {
-            currentStep--;
-            showStep(currentStep);
-        }
-
-        function goToStep(index) {
-            if (index <= currentStep) {
-                currentStep = index;
-                showStep(index);
-            }
-        }
-
-
-
-        // open menu , ===
-        function toggleMenu() {
-            document.querySelector(".nav-links").classList.toggle("active");
-        }
-
-        document.getElementById("enrollForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            alert("Enrollment submitted successfully!");
-        });
-
-        document.getElementById('menu-toggle').addEventListener('click', () => {
-            document.getElementById('main-nav').classList.toggle('open');
-        });
-
-
-
-        //if chooses yes in medical info
-        const medicalSelect = document.getElementById('medical');
-        const infoGroup = document.getElementById('medical-info-group');
-
-        medicalSelect.addEventListener('change', function () {
-            if (this.value === "1") {
-                infoGroup.style.display = "block";
-            } else {
-                infoGroup.style.display = "none";
-            }
-        });
-
-
-        //file preview
-        document.querySelectorAll('.file-preview').forEach(input => {
-            input.addEventListener('change', function () {
-                const previewId = this.dataset.preview;
-                const previewBox = document.getElementById(previewId);
-                const file = this.files[0];
-
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    if (file.type.startsWith("image/")) {
-                        previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-                    } else if (file.type === "application/pdf") {
-                        previewBox.innerHTML = `<iframe src="${e.target.result}" width="100%" height="400px"></iframe>`;
-                    } else {
-                        previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
-                    }
-                };
-                reader.readAsDataURL(file);
-            });
-        });
-
-
-        //fee price pop up
-        function showPricingPopup(event) {
-            event.preventDefault();
-            document.body.classList.add('popup-open');
-            document.getElementById('pricingPopup').style.display = 'flex';
-        }
-
-        function closePricingPopup() {
-            document.getElementById('pricingPopup').style.display = 'none';
-            document.body.classList.remove('popup-open');
-        }
-
-
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
