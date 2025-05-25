@@ -21,6 +21,7 @@ menuToggle.addEventListener('click', () => {
         btn.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(btn);
     });
+
     const dots = dotsContainer.querySelectorAll('button');
 
     function show(index) {
@@ -42,28 +43,31 @@ menuToggle.addEventListener('click', () => {
     // Initialize
     show(0);
     timer = setInterval(next, 5000);
-})();
+});
 
 
 // enroll popup - in index page
-  function openEnrollModal(e) {
+function openEnrollModal(e) {
     e.preventDefault();
     document.getElementById('enrollModal').style.display = 'flex';
     document.body.classList.add('no-scroll');
-  }
-  function closeEnrollModal() {
+}
+function closeEnrollModal() {
     document.getElementById('enrollModal').style.display = 'none';
     document.body.classList.remove('no-scroll');
-  }
-  /* optional: close if click outside content */
-  document.getElementById('enrollModal')
-    .addEventListener('click', function(e) {
-      if (e.target === this) closeEnrollModal();
+}
+/* optional: close if click outside content */
+document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('enrollModal');
+
+    if (!modal) return;
+
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            closeEnrollModal();
+        }
     });
-// {/* <style>
-//   /* prevent background scroll when modal open */
-//   body.no-scroll { overflow: hidden; }
-// </style> */}
+});
 
 
 
@@ -98,11 +102,14 @@ function nextStep() {
     }
     currentStep++;
     showStep(currentStep);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function prevStep() {
     currentStep--;
     showStep(currentStep);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function goToStep(index) {
