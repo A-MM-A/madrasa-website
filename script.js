@@ -9,7 +9,7 @@ menuToggle.addEventListener('click', () => {
 
 // ----------index page: start
 
-
+// slideshow js in index.html file
 
 
 // enroll popup - in index page
@@ -139,5 +139,115 @@ function closePricingPopup() {
     document.body.classList.remove('popup-open');
 }
 
+
+
+// Final submission: generate and download PDF - in enroll page
+// async function submitForm() {
+//   // 1) Gather form data
+//   const data = {
+//     fullName: document.getElementById('fullName').value,
+//     birthDate: document.getElementById('birthDate').value,
+//     gender: document.getElementById('gender').value,
+//     address: document.getElementById('Address').value,
+//     nationality: document.getElementById('nation').value,
+//     email: document.getElementById('email').value,
+//     guardianPhone: document.getElementById('guardianPhone').value,
+//     id: Date.now().toString()
+//   };
+
+//   // 2) Request PDF from backend
+//   const res = await fetch('http://localhost:3000/generate-pdf', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(data)
+//   });
+
+//   if (!res.ok) {
+//     alert('PDF generation failed.');
+//     return;
+//   }
+
+//   // 3) Download the PDF
+//   const blob = await res.blob();
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement('a');
+//   a.href = url;
+//   a.download = 'enrollment.pdf';
+//   a.click();
+// }
+
+// // Attach to the new Confirm button
+// document.getElementById('confirmBtn').addEventListener('click', () => {
+//   // ensure all validation and final step checks pass
+//   submitForm();
+// });
+
+// helper to read a file input as base64 string (without data: prefix)
+function readFileAsBase64(inputEl) {
+    return new Promise(resolve => {
+        const file = inputEl.files[0];
+        if (!file) return resolve(null);
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.readAsDataURL(file);
+    });
+}
+
+// Final submission: generate and download PDF
+async function submitForm() {
+    // 1) Gather all form fields
+    const data = {
+        fullName: document.getElementById('fullName')?.value || '',
+        birthDate: document.getElementById('birthDate')?.value || '',
+        gender: document.getElementById('gender')?.value || '',
+        address: document.getElementById('Address')?.value || '',
+        nationality: document.getElementById('nation')?.value || '',
+        studentemail: document.getElementById('studentemail')?.value || '',
+        studentPhone: document.getElementById('studentPhone')?.value || '',
+        representative: document.getElementById('representative')?.value || '',
+        guardianname: document.getElementById('guardianname')?.value || '',
+        guardianGender: document.getElementById('guardianGender')?.value || '',
+        Occupation: document.getElementById('Occupation')?.value || '',
+        GuardianAddress: document.getElementById('GuardianAddress')?.value || '',
+        GuardianNationality: document.getElementById('GuardianNationality')?.value || '',
+        id: document.getElementById('id')?.value || '',
+        guardianPhone: document.getElementById('guardianPhone')?.value || '',
+        email: document.getElementById('email')?.value || '',
+        medical: document.getElementById('medical')?.value || '',
+        medical_info: document.getElementById('medical-info')?.value || ''
+    };
+
+    // 2) Read file inputs as base64
+    data.photoBase64 = await readFileAsBase64(document.getElementById('photo'));
+    data.birthCertBase64 = await readFileAsBase64(document.getElementById('birth'));
+    data.repIDBase64 = await readFileAsBase64(document.getElementById('repID'));
+    data.vaccineBase64 = await readFileAsBase64(document.getElementById('vaccine'));
+
+    // 3) Send to backend
+    const response = await fetch('http://localhost:3000/generate-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        alert('Failed to generate PDF');
+        return;
+    }
+
+    // 4) Download the PDF
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'enrollment.pdf';
+    a.click();
+}
+
+// Attach to the new Confirm button
+document.getElementById('confirmBtn').addEventListener('click', () => {
+  // ensure all validation and final step checks pass
+  submitForm();
+});
 
 // ----------enroll page: end
