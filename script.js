@@ -140,47 +140,57 @@ function closePricingPopup() {
 }
 
 
+// Final submission: generate and download PDF
+// ---------------------- FILE VALIDATION -----------------------
+// show a centered modal with green-white theme
+function showModal(message) {
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = '0'; overlay.style.left = '0';
+  overlay.style.width = '100%'; overlay.style.height = '100%';
+  overlay.style.background = 'rgba(0,0,0,0.4)';
+  overlay.style.display = 'flex'; overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center';
+  const box = document.createElement('div');
+  box.style.background = 'white'; box.style.color = 'var(--primary-green)';
+  box.style.padding = '1.5rem'; box.style.borderRadius = '8px';
+  box.style.maxWidth = '80%'; box.style.textAlign = 'center';
+  box.innerText = message;
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+  setTimeout(() => document.body.removeChild(overlay), 3000);
+}
 
-// Final submission: generate and download PDF - in enroll page
-// async function submitForm() {
-//   // 1) Gather form data
-//   const data = {
-//     fullName: document.getElementById('fullName').value,
-//     birthDate: document.getElementById('birthDate').value,
-//     gender: document.getElementById('gender').value,
-//     address: document.getElementById('Address').value,
-//     nationality: document.getElementById('nation').value,
-//     email: document.getElementById('email').value,
-//     guardianPhone: document.getElementById('guardianPhone').value,
-//     id: Date.now().toString()
-//   };
+function validateFile(inputEl, allowedTypes, maxMB) {
+  const file = inputEl.files[0];
+  const previewBox = document.getElementById(inputEl.dataset.preview);
+  if (!file) return true;
+  if (!allowedTypes.includes(file.type)) {
+    showModal(`\"${file.name}\" must be one of: ${allowedTypes.join(', ')}`);
+    inputEl.value = '';
+    if (previewBox) previewBox.innerHTML = '';
+    return false;
+  }
+  if (file.size > maxMB * 1024 * 1024) {
+    showModal(`\"${file.name}\" exceeds ${maxMB}MB.`);
+    inputEl.value = '';
+    if (previewBox) previewBox.innerHTML = '';
+    return false;
+  }
+  return true;
+}
 
-//   // 2) Request PDF from backend
-//   const res = await fetch('http://localhost:3000/generate-pdf', {
-//     method: 'POST',
-//     headers: { 'Content-Type': 'application/json' },
-//     body: JSON.stringify(data)
-//   });
-
-//   if (!res.ok) {
-//     alert('PDF generation failed.');
-//     return;
-//   }
-
-//   // 3) Download the PDF
-//   const blob = await res.blob();
-//   const url = URL.createObjectURL(blob);
-//   const a = document.createElement('a');
-//   a.href = url;
-//   a.download = 'enrollment.pdf';
-//   a.click();
-// }
-
-// // Attach to the new Confirm button
-// document.getElementById('confirmBtn').addEventListener('click', () => {
-//   // ensure all validation and final step checks pass
-//   submitForm();
-// });
+document.getElementById('birth').addEventListener('change', e => {
+    validateFile(e.target, ['application/pdf'], 4);
+});
+document.getElementById('repID').addEventListener('change', e => {
+    validateFile(e.target, ['application/pdf'], 4);
+});
+document.getElementById('photo').addEventListener('change', e => {
+    validateFile(e.target, ['image/png', 'image/jpeg'], 4);
+});
+document.getElementById('vaccine').addEventListener('change', e => {
+    validateFile(e.target, ['application/pdf', 'image/png', 'image/jpeg'], 4);
+});
 
 // helper to read a file input as base64 string (without data: prefix)
 function readFileAsBase64(inputEl) {
@@ -193,7 +203,7 @@ function readFileAsBase64(inputEl) {
     });
 }
 
-// Final submission: generate and download PDF
+// ---------------------- SUBMIT FORM -----------------------
 async function submitForm() {
     // 1) Gather all form fields
     const data = {
@@ -246,8 +256,8 @@ async function submitForm() {
 
 // Attach to the new Confirm button
 document.getElementById('confirmBtn').addEventListener('click', () => {
-  // ensure all validation and final step checks pass
-  submitForm();
+    // ensure all validation and final step checks pass
+    submitForm();
 });
 
 // ----------enroll page: end
