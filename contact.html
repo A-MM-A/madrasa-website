@@ -37,12 +37,41 @@
             </nav>
             <div class="header-actions">
                 <a href="#" class="btn donate">Donate</a>
-                <a href="enroll.html" class="btn enroll">Enroll Now</a>
+                <a href="#" class="btn enroll" onclick="openEnrollModal(event)">Enroll Now</a>
                 <!-- <button class="btn icon-btn search-btn">🔍</button> -->
                 <button class="btn icon-btn mobile-menu" id="menu-toggle">☰</button>
             </div>
         </div>
     </header>
+
+    <!-- enroll now pop up -->
+    <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeEnrollModal()">&times;</span>
+            <h2>Select Enrollment Type</h2>
+            <div class="cards-container">
+                <!-- Card 1 -->
+                <div class="enroll-card">
+                    <div class="card-image"><img src="media/slide1.jpg" alt="#"></div>
+                    <div class="card-desc">
+                        <h3>Qur’ān & Boarding</h3>
+                        <p>Full-time Qur’ān memorization program with on-site boarding in an Islamic environment.</p>
+                    </div>
+                    <button><a href="enroll.html">Enroll Now</a></button>
+                </div>
+                <!-- Card 2 -->
+                <div class="enroll-card">
+                    <div class="card-image"><img src="media/slide2.jpg" alt="#"></div>
+                    <div class="card-desc">
+                        <h3>Day Care & Qur’ān</h3>
+                        <p>Day care for ages 2+ with daily Qur’ān memorization and Islamic teachings.</p>
+                    </div>
+                    <button><a href="enroll-d.html">Enroll Now</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Main info -->
@@ -51,14 +80,16 @@
     </main>
 
 
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div>
                 <h1>Dar al-Arqam</h1>
                 <p>Qur’ān & Tarbīya Centre</p><br>
                 <p>&copy; 2025 Dar al-Arqam. All rights reserved.</p><br>
-                <p><h5><a href="#">By AMMA Foundation</a></h5></p>
+                <p>
+                <h5><a href="#">By AMMA Foundation</a></h5>
+                </p>
             </div>
             <div>
                 <h2>Navigate</h2><br>

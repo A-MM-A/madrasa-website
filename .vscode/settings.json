@@ -1,0 +1,6 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/.stkcallback.json",
+    "**/.env"
+  ]
+}

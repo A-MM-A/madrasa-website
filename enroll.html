@@ -51,6 +51,7 @@
                 <!-- <a href="enroll.html" class="btn enroll">Enroll Now</a> -->
                 <!-- <button class="btn icon-btn search-btn">🔍</button> -->
                 <button class="btn icon-btn mobile-menu" id="menu-toggle">☰</button>
+                <!-- <button type="button" id="hdrConfirmBtn">Confirm</button> -->
             </div>
         </div>
     </header>
@@ -252,13 +253,13 @@
                 <h2>Upload Documents</h2><br>
                 <div class="form-group">
                     <label for="birth">Birth Certificate <span class="required">*</span></label>
-                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth"  />
+                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" />
                     <div id="preview-birth" class="preview-box"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="repID">Representative ID/Passport <span class="required">*</span></label>
-                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID"  />
+                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" />
                     <div id="preview-repID" class="preview-box"></div>
                 </div>
 
@@ -288,10 +289,6 @@
                             class="required">*</span>
                     </label>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="birth">Birth Certificate <span class="required">*</span></label>
-                    <input type="file" id="birth" required />
-                </div> -->
                 <div class="form-buttons">
                     <button type="button" onclick="prevStep()">Previous</button>
                     <button type="button" id="confirmBtn">Confirm</button>
@@ -300,11 +297,91 @@
         </form>
     </main>
 
+    <!-- mpesa pop up -->
+    <!-- <div id="mpesaModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <img src="media/mpesa-logo.png" alt="M-Pesa Logo" class="mpesa-logo">
+            <h2>Pay with M-Pesa</h2>
+            <p>Enter your phone number linked to M-Pesa:</p>
+            <input type="tel" id="mpesaNumber" placeholder="07..." required />
+            <button onclick="initiatePayment()">Proceed</button>
+            <button onclick="closeMpesaPopup()">Cancel</button>
+        </div>
+    </div> -->
+
+    <!-- PIN Prompt Popup -->
+    <!-- <div id="pinModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <h2>Enter your M-Pesa PIN</h2>
+            <p>Please enter your M-Pesa PIN on your phone to complete payment.</p>
+            <button onclick="closePinModal()">OK</button>
+        </div>
+    </div> -->
+
+    <!-- 1) Rules + Phone Input -->
+    <div id="rulesModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <h1>Payment</h1>
+            <h4>Please Read Carefully!</h4>
+            <ul style="color: gray;">
+                <li>Do <b>NOT</b> press back or Reload.</li>
+                <li>Enter Mpesa-Pin on your phone</li>
+                <li>Payment amount is non‑refundable.</li>
+            </ul>
+            <div style="background: var(--light-green); padding: 10px 0; text-align: center; border-radius: 20px; display: flex; margin: 10px;">
+                <div class="mpesa-logo">
+                    <img src="media/mpesa-logo.png" alt="M-Pesa Logo">
+                </div>
+                <label><span style="color: green;">Lipa na M-Pesa</span><input type="tel" id="rulesMpesaNumber"
+                        placeholder=" e.g 07XXXXXXXX" /></label>
+
+            </div>
+
+            <button id="rulesSubmit">Submit</button>
+            <button onclick="closeRules()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- 2) Waiting + Spinner -->
+    <div id="waitingModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="spinner"></div>
+            <h2>Waiting for Confirmation</h2>
+            <p style="color: gray;">Enter Mpesa-Pin on your phone. <br> Please do <b>NOT</b> close this window.<br> You can Retry Payment after 30 seconds.</p>
+        </div>
+    </div>
+
+    <!-- 3) Success -->
+    <div id="successModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="checkmark">✔</div>
+            <h2> ✅ Payment Successful!</h2>
+            <p>Your form has been emailed to you and our admissions board.</p>
+            <button id="downloadPdf">Download PDF</button>
+            <button onclick="closeSuccess()">Close</button>
+        </div>
+    </div>
+
+    <!-- 4) Failure -->
+    <div id="failureModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="failmark">✖</div>
+            <h2> ❌ Payment Failed</h2>
+            <p>Something went wrong.</p>
+            <button id="retryPay">Try Again</button>
+            <button id="reportIssue">I Paid But Didn’t See Confirmation</button>
+        </div>
+    </div>
+
+
+
+
+
     <!-- Pricing Popup -->
-    <div id="pricingPopup" class="popup">
+    <div id="pricingPopup" class="popup" style="display: none;">
         <div class="popup-content">
             <img src="media/fee.jpg" alt="Pricing Info" />
-            <button onclick="closePricingPopup()">Done</button>
+            <button type="button" onclick="closePricingPopup()">Done</button>
         </div>
     </div>
 
