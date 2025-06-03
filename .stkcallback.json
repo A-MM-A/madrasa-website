@@ -266,5 +266,34 @@
         }
       ]
     }
+  },
+  "ws_CO_04062025000008636707352862": {
+    "MerchantRequestID": "94fd-4d30-a4ee-73894dcc3fe2660236",
+    "CheckoutRequestID": "ws_CO_04062025000008636707352862",
+    "ResultCode": 0,
+    "ResultDesc": "The service request is processed successfully.",
+    "CallbackMetadata": {
+      "Item": [
+        {
+          "Name": "Amount",
+          "Value": 1
+        },
+        {
+          "Name": "MpesaReceiptNumber",
+          "Value": "TF31FB61PN"
+        },
+        {
+          "Name": "Balance"
+        },
+        {
+          "Name": "TransactionDate",
+          "Value": 20250603235813
+        },
+        {
+          "Name": "PhoneNumber",
+          "Value": 254707352862
+        }
+      ]
+    }
   }
 }

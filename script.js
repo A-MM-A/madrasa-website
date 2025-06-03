@@ -307,7 +307,7 @@ function closeSuccess() { document.getElementById('successModal').style.display 
 function openFailure() { document.getElementById('failureModal').style.display = 'flex'; }
 function closeFailure() { document.getElementById('failureModal').style.display = 'none'; }
 
-// Step 1: User clicks Confirm in header
+// Step 1: User clicks Confirm
 document.getElementById('confirmBtn').addEventListener('click', openRules);
 
 // Step 2: Rules form submit

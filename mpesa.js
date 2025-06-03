@@ -1,4 +1,3 @@
-// mpesa.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -26,7 +25,7 @@ const consumerSecret = "AB6xFV0iFXO5KYYkAe6SLoXdusPq0Rz90IbKI3WS0GGKM5aYHQRur4p4
 const passkey        = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 const shortcode      = "174379";
 const envUrl         = "https://sandbox.safaricom.co.ke";
-const callbackUrl    = "https://10f4-105-161-168-118.ngrok-free.app/api/callback";
+const callbackUrl    = "https://13b9-105-161-168-118.ngrok-free.app/api/callback";
 
 // ── Helper to get an OAuth token ─────────────────────────────────────────
 async function getAccessToken() {
@@ -64,7 +63,7 @@ router.post('/api/stkpush', async (req, res) => {
         PhoneNumber:       msisdn,
         CallBackURL:       callbackUrl,
         AccountReference:  accountReference,
-        TransactionDesc:   description || 'Form Payment'
+        TransactionDesc:   description || 'Dar Al-Arqam'
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -104,13 +103,7 @@ router.post('/api/callback', (req, res) => {
 
 // ── 5) Polling endpoint ──────────────────────────────────────────────────
 router.get('/api/payment-status', (req, res) => {
-  // accept either ?checkoutRequestID=… or ?checkoutRequestId=…
-  const id =
-    req.query.checkoutRequestID ||
-    req.query.checkoutRequestId;
-
-  // console.log('🔍 /api/payment-status asked for ID:', id);
-  // console.log('🗺️  Known paymentStatusMap keys:', Object.keys(paymentStatusMap));
+  const id = req.query.checkoutRequestID
 
   if (!id) {
     return res.status(400).json({
