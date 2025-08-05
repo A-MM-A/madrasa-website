@@ -1,12 +1,9 @@
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const axios = require('axios');
 const moment = require('moment');
 const fs = require('fs');
 
 const router = express.Router();
-router.use(cors());
 
 // ── 1) Load existing callback data (if any) ──────────────────────────────
 const CALLBACK_STORE = '.stkcallback.json';
@@ -19,13 +16,26 @@ try {
   console.log('No existing callback file, starting fresh');
 }
 
+
+
+
+// // ── 2) Your Daraja credentials & URLs ────────────────────────────────────
+// const consumerKey    = "kAdXZtxqBttVre3AekGkKMGJeuGg7dNW6VKQPFqOP2ZY2paj";
+// const consumerSecret = "AB6xFV0iFXO5KYYkAe6SLoXdusPq0Rz90IbKI3WS0GGKM5aYHQRur4p4ATsUN7RL";
+// const passkey        = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+// const shortcode      = "174379";
+// const envUrl         = "https://sandbox.safaricom.co.ke";
+// const callbackUrl    = "https://df71-105-161-146-57.ngrok-free.app/api/callback";
+
 // ── 2) Your Daraja credentials & URLs ────────────────────────────────────
-const consumerKey    = "kAdXZtxqBttVre3AekGkKMGJeuGg7dNW6VKQPFqOP2ZY2paj";
-const consumerSecret = "AB6xFV0iFXO5KYYkAe6SLoXdusPq0Rz90IbKI3WS0GGKM5aYHQRur4p4ATsUN7RL";
-const passkey        = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const shortcode      = "174379";
-const envUrl         = "https://sandbox.safaricom.co.ke";
-const callbackUrl    = "https://df71-105-161-146-57.ngrok-free.app/api/callback";
+const consumerKey    = process.env.MPESA_CONSUMER_KEY;
+const consumerSecret = process.env.MPESA_CONSUMER_SECRET;
+const passkey        = process.env.MPESA_PASSKEY;
+const shortcode      = process.env.MPESA_SHORTCODE;
+const envUrl         = process.env.MPESA_ENVIRONMENT_URL;
+const callbackUrl    = `${process.env.MPESA_CALLBACK_URL}/api/mpesa/callback`;
+
+
 
 // ── Helper to get an OAuth token ─────────────────────────────────────────
 async function getAccessToken() {
@@ -35,8 +45,10 @@ async function getAccessToken() {
   return res.data.access_token;
 }
 
+
+
 // ── 3) STK Push endpoint ─────────────────────────────────────────────────
-router.post('/api/stkpush', async (req, res) => {
+router.post('/stkpush', async (req, res) => {
   try {
     const { phone, accountReference, amount, description } = req.body;
     if (!phone || !accountReference || !amount) {
@@ -81,7 +93,7 @@ router.post('/api/stkpush', async (req, res) => {
 });
 
 // ── 4) Callback endpoint ─────────────────────────────────────────────────
-router.post('/api/callback', (req, res) => {
+router.post('/callback', (req, res) => {
   try {
     const body      = req.body.Body.stkCallback;
     const checkout  = body.CheckoutRequestID;
@@ -102,7 +114,7 @@ router.post('/api/callback', (req, res) => {
 });
 
 // ── 5) Polling endpoint ──────────────────────────────────────────────────
-router.get('/api/payment-status', (req, res) => {
+router.get('/payment-status', (req, res) => {
   const id = req.query.checkoutRequestID
 
   if (!id) {

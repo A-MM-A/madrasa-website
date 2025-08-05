@@ -1,48 +1,31 @@
-require('dotenv').config(); 
-
+// email.js
 const express = require('express');
-const cors = require('cors');
 const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const fs = require('fs');
 const path = require('path');
 const QRCode = require('qrcode');
 const nodemailer = require('nodemailer');
 
-// Express app setup
-const app = express();
-app.use(cors());  // enable CORS for all origins
-app.use(express.json({ limit: '20mb' }));
+const router = express.Router();
 
-// mpesa stuff
-const mpesaRouter = require('./mpesa'); 
-app.use(mpesaRouter); 
-
-
-// for future password integration
-// const simpleAuth = require('./simpleAuth'); 
-// app.use(simpleAuth); 
-
-
-
-
-//  Email setup
+// Mailer setup
 const EMAIL_USER = 'dar.al.arqam.admission@gmail.com';
 const EMAIL_PASS = process.env.EMAIL_PASS;
 const DEFAULT_CC = 'amma.buisness@gmail.com';
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: { user: EMAIL_USER, pass: EMAIL_PASS }
 });
 
 
-
 async function buildPdfBytes(data) {
     // 1) Load your template PDF
-    const templateBytes = fs.readFileSync('templates/enrollment_template.pdf');
+    const templatePath = path.join(__dirname, 'templates', 'enrollment_template.pdf');
+    const templateBytes = fs.readFileSync(templatePath);
     const pdfDoc = await PDFDocument.load(templateBytes);
 
-    const page1 = pdfDoc.getPages()[0];
-    const page2 = pdfDoc.getPages()[1];
+    const [page1, page2] = pdfDoc.getPages();
     const { width, height } = page1.getSize();
     const { width: w2, height: h2 } = page2.getSize();
 
@@ -50,11 +33,10 @@ async function buildPdfBytes(data) {
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontSize = 12;
 
-    // console.log('👉 Incoming form data:', Object.keys(data), '…');
-
 
     // 3) Draw text fields at coordinates
-    // Student's Information
+
+    // Student info
     page1.drawText(data.fullName || '', { x: 250, y: height - 174, size: fontSize, font });
 
     // Format DOB
@@ -71,7 +53,8 @@ async function buildPdfBytes(data) {
     page1.drawText(data.nationality || '', { x: 250, y: height - 250, size: fontSize, font });
     page1.drawText(data.studentemail || '', { x: 350, y: height - 250, size: fontSize, font });
 
-    // Guardian's Information
+
+    // Guardian info
     page1.drawText(data.guardianname || '', { x: 250, y: height - 292, size: fontSize, font });
     page1.drawText(data.representative || '', { x: 250, y: height - 315, size: fontSize, font });
     page1.drawText(data.guardianGender || '', { x: 250, y: height - 335, size: fontSize, font });
@@ -82,6 +65,7 @@ async function buildPdfBytes(data) {
     page1.drawText(data.guardianPhone || '', { x: 250, y: height - 430, size: fontSize, font });
     page1.drawText(data.email || '', { x: 250, y: height - 450, size: fontSize, font });
 
+
     // Add date of submission in DD/MM/YYYY format
     const now = new Date();
     const dd = String(now.getDate()).padStart(2, '0');
@@ -89,41 +73,29 @@ async function buildPdfBytes(data) {
     const yyyy = now.getFullYear();
     const formattedDate = `${dd}/${mm}/${yyyy}`;
 
-    page1.drawText(formattedDate, {
-        x: 250,
-        y: height - 470,
-        size: fontSize,
-        font,
-        color: rgb(0, 0, 1)
-    });
+    page1.drawText(formattedDate, { x: 250, y: height - 470, size: fontSize, font, color: rgb(0, 0, 1) });
 
-    // Medical Information (radio X marks)
-    const medY = height - 577;
-    const yesX = 470, noX = 522;
-    if (data.medical === '1') page1.drawText('X', { x: yesX, y: medY, size: fontSize, font, color: rgb(1, 0, 0) });
-    else page1.drawText('X', { x: noX, y: medY, size: fontSize, font, color: rgb(1, 0, 0) });
+
+    // Medical
+    const medY = height - 577, yesX = 470, noX = 522;
+    if (data.medical === '1') {
+        page1.drawText('X', { x: yesX, y: medY, size: fontSize, font, color: rgb(1, 0, 0) });
+    } else {
+        page1.drawText('X', { x: noX, y: medY, size: fontSize, font, color: rgb(1, 0, 0) });
+    }
     page1.drawText(data.medical_info || '', { x: 40, y: height - 637, size: fontSize, font });
 
-    // 4) Embed the passport photo (if provided)
-    if (data.photoBase64) {
-        const imgBytes = Buffer.from(data.photoBase64, 'base64');
-        const jpgImage = await pdfDoc.embedJpg(imgBytes).catch(() => null);
-        const pngImage = await pdfDoc.embedPng(imgBytes).catch(() => null);
-        const photoImage = jpgImage || pngImage;
-        if (photoImage) {
-            page1.drawImage(photoImage, {
-                x: width - 80,
-                y: height - 80,
-                width: 70,
-                height: 80
-            });
-        }
-    }
 
+    // 4) Embed the passport photo
     if (data.photoBase64) {
         try {
             const imgBytes = Buffer.from(data.photoBase64, 'base64');
-            // …embedding logic…
+            const jpgImg = await pdfDoc.embedJpg(imgBytes).catch(() => null);
+            const pngImg = await pdfDoc.embedPng(imgBytes).catch(() => null);
+            const photo = jpgImg || pngImg;
+            if (photo) {
+                page1.drawImage(photo, { x: width - 80, y: height - 80, width: 70, height: 80 });
+            }
         } catch (e) {
             console.error('Failed to embed photo:', e);
         }
@@ -131,16 +103,13 @@ async function buildPdfBytes(data) {
 
 
     // 5) Embed QR code in pg 2
-    const qrDataUrl = await QRCode.toDataURL(`https://google.com`);
+    const qrDataUrl = await QRCode.toDataURL('https://google.com');
     const qrBytes = Buffer.from(qrDataUrl.split(',')[1], 'base64');
     const qrImg = await pdfDoc.embedPng(qrBytes);
-
     page2.drawImage(qrImg, {
-        x: w2 - 120,
-        y: h2 / 2 - 50,
-        width: 100,
-        height: 100
+        x: w2 - 120, y: h2 / 2 - 50, width: 100, height: 100
     });
+
 
 
     // 6) Attach each uploaded PDF/document as its own new page 
@@ -155,17 +124,16 @@ async function buildPdfBytes(data) {
     await appendFileIf(data.repIDBase64, 'repID');
     await appendFileIf(data.vaccineBase64, 'vaccine');
 
-
     return pdfDoc.save();
 }
 
 
-// email the pdf
-app.post('/email-pdf', async (req, res) => {
+// Admission email the pdf
+router.post('/email-pdf', async (req, res) => {
     try {
         const pdfBytes = await buildPdfBytes(req.body);
         await transporter.sendMail({
-            from: `"Dar al‑Arqam Admissions" <${EMAIL_USER}>`,
+            from: `"Dar al-Arqam Admissions" <${EMAIL_USER}>`,
             to: req.body.email,
             cc: DEFAULT_CC,
             subject: `Admission for ${req.body.fullName}`,
@@ -178,44 +146,27 @@ app.post('/email-pdf', async (req, res) => {
         });
         res.json({ sent: true });
     } catch (err) {
-        console.error('❌ /email-pdf error:', err);
+        console.error('Admission email error:', err);
         res.status(500).json({ sent: false, error: err.message });
     }
 });
 
-
-// download pdf
-app.post('/generate-pdf', async (req, res) => {
-    try {
-        const pdfBytes = await buildPdfBytes(req.body);
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'attachment; filename=enrollment.pdf');
-        res.send(pdfBytes);
-    } catch (err) {
-        console.error('❌ /generate-pdf error:', err);
-        res.status(500).send('PDF generation error');
-    }
-});
-
-
-// send an email
-app.post('/send-email', async (req, res) => {
+// Generic email
+router.post('/send-email', async (req, res) => {
     try {
         const { to, subject, text, attachments } = req.body;
         await transporter.sendMail({
-            from: `"Dar al‑Arqam" <${EMAIL_USER}>`,
-            to,
-            subject,
-            text,
+            from: `"Dar al-Arqam" <${EMAIL_USER}>`,
+            to, 
+            subject, 
+            text, 
             attachments
         });
         res.json({ ok: true });
-    } catch (e) {
-        console.error('❌ send-email error:', e);
-        res.status(500).json({ ok: false, error: e.message });
+    } catch (err) {
+        console.error('Send email error:', err);
+        res.status(500).json({ ok: false, error: err.message });
     }
 });
 
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`PDF server running on ${PORT}`));
+module.exports = router;
