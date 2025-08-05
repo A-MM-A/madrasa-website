@@ -25,7 +25,7 @@ const consumerSecret = "AB6xFV0iFXO5KYYkAe6SLoXdusPq0Rz90IbKI3WS0GGKM5aYHQRur4p4
 const passkey        = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 const shortcode      = "174379";
 const envUrl         = "https://sandbox.safaricom.co.ke";
-const callbackUrl    = "https://13b9-105-161-168-118.ngrok-free.app/api/callback";
+const callbackUrl    = "https://df71-105-161-146-57.ngrok-free.app/api/callback";
 
 // ── Helper to get an OAuth token ─────────────────────────────────────────
 async function getAccessToken() {

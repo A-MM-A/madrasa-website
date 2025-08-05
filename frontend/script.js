@@ -12,7 +12,7 @@ menuToggle.addEventListener('click', () => {
 // slideshow js in index.html file
 
 
-// enroll popup - in index page
+// enroll popup - in index page 
 function openEnrollModal(e) {
     e.preventDefault();
     document.getElementById('enrollModal').style.display = 'flex';
