@@ -1,3 +1,6 @@
+// backend location
+const BASE_URL = 'https://dar-al-arqam.onrender.com';
+
 // open menu toggle - all files
 const menuToggle = document.getElementById('menu-toggle');
 const mainNav = document.getElementById('main-nav');
@@ -247,7 +250,7 @@ async function submitForm() {
         const data = await collectFormData();
 
         // 2) POST to your backend to generate the PDF
-        const res = await fetch('http://localhost:3000/generate-pdf', {
+        const res = await fetch(`${BASE_URL}/api/pdf/generate-pdf`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -268,20 +271,12 @@ async function submitForm() {
 
 
         // 4) Email the PDF
-        const reader = new FileReader();
-        reader.onload = async () => {
-            const base64 = reader.result.split(',')[1];
-            await fetch('http://localhost:3000/send-email', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    pdfBase64: base64,
-                    guardianEmail: document.getElementById('email').value.trim()
-                })
-            });
-            showModal('✅ Your form has been emailed to you. Thank you!');
-        };
-        reader.readAsDataURL(blob);
+        await fetch(`${BASE_URL}/api/email/email-pdf`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        showModal('✅ Your form has been emailed to you. Thank you!');
 
 
     } catch (err) {
@@ -324,7 +319,7 @@ async function startPayment(phone) {
     openWaiting();
     try {
         const paymentData = { phone, amount: 1, accountReference: 'DarAdmission-' + Date.now() };
-        const res = await fetch('http://localhost:3000/api/stkpush', {
+        const res = await fetch(`${BASE_URL}/api/mpesa/stkpush`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(paymentData)
         });
@@ -336,7 +331,7 @@ async function startPayment(phone) {
         for (let i = 0; i < 12; i++) {
             await new Promise(r => setTimeout(r, 3000));
             const stat = await fetch(
-                `http://localhost:3000/api/payment-status?checkoutRequestID=${checkoutID}`
+                `${BASE_URL}/api/mpesa/payment-status?checkoutRequestID=${checkoutID}`
             ).then(r => r.json());
 
             // success
@@ -345,16 +340,20 @@ async function startPayment(phone) {
 
                 // send email
                 const formData = await collectFormData();
-                fetch('http://localhost:3000/email-pdf', {
+                const emailRes = await fetch(`${BASE_URL}/api/email/email-pdf`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
+                    //     body: JSON.stringify(formData)
+                    // })
+                    //     .then(r => r.json())
+                    //     .then(json => {
+                    //         if (!json.emailed) console.error('Email failed:', json.error);
+                    //     })
+                    //     .catch(err => console.error('Email error:', err));
                     body: JSON.stringify(formData)
-                })
-                    .then(r => r.json())
-                    .then(json => {
-                        if (!json.emailed) console.error('Email failed:', json.error);
-                    })
-                    .catch(err => console.error('Email error:', err));
+                });
+                const emailJson = await emailRes.json();
+                if (!emailJson.sent) console.error('Email failed:', emailJson.error);
 
                 openSuccess();
 
