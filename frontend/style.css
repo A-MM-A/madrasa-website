@@ -659,7 +659,10 @@ a {
 
 /* preview box of uploaded documents */
 .preview-box {
+    flex: 1;
     margin-top: 10px;
+    height: 200px;
+    width: 200px;
 }
 
 .preview-box img,
@@ -667,6 +670,7 @@ a {
     max-width: 100%;
     height: auto;
     border: 1px solid #ccc;
+    object-fit: cover;
     margin-top: 5px;
 }
 
@@ -935,3 +939,4 @@ a {
 .failmark {
     color: red;
 }
+

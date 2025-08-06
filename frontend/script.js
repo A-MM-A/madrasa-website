@@ -107,26 +107,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 //file preview - in enroll form
+// document.querySelectorAll('.file-preview').forEach(input => {
+//     input.addEventListener('change', function () {
+//         const previewId = this.dataset.preview;
+//         const previewBox = document.getElementById(previewId);
+//         const file = this.files[0];
+
+//         if (!file) return;
+
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             if (file.type.startsWith("image/")) {
+//                 previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+//             } else if (file.type === "application/pdf") {
+//                 previewBox.innerHTML = `<iframe src="${e.target.result}" width="100%" height="400px"></iframe>`;
+//             } else {
+//                 previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
+//             }
+//         };
+//         reader.readAsDataURL(file);
+//     });
+// });
+
 document.querySelectorAll('.file-preview').forEach(input => {
-    input.addEventListener('change', function () {
-        const previewId = this.dataset.preview;
-        const previewBox = document.getElementById(previewId);
-        const file = this.files[0];
+  input.addEventListener('change', function () {
+    const previewId = this.dataset.preview;
+    const previewBox = document.getElementById(previewId);
+    const file = this.files[0];
 
-        if (!file) return;
+    if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            if (file.type.startsWith("image/")) {
-                previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-            } else if (file.type === "application/pdf") {
-                previewBox.innerHTML = `<iframe src="${e.target.result}" width="100%" height="400px"></iframe>`;
-            } else {
-                previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
-            }
-        };
-        reader.readAsDataURL(file);
-    });
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; height: auto;">`;
+      };
+      reader.readAsDataURL(file);
+    } else if (file.type === "application/pdf") {
+      const blobUrl = URL.createObjectURL(file);
+      previewBox.innerHTML = `<iframe src="${blobUrl}" width="100%" height="400px" style="border: none;"></iframe>`;
+    } else {
+      previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
+    }
+  });
 });
 
 
@@ -271,13 +294,13 @@ async function submitForm() {
         showModal('Your PDF has downloaded 🎉');
 
 
-        // 4) Email the PDF
-        await fetch(`${BASE_URL}/api/email/email-pdf`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        showModal('✅ Your form has been emailed to you. Thank you!');
+        // // 4) Email the PDF
+        // await fetch(`${BASE_URL}/api/email/email-pdf`, {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(data)
+        // });
+        // showModal('✅ Your form has been emailed to you. Thank you!');
 
 
     } catch (err) {
@@ -298,14 +321,19 @@ function openWaiting() { document.getElementById('waitingModal').style.display =
 function closeWaiting() { document.getElementById('waitingModal').style.display = 'none'; }
 
 function openSuccess() { document.getElementById('successModal').style.display = 'flex'; }
-function closeSuccess() { document.getElementById('successModal').style.display = 'none'; }
+function closeSuccess() {
+  document.getElementById('successModal').style.display = 'none';
+  setTimeout(() => {
+    window.location.href = '/index.html';
+  }, 300);
+}
 
 function openFailure() { document.getElementById('failureModal').style.display = 'flex'; }
 function closeFailure() { document.getElementById('failureModal').style.display = 'none'; }
 
 // Step 1: User clicks Confirm
-// document.getElementById('confirmBtn').addEventListener('click', openRules);
-document.getElementById('confirmBtn').addEventListener('click', submitForm);
+document.getElementById('confirmBtn').addEventListener('click', openRules);
+// document.getElementById('confirmBtn').addEventListener('click', submitForm);
 
 // Step 2: Rules form submit
 document.getElementById('rulesSubmit').addEventListener('click', () => {

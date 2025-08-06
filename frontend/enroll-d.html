@@ -85,9 +85,9 @@
                 <div class="form-group">
                     <label for="Gender">Gender <span class="required">*</span></label>
                     <select id="gender" name="Gender" required>
-                        <option value=""> -SELECT-</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
+                        <option value="0"> -SELECT-</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -97,19 +97,19 @@
                 <div class="form-group">
                     <label for="Nationality">Nationality <span class="required">*</span></label>
                     <select id="nation" name="Nationality" required>
-                        <option value=""> -SELECT-</option>
-                        <option value="0">Kenya</option>
-                        <option value="1">Somalia</option>
-                        <option value="1">Other</option>
+                        <option value="0"> -SELECT-</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email </label>
-                    <input type="email" id="email" />
+                    <label for="studentemail">Email </label>
+                    <input type="email" id="studentemail" />
                 </div>
                 <div class="form-group">
-                    <label for="guardianPhone">Phone </label>
-                    <input type="tel" id="guardianPhone" />
+                    <label for="studentPhone">Phone </label>
+                    <input type="tel" id="studentPhone" />
                 </div>
                 <div class="form-buttons">
                     <span></span>
@@ -123,7 +123,7 @@
                 <div class="form-group">
                     <label for="quran-level">Current Qur’an Level <span class="required">*</span></label>
                     <select id="quran-level" name="quran_level" required>
-                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0" disabled selected>-SELECT-</option>
                         <option value="0">0 Juzz Hafidh </option>
                         <option value="1">1-3 Juzz Hafidh </option>
                         <option value="2">4-10 Juzz Hafidh </option>
@@ -134,7 +134,7 @@
                 <div class="form-group">
                     <label for="secular-level">Secular Level <span class="required">*</span></label>
                     <select id="quran-level" name="quran_level" required>
-                        <option value="" disabled selected>-SELECT-</option>
+                        <option value="0" disabled selected>-SELECT-</option>
                         <option value="0">No Background Education</option>
                         <option value="1">Primary Education</option>
                         <option value="2">Secondary Education</option>
@@ -146,9 +146,9 @@
                 <div class="form-group">
                     <label for="secular-level-state">Are you still learning? <span class="required">*</span></label>
                     <select id="quran-level" name="quran_level" required>
-                        <option value="" disabled selected>-SELECT-</option>
-                        <option value="0">No, Not learning anymore.</option>
-                        <option value="1">Yes, Still learning.</option>
+                        <option value="0" disabled selected>-SELECT-</option>
+                        <option value="No">No, Not learning anymore.</option>
+                        <option value="Yes">Yes, Still learning.</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -166,23 +166,23 @@
                 <h2>Parent/Guardian Information</h2><br>
                 <div class="form-group">
                     <label for="representative">Who will be responsible for you? <span class="required">*</span></label>
-                    <select id="quran-level" name="quran_level" required>
-                        <option value="" disabled selected>-SELECT-</option>
-                        <option value="0">Myself</option>
-                        <option value="1">Parent</option>
-                        <option value="1">Guardian</option>
+                    <select id="representative" name="representative" required>
+                        <option value="0" disabled selected>-SELECT-</option>
+                        <option value="Self">Myself</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Guardian">Guardian</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="guardianName"> Full Name <span class="required">*</span></label>
-                    <input type="text" id="guardianName" required />
+                    <label for="guardianname"> Full Name <span class="required">*</span></label>
+                    <input type="text" id="guardianname" required />
                 </div>
                 <div class="form-group">
-                    <label for="Gender">Gender <span class="required">*</span></label>
-                    <select id="gender" name="Gender" required>
-                        <option value=""> -SELECT-</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
+                    <label for="guardianGender">Gender <span class="required">*</span></label>
+                    <select id="guardianGender" name="guardianGender" required>
+                        <option value="0"> -SELECT-</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -190,16 +190,16 @@
                     <input type="text" id="Occupation" required />
                 </div>
                 <div class="form-group">
-                    <label for="Address">Residential Address <span class="required">*</span></label>
-                    <input type="text" id="Address" required />
+                    <label for="GuardianAddress">Residential Address <span class="required">*</span></label>
+                    <input type="text" id="GuardianAddress" required />
                 </div>
                 <div class="form-group">
-                    <label for="Nationality">Nationality <span class="required">*</span></label>
-                    <select id="nation" name="Nationality" required>
-                        <option value=""> -SELECT-</option>
-                        <option value="0">Kenya</option>
-                        <option value="1">Somalia</option>
-                        <option value="1">Other</option>
+                    <label for="GuardianNationality">Nationality <span class="required">*</span></label>
+                    <select id="GuardianNationality" name="GuardianNationality" required>
+                        <option value="0"> -SELECT-</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -252,13 +252,13 @@
                 <h2>Upload Documents</h2><br>
                 <div class="form-group">
                     <label for="birth">Birth Certificate <span class="required">*</span></label>
-                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" required />
+                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" />
                     <div id="preview-birth" class="preview-box"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="repID">Representative ID/Passport <span class="required">*</span></label>
-                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" required />
+                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" />
                     <div id="preview-repID" class="preview-box"></div>
                 </div>
 
@@ -288,17 +288,74 @@
                             class="required">*</span>
                     </label>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="birth">Birth Certificate <span class="required">*</span></label>
-                    <input type="file" id="birth" required />
-                </div> -->
                 <div class="form-buttons">
                     <button type="button" onclick="prevStep()">Previous</button>
-                    <button type="submit">Confirm</button>
+                    <button type="button" id="confirmBtn">Confirm</button>
                 </div>
             </section>
         </form>
     </main>
+
+    
+    <!-- mpesa pop up -->
+
+    <!-- 1) Rules + Phone Input -->
+    <div id="rulesModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <h1>Payment</h1>
+            <h4>Please Read Carefully!</h4>
+            <ul style="color: gray;">
+                <li>Do <b>NOT</b> press back or Reload.</li>
+                <li>Enter Mpesa-Pin on your phone</li>
+                <li>Payment amount is non‑refundable.</li>
+            </ul>
+            <div style="background: var(--light-green); padding: 10px 0; text-align: center; border-radius: 20px; display: flex; margin: 10px;">
+                <div class="mpesa-logo">
+                    <img src="media/mpesa-logo.png" alt="M-Pesa Logo">
+                </div>
+                <label><span style="color: green;">Lipa na M-Pesa</span><input type="tel" id="rulesMpesaNumber"
+                        placeholder=" e.g 07XXXXXXXX" /></label>
+
+            </div>
+
+            <button id="rulesSubmit">Submit</button>
+            <button onclick="closeRules()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- 2) Waiting + Spinner -->
+    <div id="waitingModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="spinner"></div>
+            <h2>Waiting for Confirmation</h2>
+            <p style="color: gray;">Enter Mpesa-Pin on your phone. <br> Please do <b>NOT</b> close this window.<br> You can Retry Payment after 30 seconds.</p>
+        </div>
+    </div>
+
+    <!-- 3) Success -->
+    <div id="successModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="checkmark">✔</div>
+            <h2> ✅ Payment Successful!</h2>
+            <p>Your form has been emailed to you and our admissions board.</p>
+            <button id="downloadPdf">Download PDF</button>
+            <button onclick="closeSuccess()">Close</button>
+        </div>
+    </div>
+
+    <!-- 4) Failure -->
+    <div id="failureModal" class="popup" style="display:none;">
+        <div class="popup-content mpesa-style">
+            <div class="failmark">✖</div>
+            <h2> ❌ Payment Failed</h2>
+            <p>Something went wrong.</p>
+            <button id="retryPay">Try Again</button>
+            <button id="reportIssue">I Paid But Didn’t See Confirmation</button>
+        </div>
+    </div>
+
+
+
 
     <!-- Pricing Popup -->
     <div id="pricingPopup" class="popup">
