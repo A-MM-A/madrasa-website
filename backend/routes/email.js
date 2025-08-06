@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 
 async function buildPdfBytes(data) {
     // 1) Load your template PDF
-    const templatePath = path.join(__dirname, 'templates', 'enrollment_template.pdf');
+    const templatePath = path.join(__dirname, '..', 'templates', 'enrollment_template.pdf');
     const templateBytes = fs.readFileSync(templatePath);
     const pdfDoc = await PDFDocument.load(templateBytes);
 

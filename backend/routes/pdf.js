@@ -236,7 +236,7 @@ const router = express.Router();
 
 async function buildPdfBytes(data) {
     // 1) Load your template PDF
-    const templatePath = path.join(__dirname, 'templates', 'enrollment_template.pdf');
+    const templatePath = path.join(__dirname, '..', 'templates', 'enrollment_template.pdf');
     const templateBytes = fs.readFileSync(templatePath);
     const pdfDoc = await PDFDocument.load(templateBytes);
 
@@ -350,8 +350,8 @@ router.post('/generate-pdf', async (req, res) => {
             .set('Content-Disposition', 'attachment; filename=enrollment.pdf')
             .send(pdfBytes);
     } catch (err) {
-        console.error('PDF generation error:', err);
-        res.status(500).send('PDF generation error');
+        console.error('PDF generation error:', err.stack || err);
+        res.status(500).json({ error: err.message });
     }
 });
 

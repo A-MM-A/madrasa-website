@@ -248,6 +248,7 @@ async function submitForm() {
     try {
         // 1) Collect all the form data & files
         const data = await collectFormData();
+        console.log(data);        
 
         // 2) POST to your backend to generate the PDF
         const res = await fetch(`${BASE_URL}/api/pdf/generate-pdf`, {
@@ -303,7 +304,8 @@ function openFailure() { document.getElementById('failureModal').style.display =
 function closeFailure() { document.getElementById('failureModal').style.display = 'none'; }
 
 // Step 1: User clicks Confirm
-document.getElementById('confirmBtn').addEventListener('click', openRules);
+// document.getElementById('confirmBtn').addEventListener('click', openRules);
+document.getElementById('confirmBtn').addEventListener('click', submitForm);
 
 // Step 2: Rules form submit
 document.getElementById('rulesSubmit').addEventListener('click', () => {
