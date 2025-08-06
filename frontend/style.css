@@ -10,6 +10,7 @@ body {
     line-height: 1.6;
     color: #1f2937;
     background: #f3f4f6;
+    min-width: 270px;
 }
 
 a {
@@ -18,7 +19,7 @@ a {
 }
 
 .container {
-    width: 90%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -38,7 +39,7 @@ a {
     cursor: pointer;
 }
 
-/* Theme Colors */
+/* variables */
 :root {
     --primary-green: #047857;
     --light-green: #d1fae5;
@@ -46,7 +47,13 @@ a {
     --dark-gray: #1f2937;
 }
 
-/* Header */
+
+
+
+
+
+
+/* -----------------------------------  Header */
 .site-header {
     background: var(--white);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -112,9 +119,9 @@ a {
 }
 
 
-
-/* Mobile Menu Hidden by Default */
-@media (max-width: 768px) {
+/* RESPONSIVE HEADER */
+/* Small screens hamberger -Mobile Menu */
+@media (max-width: 1000px) {
     .site-nav {
         display: none;
         position: absolute;
@@ -151,7 +158,7 @@ a {
 }
 
 /* Larger screens keep desktop nav */
-@media (min-width: 769px) {
+@media (min-width: 1001px) {
     .site-nav {
         display: block !important;
         position: static;
@@ -164,7 +171,12 @@ a {
     }
 }
 
-/* ---------------------------------------enroll now pop up */
+
+
+
+
+
+/* ---------------------------------------enroll pop up */
 /* Modal overlay */
 .modal {
     display: none;
@@ -181,7 +193,7 @@ a {
 /* Modal box */
 .modal-content {
     background: var(--white);
-    width: 50%;
+    width: 90%;
     max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
@@ -299,9 +311,10 @@ a {
 }
 
 /* Responsive: stack cards on small screens */
-@media (max-width: 768px) {
+@media (max-width: 720px) {
     .modal-content {
         width: 90%;
+        min-width: 310px;
         padding: 1.5rem;
     }
 
@@ -324,201 +337,13 @@ a {
 
 
 
-/*---------------------------------------- Hero */
-.hero {
-    background: var(--light-green);
-    padding: 5rem 0;
-    text-align: center;
-}
 
-.hero-content h2 {
-    font-size: 2.25rem;
-    color: var(--primary-green);
-    margin-bottom: 1rem;
-}
 
-.hero-content p {
-    font-size: 1.1rem;
-    color: var(--dark-gray);
-    margin-bottom: 1.5rem;
-}
 
-/* 4) Buttons below */
-.hero-buttons {
-    margin-top: 1rem;
-}
 
-.hero-buttons .btn {
-    margin: 0 0.5rem;
-    padding: 0.6rem 1.2rem;
-}
 
-.btn.primary {
-    background: var(--primary-green);
-    color: var(--white);
-}
 
-.btn.outline {
-    background: transparent;
-    border: 2px solid var(--primary-green);
-    color: var(--primary-green);
-}
-
-.hero-slides {
-    margin-top: 2rem;
-}
-
-.dot {
-    width: 12px;
-    height: 12px;
-    background: var(--white);
-    border: 2px solid var(--primary-green);
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.dot.active {
-    background: var(--primary-green);
-}
-
-/* Hero Slideshow */
-.hero {
-    position: relative;
-    overflow: hidden;
-    height: 80vh;
-    min-height: 400px;
-}
-
-.hero-slides {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    height: 50vh;
-    min-height: 200px;
-    overflow: hidden;
-}
-
-.hero-slide {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.hero-slide.active {
-    opacity: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--white);
-    padding-top: 20vh;
-}
-
-.hero-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
-}
-
-.hero-dots button {
-    width: 10px;
-    height: 10px;
-    border: none;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.hero-dots button.active {
-    background: var(--primary-green);
-}
-
-/* Programs */
-.programs {
-    padding: 3rem 0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1.5rem;
-    text-align: center;
-}
-
-.stat-item strong {
-    display: block;
-    font-size: 1.75rem;
-    color: var(--primary-green);
-    margin-bottom: 0.5rem;
-}
-
-.stat-item span {
-    color: var(--dark-gray);
-}
-
-/* Features */
-.features {
-    background: var(--white);
-    padding: 3rem 0;
-}
-
-.features h3 {
-    text-align: center;
-    font-size: 1.85rem;
-    color: var(--primary-green);
-    margin-bottom: 0.5rem;
-}
-
-.features p {
-    text-align: center;
-    color: var(--dark-gray);
-    margin-bottom: 2rem;
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-}
-
-.card {
-    background: var(--light-green);
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h4 {
-    color: var(--primary-green);
-    margin-bottom: 0.75rem;
-}
-
-.card p {
-    color: var(--dark-gray);
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-}
-
-.card small {
-    color: var(--dark-gray);
-    font-size: 0.85rem;
-}
-
-/* Footer */
+/* ----------------------------------------- Footer */
 .site-footer {
     background: var(--dark-gray);
     color: #9ca3af;
@@ -550,132 +375,16 @@ a {
 }
 
 
-/* --- Enrollment Page Specific Styles --- */
-.required {
-    color: red;
-}
-
-.enroll-page {
-    padding: 2rem 1rem;
-    background: var(--light-green);
-}
-
-.form-container {
-    padding: 2rem;
-    max-width: 800px;
-    margin: auto;
-}
-
-.step-indicator {
-    overflow-x: auto;
-    margin-bottom: 2rem;
-}
-
-.step-indicator ol {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.step-indicator li {
-    flex: 1 1 auto;
-    text-align: center;
-    padding: 1rem;
-    border-bottom: 4px solid #ccc;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.step-indicator li.completed {
-    color: green;
-    border-bottom-color: green;
-}
-
-.step-indicator li.current {
-    color: #0c4a6e;
-    border-bottom-color: #0c4a6e;
-}
-
-.step-indicator li.disabled {
-    pointer-events: none;
-    color: #aaa;
-}
-
-.form-step {
-    display: none;
-    border: 1px solid #ddd;
-    padding: 2rem;
-    background-color: #fff;
-    margin-bottom: 1rem;
-    border-radius: 6px;
-}
-
-.form-step.active {
-    width: 700px;
-    margin: 0 auto;
-    align-items: center;
-    display: block;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.form-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
-}
-
-.form-buttons button {
-    padding: 0.75rem 2rem;
-    background-color: #0c4a6e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.form-buttons button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
-}
 
 
-/* preview box of uploaded documents */
-.preview-box {
-    flex: 1;
-    margin-top: 10px;
-    height: 200px;
-    width: 200px;
-}
 
-.preview-box img,
-.preview-box iframe {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    object-fit: cover;
-    margin-top: 5px;
-}
 
-/* pop up for pricing */
-/* Popup background overlay */
+
+
+
+
+
+/* ----------------------------------- pop up for pricing */
 .popup {
     display: none;
     position: fixed;
@@ -755,121 +464,15 @@ a {
 }
 
 
-/* Responsive Improvements */
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 250px;
-    }
-
-    .hero-slide {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center top;
-    }
-
-    .hero-content {
-        padding: 2rem 1rem;
-        height: auto;
-    }
-
-    .hero-text h2 {
-        font-size: 1.5rem;
-    }
-
-    .hero-text p {
-        font-size: 0.9rem;
-    }
-
-    .hero-slides {
-        height: 30vh;
-    }
-
-    .hero-buttons .btn {
-        display: block;
-        width: 80%;
-        margin: 0.5rem auto;
-    }
-}
 
 
-/* RESPONSIVE HEADER */
-@media (max-width: 768px) {
-    .site-nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--white);
-    }
 
-    */ .site-nav.open {
-        display: block;
-    }
 
-    .site-nav ul {
-        flex-direction: column;
-    }
 
-    .site-nav li {
-        border-top: 1px solid #e5e7eb;
-    }
 
-    /* /* .mobile-menu { display: inline-block; } */
-}
 
-@media (min-width: 769px) {
-    .mobile-menu {
-        display: none;
-    }
-}
 
-/* ENROLL PAGE RESPONSIVENESS */
-@media (max-width: 768px) {
-    .form-step.active {
-        width: 450px;
-        margin: 0 auto;
-        align-items: center;
-        display: block;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        width: 95%;
-    }
-
-    .form-step.active {
-        width: 80%;
-        margin: 0 auto;
-        align-items: center;
-        display: block;
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .site-nav ul {
-        flex-direction: column;
-        background: var(--white);
-    }
-
-    .site-nav a {
-        padding: 1rem;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .header-actions .btn:not(.icon-btn) {
-        display: none;
-    }
-
-    .mobile-menu {
-        display: inline-block;
-    }
-}
-
-/* mpesa pop up in enroll page */
+/* ------------------------------------- mpesa pop up*/
 
 .mpesa-style {
     background-color: #f2fef4;

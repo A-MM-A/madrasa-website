@@ -11,6 +11,7 @@
     <link rel="icon" href="/media/favicon.ico" sizes="32x32" type="image/x-icon">
 
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="enroll.css" />
 </head>
 
 <body>
@@ -72,7 +73,7 @@
                 <div class="form-group">
                     <label for="Gender">Gender <span class="required">*</span></label>
                     <select id="gender" name="Gender" required>
-                        <option value="0"> -SELECT-</option>
+                        <option value="0"> -SELECT- </option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
@@ -214,9 +215,9 @@
                     <label for="medical">DOES YOUR CHILD HAVE ANY SERIOUS HEALTH CONDITIONS OR REQUIRE MEDICATION AT
                         SCHOOL? <span class="required">*</span></label>
                     <select id="medical" name="medical" required>
-                        <option value="">-SELECT-</option>
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+                        <option value="0">-SELECT-</option>
+                        <option value="1">No</option>
+                        <option value="2">Yes</option>
                     </select>
                 </div>
 
@@ -226,7 +227,7 @@
                 </div>
                 <div class="form-group">
                     <label for="medical other">ARE THERE ANY OTHER MEDICAL CONCERNS? </label>
-                    <input type="text" id="medical other" />
+                    <input type="text" id="medical-other" />
                 </div>
                 <div class="form-buttons">
                     <button type="button" onclick="prevStep()">Previous</button>
@@ -236,35 +237,38 @@
 
             <!-- Step 5 -->
             <section class="form-step">
-                <h2>Upload Documents</h2><br>
-                <div class="form-group">
+                <h2>Upload Documents</h2>
+
+                <div class="form-group upload-group">
                     <label for="birth">Birth Certificate <span class="required">*</span></label>
-                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" />
+                    <input type="file" id="birth" class="file-preview" data-preview="preview-birth" required />
                     <div id="preview-birth" class="preview-box"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group upload-group">
                     <label for="repID">Representative ID/Passport <span class="required">*</span></label>
-                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" />
+                    <input type="file" id="repID" class="file-preview" data-preview="preview-repID" required />
                     <div id="preview-repID" class="preview-box"></div>
                 </div>
 
-                <div class="form-group">
-                    <label for="photo">Student's Passport Photo <span class="required">*</span></label>
+                <div class="form-group upload-group">
+                    <label for="photo">Student’s Passport Photo <span class="required">*</span></label>
                     <input type="file" id="photo" class="file-preview" data-preview="preview-photo" required />
                     <div id="preview-photo" class="preview-box"></div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group upload-group">
                     <label for="vaccine">Vaccination Record</label>
                     <input type="file" id="vaccine" class="file-preview" data-preview="preview-vaccine" />
                     <div id="preview-vaccine" class="preview-box"></div>
                 </div>
+
                 <div class="form-buttons">
                     <button type="button" onclick="prevStep()">Previous</button>
                     <button type="button" onclick="nextStep()">Next</button>
                 </div>
             </section>
+
             <!-- Step 6 -->
             <section class="form-step">
                 <h2>Payement</h2><br>
@@ -295,7 +299,8 @@
                 <li>Enter Mpesa-Pin on your phone</li>
                 <li>Payment amount is non‑refundable.</li>
             </ul>
-            <div style="background: var(--light-green); padding: 10px 0; text-align: center; border-radius: 20px; display: flex; margin: 10px;">
+            <div
+                style="background: var(--light-green); padding: 10px 0; text-align: center; border-radius: 20px; display: flex; margin: 10px;">
                 <div class="mpesa-logo">
                     <img src="media/mpesa-logo.png" alt="M-Pesa Logo">
                 </div>
@@ -314,7 +319,8 @@
         <div class="popup-content mpesa-style">
             <div class="spinner"></div>
             <h2>Waiting for Confirmation</h2>
-            <p style="color: gray;">Enter Mpesa-Pin on your phone. <br> Please do <b>NOT</b> close this window.<br> You can Retry Payment after 30 seconds.</p>
+            <p style="color: gray;">Enter Mpesa-Pin on your phone. <br> Please do <b>NOT</b> close this window.<br> You
+                can Retry Payment after 30 seconds.</p>
         </div>
     </div>
 
@@ -352,6 +358,9 @@
         </div>
     </div>
 
+
+
+
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container footer-grid">
@@ -385,6 +394,45 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // document.getElementById("fullName").addEventListener("input", function () {
+        //     this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        // });
+
+        // IDs of fields that should allow only letters (and spaces)
+        const letterOnlyFields = ['fullName', 'Address', 'school', 'guardianname', 'Occupation', 'GuardianAddress', 'medical-info', 'medical-other'];
+
+        // IDs of fields that should allow only numbers
+        const numberOnlyFields = ['studentPhone', 'age', 'id', 'guardianPhone'];
+
+        // Apply letter-only restriction
+        letterOnlyFields.forEach(function (id) {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+                });
+            }
+        });
+
+        // Apply number-only restriction
+        numberOnlyFields.forEach(function (id) {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('input', function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,232 @@
+/*---------------------------------------- Hero */
+.hero {
+    background: var(--light-green);
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.hero-content h2 {
+    font-size: 2.25rem;
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+    margin-bottom: 1.5rem;
+}
+
+
+.hero-buttons {
+    margin-top: 1rem;
+}
+
+.hero-buttons .btn {
+    margin: 0 0.5rem;
+    padding: 0.6rem 1.2rem;
+}
+
+.btn.primary {
+    background: var(--primary-green);
+    color: var(--white);
+}
+
+.btn.outline {
+    background: transparent;
+    border: 2px solid var(--primary-green);
+    color: var(--primary-green);
+}
+
+.hero-slides {
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: var(--white);
+    border: 2px solid var(--primary-green);
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: var(--primary-green);
+}
+
+/* Hero Slideshow */
+.hero {
+    position: relative;
+    overflow: hidden;
+    height: 80vh;
+    min-height: 400px;
+}
+
+.hero-slides {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    height: 50vh;
+    min-height: 200px;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    padding-top: 20vh;
+}
+
+.hero-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.hero-dots button {
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.hero-dots button.active {
+    background: var(--primary-green);
+}
+
+/* Programs */
+.programs {
+    padding: 3rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.stat-item strong {
+    display: block;
+    font-size: 1.75rem;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.stat-item span {
+    color: var(--dark-gray);
+}
+
+/* Features */
+.features {
+    background: var(--white);
+    padding: 3rem 0;
+}
+
+.features h3 {
+    text-align: center;
+    font-size: 1.85rem;
+    color: var(--primary-green);
+    margin-bottom: 0.5rem;
+}
+
+.features p {
+    text-align: center;
+    color: var(--dark-gray);
+    margin-bottom: 2rem;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: var(--light-green);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h4 {
+    color: var(--primary-green);
+    margin-bottom: 0.75rem;
+}
+
+.card p {
+    color: var(--dark-gray);
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.card small {
+    color: var(--dark-gray);
+    font-size: 0.85rem;
+}
+
+
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .hero {
+        height: auto;
+        min-height: 250px;
+    }
+
+    .hero-slide {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+        height: auto;
+    }
+
+    .hero-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+
+    .hero-slides {
+        height: 30vh;
+    }
+
+    .hero-buttons .btn {
+        display: block;
+        width: 80%;
+        margin: 0.5rem auto;
+    }
+}

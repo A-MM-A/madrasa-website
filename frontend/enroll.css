@@ -1,0 +1,184 @@
+/* --- Enrollment Page Specific Styles --- */
+.required {
+    color: red;
+}
+
+.enroll-page {
+    padding: 2rem 1rem;
+    background: var(--light-green);
+}
+
+.form-container {
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+.step-indicator {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+}
+
+.step-indicator ol {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.step-indicator li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 4px solid #ccc;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.step-indicator li.completed {
+    color: green;
+    border-bottom-color: green;
+}
+
+.step-indicator li.current {
+    color: #0c4a6e;
+    border-bottom-color: #0c4a6e;
+}
+
+.step-indicator li.disabled {
+    pointer-events: none;
+    color: #aaa;
+}
+
+.form-step {
+    display: none;
+    border: 1px solid #ddd;
+    padding: 2rem;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+.form-step.active {
+    width: 700px;
+    margin: 0 auto;
+    align-items: center;
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.form-buttons button {
+    padding: 0.75rem 2rem;
+    background-color: #0c4a6e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-buttons button:disabled {
+    background-color: #888;
+    cursor: not-allowed;
+}
+
+
+/* Container for each upload field */
+.upload-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+/* Style file inputs for modern look */
+.upload-group input[type="file"] {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.upload-group input[type="file"]:hover {
+  border-color: #888;
+}
+
+/* Preview box: fixed size, centered, with overflow hidden */
+.preview-box {
+  width: 160px;
+  height: 160px;
+  margin-top: 0.75rem;
+  border: 1px dashed #aaa;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fafafa;
+}
+
+/* Transition for adding/removing previews */
+.preview-box img,
+.preview-box iframe {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.preview-box img:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+.invalid {
+    border: 2px solid red;
+    background-color: #f1dede;
+}
+
+
+/* ENROLL PAGE RESPONSIVENESS */
+@media (max-width: 768px) {
+    .form-step.active {
+        width: 90%;
+        margin: 0 auto;
+        align-items: center;
+        display: block;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .form-step.active {
+        width: 100%;
+        min-width: 230px;
+        margin: 0 auto;
+        align-items: center;
+        display: block;
+    }
+}

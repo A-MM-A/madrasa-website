@@ -62,18 +62,39 @@ function showStep(index) {
 }
 
 function nextStep() {
-    const inputs = steps[currentStep].querySelectorAll("input");
-    for (const input of inputs) {
-        if (!input.checkValidity()) {
-            input.reportValidity();
-            return;
-        }
-    }
-    currentStep++;
-    showStep(currentStep);
+    const currentFields = steps[currentStep].querySelectorAll("input, select, textarea");
+    let allValid = true;
 
+    for (const field of currentFields) {
+        if (field.hasAttribute("required")) {
+            if (field.tagName === "SELECT") {
+                if (field.value === "" || field.value === "0") {
+                    allValid = false;
+                    field.classList.add("invalid");
+                    field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    field.focus();
+                    break;
+                }
+            } else if (!field.checkValidity()) {
+                allValid = false;
+                field.classList.add("invalid");
+                field.reportValidity();
+                field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                break;
+            }
+        }
+
+        // Remove old invalid mark if now valid
+        field.classList.remove("invalid");
+    }
+
+    if (!allValid) return;
+
+    currentStep ++;
+    showStep(currentStep);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
 
 function prevStep() {
     currentStep--;
@@ -130,26 +151,48 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 document.querySelectorAll('.file-preview').forEach(input => {
-  input.addEventListener('change', function () {
-    const previewId = this.dataset.preview;
-    const previewBox = document.getElementById(previewId);
-    const file = this.files[0];
+    input.addEventListener('change', function () {
+        const previewId = this.dataset.preview;
+        const previewBox = document.getElementById(previewId);
+        const file = this.files[0];
 
-    if (!file) return;
+        if (!file) return;
 
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; height: auto;">`;
-      };
-      reader.readAsDataURL(file);
-    } else if (file.type === "application/pdf") {
-      const blobUrl = URL.createObjectURL(file);
-      previewBox.innerHTML = `<iframe src="${blobUrl}" width="100%" height="400px" style="border: none;"></iframe>`;
-    } else {
-      previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
-    }
-  });
+        // Validate file
+        let allowedTypes = [];
+        let maxMB = 4;
+
+        switch (this.id) {
+            case 'birth':
+                allowedTypes = ['application/pdf'];
+                break;
+            case 'repID':
+                allowedTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+                break;
+            case 'photo':
+                allowedTypes = ['image/png', 'image/jpeg'];
+                break;
+            case 'vaccine':
+                allowedTypes = ['application/pdf', 'image/png', 'image/jpeg'];
+                break;
+        }
+
+        if (!validateFile(this, allowedTypes, maxMB)) return;
+
+        // Handle PDF with blob, image with base64
+        if (file.type === "application/pdf") {
+            const blobUrl = URL.createObjectURL(file);
+            previewBox.innerHTML = `<iframe src="${blobUrl}" width="100%" height="400px" style="border:none;"></iframe>`;
+        } else if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 100%; height: auto;">`;
+            };
+            reader.readAsDataURL(file);
+        } else {
+            previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
+        }
+    });
 });
 
 
@@ -207,18 +250,7 @@ function validateFile(inputEl, allowedTypes, maxMB) {
     return true;
 }
 
-document.getElementById('birth').addEventListener('change', e => {
-    validateFile(e.target, ['application/pdf'], 4);
-});
-document.getElementById('repID').addEventListener('change', e => {
-    validateFile(e.target, ['application/pdf'], 4);
-});
-document.getElementById('photo').addEventListener('change', e => {
-    validateFile(e.target, ['image/png', 'image/jpeg'], 4);
-});
-document.getElementById('vaccine').addEventListener('change', e => {
-    validateFile(e.target, ['application/pdf', 'image/png', 'image/jpeg'], 4);
-});
+
 
 globalThis.enrollmentData = {}; // temp store form d
 
@@ -271,7 +303,7 @@ async function submitForm() {
     try {
         // 1) Collect all the form data & files
         const data = await collectFormData();
-        console.log(data);        
+        console.log(data);
 
         // 2) POST to your backend to generate the PDF
         const res = await fetch(`${BASE_URL}/api/pdf/generate-pdf`, {
@@ -322,10 +354,10 @@ function closeWaiting() { document.getElementById('waitingModal').style.display 
 
 function openSuccess() { document.getElementById('successModal').style.display = 'flex'; }
 function closeSuccess() {
-  document.getElementById('successModal').style.display = 'none';
-  setTimeout(() => {
-    window.location.href = '/index.html';
-  }, 300);
+    document.getElementById('successModal').style.display = 'none';
+    setTimeout(() => {
+        window.location.href = '/index.html';
+    }, 300);
 }
 
 function openFailure() { document.getElementById('failureModal').style.display = 'flex'; }
