@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Essentials of Islam - For Sisters Only</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: url('./event_media/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #3a3a3f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            padding-left: 3px;
+            padding-right: 3px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(to bottom, #bbbdbd, #006459);
+            color: rgb(218, 254, 255);
+            padding: 1rem 1rem;
+            border-radius: 0 0 1rem 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero>img {
+            width: 100%;
+        }
+
+        .hero-img img {
+            width: 250px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            animation: zoomIn 1.2s ease-in-out;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .tagline,
+        .quote {
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .register-btn {
+            background: #666666;
+            color: rgb(218, 254, 255);
+            border: 2.5px solid #13927d;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #004d40;
+        }
+
+        .section {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        h2 {
+            color: #028a73;
+            font-weight: 700;
+            border-bottom: 2px solid #006459;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .icon-container>p {
+            padding-left: 15px;
+            font-weight: 600;
+        }
+
+        .icon-description>p {
+            padding-left: 15px;
+            font-weight: 600;
+        }
+
+        .topics li {
+            margin-bottom: 0.5rem;
+            list-style-type: none;
+            padding-left: 20px;
+            font-weight: 600;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            padding-left: 10px;
+            margin-bottom: -13px;
+            font-weight: 500;
+        }
+
+        form input,
+        form button {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        form>h2 {
+            margin-bottom: -5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fafafa;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #20b181;
+            background-color: #f5fdfb;
+        }
+
+        form button {
+            background: #089e85;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #119191;
+        }
+
+        .errorMessage {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #004d40;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .footer .social-icons {
+            margin: 1rem 0;
+        }
+
+        .footer .social-icons a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        .contact-info {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+        }
+
+        .contact-info>p {
+            padding: 10px;
+        }
+
+        .footer-icon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 6px;
+            margin-bottom: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .footer-icon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+        }
+
+        .whatsapp {
+            height: 60px;
+            width: 60px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="https://wa.me/254740600220" target="_blank" class="whatsapp-button"><img
+                src="./event_media/whatsapp.svg" class="whatsapp" alt="WhatsApp" /></a>
+
+        <header class="hero">
+            <div class="hero-img">
+                <img src="./event_media/logo.png" alt="Event Flyer" />
+            </div>
+            <img src="./event_media/essential.png" alt="The Essentials of Islam" />
+            <p class="subtitle">For Sisters Only</p>
+            <p class="tagline">“Your journey to a stronger, smarter Muslimah begins here!”</p>
+            <p class="quote">The Prophet ﷺ said: "Women are the twin halves of men." (Abu Dawud)</p>
+            <a href="#register" class="register-btn">Register Now</a>
+        </header>
+
+        <section class="section">
+            <h2>Event Details</h2>
+            <div class="icon-container">
+                <img src="./event_media/map.svg" class="icon" alt="Map icon" />
+                <div class="icon-description">
+                    <p>Dar Al-Arqam, Bondeni Mombasa</p>
+                    <p>(Next to OLA Petrol Station)</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <img src="./event_media/calender.svg" class="icon" alt="Calendar icon" />
+                <div class="icon-description">
+                    <p>12th–14th Aug 2025</p>
+                    <p>Tuesday – Thursday</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <img src="./event_media/clock.svg" class="icon" alt="Clock icon" />
+                <p> 4:00 pm – 6:00 pm</p>
+            </div>
+            <div class="icon-container">
+                <img src="./event_media/money.svg" class="icon" alt="Fee icon" />
+                <p> Ksh. <strong>500</strong></p>
+            </div>
+            <br />
+            <h3>What You’ll Receive:</h3>
+            <div class="icon-container">
+                <img src="./event_media/certificate.svg" class="icon" alt="Certificate Icon" />
+                <p>Official Certificate </p>
+            </div>
+        </section>
+
+
+
+
+        <section class="section">
+            <h2>Join us as we explore:</h2>
+            <ul class="topics">
+                <li>Purifying the Heart</li>
+                <li>Fiqhu Ṭahārah for Women</li>
+                <li>The Role of Women in Islam</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Speaker</h2>
+            <div class="speaker" style="text-align:center;">
+                <img src="./event_media/speaker.png" alt="Ustadhah Ummu Az-Zahraa" style="width: 250px;" />
+                <div class="icon-container" style="padding-left: 40px;">
+                    <img src="./event_media/art-line.png" style="width: 70px;" alt="Decoration" />
+                    <div class="icon-description">
+                        <h3>USTADHAH:</h3>
+                        <p>Ummu Az-Zahraa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="register">
+            <h2>Register Now</h2>
+            <form id="registrationForm" action="submit1.php" method="POST" novalidate>
+
+                <label>Full Name</label>
+                <input type="text" id="participantName" name="participantName" required pattern="[A-Za-z\s'-]+" />
+                <small class="errorMessage"></small>
+
+                <label>Age</label>
+                <input type="number" id="participantAge" name="participantAge" required />
+                <small class="errorMessage"></small>
+
+                <label>Location</label>
+                <input type="text" id="homeAddress" name="homeAddress" placeholder="(At least 5 characters)" />
+                <small class="errorMessage"></small>
+
+                <label>Phone Number</label>
+                <input type="tel" placeholder="0722xxxxxx" id="participantPhone" name="participantPhone" required />
+                <small class="errorMessage"></small>
+
+                <label>Email</label>
+                <input type="email" placeholder="Email Address" id="participantEmail" name="participantEmail"
+                    required />
+                <small class="errorMessage"></small>
+
+                <h2>Pay via MPESA to:</h2>
+                <p><strong>FATMA BASHEIKH - </strong> 0740600220</p>
+
+                <label>MPESA message</label>
+                <textarea id="mpesaCode" rows="5" name="mpesaCode"
+                    placeholder="Paste your MPESA message here. It should contain the code, amount, name and date &amp; time."
+                    required></textarea>
+                <small class="errorMessage"></small>
+
+                <input type="hidden" id="submissionTime" name="submissionTime" />
+
+                <button type="button" onclick="submitMpesa()">Submit</button>
+
+                <div id="successBox" style="color: green; margin-top: 20px"></div>
+                <div id="errorBox" style="color: red; margin-top: 20px"></div>
+            </form>
+        </section>
+
+        <section class="section">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <img src="./event_media/telephone.svg" class="icon" alt="Phone icon" />
+                <div>
+                    <p>+254 740 600 220</p>
+                    <p>+254 756 600 220</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <img src="./event_media/mail.svg" class="icon" alt="Mail icon" />
+                <p> daralarqam.ke@gmail.com</p>
+            </div>
+        </section>
+
+
+
+
+        <footer class="footer">
+            <div class="social-icons">
+                <a href="https://youtube.com/@daralarqam.ke.111?si=MlqQ3Gv9TOuFzVuG" target="_blank"
+                    title="YouTube"><img src="./event_media/youtube.svg" class="footer-icon" alt="YouTube" /></a>
+                <a href="https://www.tiktok.com/@daralarqam.ke?_t=ZM-8yiRXKnKMCM&_r=1" target="_blank"
+                    title="Tiktok"><img src="./event_media/tiktok.svg" class="footer-icon" alt="Tiktok" /></a>
+                <a href="https://www.instagram.com/daralarqam.ke?igsh=NHN2a2FyODQzdDUx&utm_source=qr" target="_blank"
+                    title="Instagram"><img src="./event_media/intsagram.svg" class="footer-icon" alt="Instagram" /></a>
+                <!-- <a href="https://facebook.com/daralarqam.ke" target="_blank" title="Facebook"><img
+                        src="./event_media/facebook.svg" class="footer-icon" alt="Facebook" /></a> -->
+            </div>
+            <p>&copy; 2025 Dar Al-Arqam. All rights reserved.</p>
+        </footer>
+    </div>
+
+
+    <!-- Success Modal -->
+    <div id="successModal" style="
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+">
+        <div style="
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    ">
+            <h2 style="color: green; margin-bottom: 15px;">🎉 Congratulations!</h2>
+            <p>Your registration has been submitted successfully.</p>
+            <p>You will receive updates shortly.</p>
+            <button id="doneButton" style="
+            background: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 15px;
+            cursor: pointer;
+        ">
+                Done
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- <script>
+        (function () {
+            const form = document.getElementById("registrationForm");
+            if (!form) return console.warn("Form #registrationForm not found.");
+
+            // Find the button (works for button or input[type="submit"])
+            const btn = form.querySelector('button') || form.querySelector('input[type="submit"]');
+
+            // Ensure button won't perform native submit unexpectedly
+            if (btn) {
+                try { btn.type = 'button'; } catch (e) { /* ignore */ }
+                btn.onclick = null; // remove inline handlers if any
+            }
+
+            // Utility to clear all error messages
+            function clearErrors() {
+                const errorMessages = form.querySelectorAll(".errorMessage");
+                errorMessages.forEach(msg => msg.textContent = "");
+                const errorBox = document.getElementById("errorBox");
+                if (errorBox) errorBox.textContent = "";
+            }
+
+            // Validation function (keeps your original checks)
+            function validateFields() {
+                clearErrors();
+                let isValid = true;
+
+                // Name check
+                const name = document.getElementById("participantName");
+                if (!name || !/^[A-Za-z\s'-]+$/.test(name.value.trim())) {
+                    if (name && name.nextElementSibling) name.nextElementSibling.textContent = "Please enter a valid name.";
+                    isValid = false;
+                }
+
+                // Age check
+                const age = document.getElementById("participantAge");
+                const ageVal = age ? Number(age.value) : NaN;
+                if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
+                    if (age && age.nextElementSibling) age.nextElementSibling.textContent = "Enter a valid age between 10 and 100.";
+                    isValid = false;
+                }
+
+                // Location check (if filled)
+                const location = document.getElementById("homeAddress");
+                if (location && location.value.trim() && location.value.trim().length < 5) {
+                    if (location && location.nextElementSibling) location.nextElementSibling.textContent = "Location must be at least 5 characters.";
+                    isValid = false;
+                }
+
+                // Phone check
+                const phone = document.getElementById("participantPhone");
+                if (!phone || !/^\d{9,}$/.test(phone.value.trim())) {
+                    if (phone && phone.nextElementSibling) phone.nextElementSibling.textContent = "Enter a valid phone number.";
+                    isValid = false;
+                }
+
+                // Email check
+                const email = document.getElementById("participantEmail");
+                if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())) {
+                    if (email && email.nextElementSibling) email.nextElementSibling.textContent = "Enter a valid email address.";
+                    isValid = false;
+                }
+
+                // MPESA message check
+                const mpesa = document.getElementById("mpesaCode");
+                if (!mpesa || mpesa.value.trim().length < 10) {
+                    if (mpesa && mpesa.nextElementSibling) mpesa.nextElementSibling.textContent = "MPESA message is too short.";
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // Handle successful submission UI (no redirect)
+            function showSubmittedState() {
+                // update hidden submission time if present
+                const submissionTimeISO = new Date().toISOString();
+                const hiddenTime = document.getElementById("submissionTime");
+                if (hiddenTime) hiddenTime.value = submissionTimeISO;
+
+                // Show simple "Submitted" message
+                const successBox = document.getElementById("successBox");
+                if (successBox) {
+                    successBox.textContent = "Submitted";
+                    successBox.style.color = "green";
+                    successBox.style.fontWeight = "600";
+                } else {
+                    // fallback: append a small message to the form
+                    const msg = document.createElement("div");
+                    msg.textContent = "Submitted";
+                    msg.style.color = "green";
+                    msg.style.fontWeight = "600";
+                    msg.style.marginTop = "12px";
+                    form.appendChild(msg);
+                }
+
+                // disable the submit button to prevent double clicks
+                if (btn) btn.disabled = true;
+            }
+
+            // Prevent actual navigation and run validation
+            function handleSubmit(event) {
+                if (event && typeof event.preventDefault === 'function') event.preventDefault();
+
+                // Run validations and show errors if any
+                const ok = validateFields();
+                if (!ok) {
+                    const errorBox = document.getElementById("errorBox");
+                    if (errorBox) {
+                        errorBox.textContent = "Please fix the errors and try again.";
+                        errorBox.style.color = "red";
+                    }
+                    return false;
+                }
+
+                // If valid — show simple Submitted message and STOP (no redirect, no form.submit())
+                showSubmittedState();
+
+                // Optional: build a payload and print to console (keeps things simple)
+                try {
+                    const payload = {
+                        participantName: document.getElementById("participantName").value.trim() || null,
+                        participantAge: Number(document.getElementById("participantAge").value) || null,
+                        homeAddress: (document.getElementById("homeAddress").value || "").trim() || null,
+                        participantPhone: (document.getElementById("participantPhone").value || "").trim() || null,
+                        participantEmail: (document.getElementById("participantEmail").value || "").trim() || null,
+                        mpesaMessage: (document.getElementById("mpesaCode").value || "").trim() || null,
+                        submissionTime: new Date().toISOString()
+                    };
+                    console.log("Registration payload:", payload);
+                } catch (e) {
+                    // ignore payload errors
+                }
+
+                return false;
+            }
+
+            // Attach handlers: prevent native submit (Enter key) and button click
+            form.addEventListener("submit", handleSubmit);
+            if (btn) btn.addEventListener("click", handleSubmit);
+        })();
+
+    </script> -->
+
+    <!-- add supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script>
+        (function () {
+            const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
+            const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaWdna3FkZGJ5Z3B2bnZlaXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjQxMjAsImV4cCI6MjA3MDM0MDEyMH0.eDA5qFQKWlPDk6Z6N12yuhLPwxSJ_pavVy-N50A0xHk";
+
+            // init client
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            const form = document.getElementById("registrationForm");
+            if (!form) return console.warn("Form #registrationForm not found.");
+
+            const btn = form.querySelector('button') || form.querySelector('input[type="submit"]');
+            if (btn) { try { btn.type = 'button'; } catch (e) { } btn.onclick = null; }
+
+            function clearErrors() {
+                form.querySelectorAll(".errorMessage").forEach(m => m.textContent = "");
+                const errorBox = document.getElementById("errorBox"); if (errorBox) errorBox.textContent = "";
+            }
+
+            function validateFields() {
+                clearErrors();
+                let isValid = true;
+
+                const name = document.getElementById("participantName");
+                if (!name || !/^[A-Za-z\s'-]+$/.test(name.value.trim())) {
+                    if (name && name.nextElementSibling) name.nextElementSibling.textContent = "Please enter a valid name.";
+                    isValid = false;
+                }
+
+                const age = document.getElementById("participantAge");
+                const ageVal = age ? Number(age.value) : NaN;
+                if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
+                    if (age && age.nextElementSibling) age.nextElementSibling.textContent = "Enter a valid age between 10 and 100.";
+                    isValid = false;
+                }
+
+                const location = document.getElementById("homeAddress");
+                if (location && location.value.trim() && location.value.trim().length < 5) {
+                    if (location && location.nextElementSibling) location.nextElementSibling.textContent = "Location must be at least 5 characters.";
+                    isValid = false;
+                }
+
+                const phone = document.getElementById("participantPhone");
+                if (!phone || !/^\d{9,}$/.test(phone.value.trim())) {
+                    if (phone && phone.nextElementSibling) phone.nextElementSibling.textContent = "Enter a valid phone number.";
+                    isValid = false;
+                }
+
+                const email = document.getElementById("participantEmail");
+                if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())) {
+                    if (email && email.nextElementSibling) email.nextElementSibling.textContent = "Enter a valid email address.";
+                    isValid = false;
+                }
+
+                const mpesa = document.getElementById("mpesaCode");
+                if (!mpesa || mpesa.value.trim().length < 10) {
+                    if (mpesa && mpesa.nextElementSibling) mpesa.nextElementSibling.textContent = "MPESA message is too short.";
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // Show Submitted UI (no redirect)
+            // function showSubmittedState() {
+            //     const submissionTimeISO = new Date().toISOString();
+            //     const hiddenTime = document.getElementById("submissionTime");
+            //     if (hiddenTime) hiddenTime.value = submissionTimeISO;
+
+            //     const successBox = document.getElementById("successBox");
+            //     if (successBox) {
+            //         successBox.textContent = "Submitted";
+            //         successBox.style.color = "green";
+            //         successBox.style.fontWeight = "600";
+            //     } else {
+            //         const msg = document.createElement("div");
+            //         msg.textContent = "Submitted";
+            //         msg.style.color = "green";
+            //         msg.style.fontWeight = "600";
+            //         msg.style.marginTop = "12px";
+            //         form.appendChild(msg);
+            //     }
+            //     if (btn) btn.disabled = true;
+            // }
+
+            function showSubmittedState() {
+                const modal = document.getElementById("successModal");
+                if (modal) {
+                    modal.style.display = "flex"; // show popup
+                }
+
+                // Done button click → redirect to index.html
+                const doneBtn = document.getElementById("doneButton");
+                if (doneBtn) {
+                    doneBtn.addEventListener("click", () => {
+                        window.location.href = "index.html";
+                    });
+                }
+            }
+
+
+
+            // Build payload matching your table columns
+            function buildPayload() {
+                return {
+                    participant_name: (document.getElementById("participantName").value || "").trim() || null,
+                    participant_age: Number(document.getElementById("participantAge").value) || null,
+                    home_address: (document.getElementById("homeAddress").value || "").trim() || null,
+                    participant_phone: (document.getElementById("participantPhone").value || "").trim() || null,
+                    participant_email: (document.getElementById("participantEmail").value || "").trim() || "",
+                    mpesa_message: (document.getElementById("mpesaCode").value || "").trim() || "",
+                    confirmed: false  // default; you can update later from admin panel
+                };
+            }
+
+            // Insert into Supabase
+            async function insertRegistration(row) {
+                // row must be an object (matching columns). We insert as single-item array.
+                try {
+                    const { data, error } = await supabase
+                        .from("event_registrations")
+                        .insert([row]);
+
+                    if (error) {
+                        console.error("Supabase insert error:", error);
+                        return { ok: false, error };
+                    }
+                    console.log("Supabase insert success:", data);
+                    return { ok: true, data };
+                } catch (err) {
+                    console.error("Unexpected insert error:", err);
+                    return { ok: false, error: err };
+                }
+            }
+
+            // Main submit handler
+            async function handleSubmit(e) {
+                if (e && typeof e.preventDefault === "function") e.preventDefault();
+
+                const valid = validateFields();
+                if (!valid) {
+                    const errorBox = document.getElementById("errorBox");
+                    if (errorBox) { errorBox.textContent = "Please fix the errors and try again."; errorBox.style.color = "red"; }
+                    return false;
+                }
+
+                const payload = buildPayload();
+                console.log("Payload to send:", payload);
+
+                // show small UI change (optional)
+                if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+
+                const res = await insertRegistration(payload);
+
+                if (res.ok) {
+                    showSubmittedState();
+                } else {
+                    // Show error to user and re-enable button
+                    const errorBox = document.getElementById("errorBox");
+                    if (errorBox) {
+                        errorBox.textContent = "Failed to submit. Try again later.";
+                        errorBox.style.color = "red";
+                    }
+                    if (btn) { btn.disabled = false; btn.textContent = "Submit"; }
+                }
+
+                return false;
+            }
+
+            form.addEventListener("submit", handleSubmit);
+            if (btn) btn.addEventListener("click", handleSubmit);
+        })();
+    </script>
+
+
+
+</body>
+
+</html>
