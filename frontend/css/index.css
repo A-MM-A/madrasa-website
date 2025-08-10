@@ -1,7 +1,7 @@
 /*---------------------------------------- Hero */
-.hero {
+/* .hero {
     background: var(--light-green);
-    padding: 5rem 0;
+    padding: 2rem 0;
     text-align: center;
 }
 
@@ -36,85 +36,242 @@
     background: transparent;
     border: 2px solid var(--primary-green);
     color: var(--primary-green);
-}
+} */
 
-.hero-slides {
-    margin-top: 2rem;
-}
+/* -------------------------
+   HERO — full replacement
+   ------------------------- */
 
-.dot {
-    width: 12px;
-    height: 12px;
-    background: var(--white);
-    border: 2px solid var(--primary-green);
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.dot.active {
-    background: var(--primary-green);
-}
-
-/* Hero Slideshow */
+/* Hero container */
 .hero {
     position: relative;
-    overflow: hidden;
+    width: 100%;
     height: 80vh;
     min-height: 400px;
-}
-
-.hero-slides {
-    position: relative;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    height: 50vh;
-    min-height: 200px;
     overflow: hidden;
+    --bg-image: none;
+    /* JS should set this */
 }
 
-.hero-slide {
+/* Two background layers:
+   ::before = blurred / zoomed fill (covers whole area)
+   ::after  = crisp main image (contain) so full image is visible
+*/
+.hero::before,
+.hero::after {
+    content: "";
     position: absolute;
     inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Blurred fill behind the main image
+   - background-size: cover so it fills
+   - scaled slightly so the blur doesn't show black edges
+*/
+.hero::before {
+    background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    background-repeat: no-repeat;
+    filter: blur(22px) brightness(0.6);
+    transform: scale(1.08);
+    transform-origin: center;
+    z-index: 0;
+
 }
 
-.hero-slide.active {
+/* Main image shown on top of blur
+   - background-size: contain keeps the entire image visible (no cropping)
+   - the empty areas reveal the blurred layer underneath
+*/
+.hero::after {
+    background-image: var(--bg-image);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
     opacity: 1;
+    transition: opacity 1.5s ease-in-out;
 }
 
-.hero-content {
-    position: relative;
+.hero.fading::after {
+    opacity: 0;
+}
+
+/* Bottom gradient: place this element inside .hero (see HTML note)
+   - only covers the lower portion (adjust height % to taste)
+   - sits above the image (z-index:2) but below overlay content (z-index:3+)
+*/
+.hero-gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 35%;
+    /* lower-third; change to 30% / 40% if you like */
     z-index: 2;
-    text-align: center;
-    color: var(--white);
-    padding-top: 20vh;
+    pointer-events: none;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.55) 30%,
+            rgba(0, 0, 0, 0.25) 60%,
+            rgba(0, 0, 0, 0) 100%);
 }
 
-.hero-dots {
+/* Overlay container (text + buttons) - sits above backgrounds */
+.hero-overlay {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 1rem 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
-.hero-dots button {
-    width: 10px;
-    height: 10px;
+/* Heading top-left */
+.hero-text h2 {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: rgb(155, 187, 142);
+    /* readable glow without touching background image */
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.8),
+        0 6px 18px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.18rem 0.45rem;
+    /* small padding so text-shadow looks nicer */
+    margin: 20px;
+    border-radius: 4px;
+    text-decoration: underline;
+}
+
+/* Description below heading (top-left stack) */
+.hero-text p {
+    margin: 20px;
+    position: absolute;
+    top: calc(1rem + 2.8rem);
+    /* adjust if title size changes */
+    left: 1rem;
+    max-width: 320px;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    line-height: 1.4;
+    color: rgb(231, 231, 231);
+    text-shadow:
+        0 1px 0 rgba(0, 0, 0, 0.8),
+        0 6px 14px rgba(0, 0, 0, 0.5);
+    padding: 0.18rem 0.45rem;
+    border-radius: 4px;
+    margin-top: 40px;
+}
+
+/* Buttons near bottom center — on top of the gradient */
+.hero-buttons {
+    position: absolute;
+    bottom: 1.2rem;
+    /* sits just above bottom edge */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 4;
+    /* above gradient */
+    /* subtle translucent panel to further ensure contrast (optional) */
+    background: rgba(255, 255, 255, 0.02);
+    /* barely visible, mostly for smoothing */
+    padding: 0.25rem 0.6rem;
+    border-radius: 10px;
+    pointer-events: auto;
+}
+
+.hero-buttons .btn {
+    padding: 0.6rem 1.35rem;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
     border: none;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: background 0.3s;
 }
 
-.hero-dots button.active {
+.btn.primary {
     background: var(--primary-green);
+    color: white;
 }
+
+.btn.outline {
+    background: rgba(220, 212, 212, 0.693);
+    /* subtle translucent fill so outline stands out */
+    border: 2px solid var(--primary-green);
+    color: var(--primary-green);
+}
+
+/* Prevent text selection while swiping */
+.hero-overlay,
+.hero-overlay * {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .hero {
+        height: 80vh; /* keep hero height same ratio as desktop */
+        min-height: 300px;
+    }
+
+    .hero-overlay {
+        justify-content: flex-start; /* no vertical centering */
+    }
+
+    .hero-text h2 {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: clamp(1rem, 5vw, 1.6rem);
+        max-width: calc(100% - 2rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .hero-text p {
+        position: absolute;
+        top: calc(1rem + 2.2rem); /* directly under h2 */
+        left: 1rem;
+        font-size: 0.85rem;
+        max-width: calc(100% - 2rem);
+    }
+
+    .hero-buttons {
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        z-index: 4;
+    }
+
+    .hero-buttons .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
 
 /* Programs */
 .programs {
@@ -138,6 +295,7 @@
 .stat-item span {
     color: var(--dark-gray);
 }
+
 
 /* Features */
 .features {
@@ -190,43 +348,4 @@
 .card small {
     color: var(--dark-gray);
     font-size: 0.85rem;
-}
-
-
-
-/* Responsive Improvements */
-@media (max-width: 768px) {
-    .hero {
-        height: auto;
-        min-height: 250px;
-    }
-
-    .hero-slide {
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center top;
-    }
-
-    .hero-content {
-        padding: 2rem 1rem;
-        height: auto;
-    }
-
-    .hero-text h2 {
-        font-size: 1.5rem;
-    }
-
-    .hero-text p {
-        font-size: 0.9rem;
-    }
-
-    .hero-slides {
-        height: 30vh;
-    }
-
-    .hero-buttons .btn {
-        display: block;
-        width: 80%;
-        margin: 0.5rem auto;
-    }
 }

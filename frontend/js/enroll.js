@@ -160,37 +160,22 @@ document.querySelectorAll('.file-preview').forEach(input => {
 
 
 
-function showModal(message) {
-    const overlay = document.createElement('div');
-    overlay.style.position = 'fixed';
-    overlay.style.top = '0'; overlay.style.left = '0';
-    overlay.style.width = '100%'; overlay.style.height = '100%';
-    overlay.style.background = 'rgba(0,0,0,0.4)';
-    overlay.style.display = 'flex'; overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center';
-    const box = document.createElement('div');
-    box.style.background = 'white'; box.style.color = 'var(--primary-green)';
-    box.style.padding = '1.5rem'; box.style.borderRadius = '8px';
-    box.style.maxWidth = '80%'; box.style.textAlign = 'center';
-    box.innerText = message;
-    overlay.appendChild(box);
-    document.body.appendChild(overlay);
-    setTimeout(() => document.body.removeChild(overlay), 3000);
-}
+
 
 function validateFile(inputEl, allowedTypes, maxMB) {
     const file = inputEl.files[0];
     const previewBox = document.getElementById(inputEl.dataset.preview);
     if (!file) return true;
     if (!allowedTypes.includes(file.type)) {
-        // showModal(`\"${file.name}\" must be one of: ${allowedTypes.join(', ')}`);
-        showModal(`Please Input A Valid File`);
+        // showMsg(`\"${file.name}\" must be one of: ${allowedTypes.join(', ')}`);
+        showMsg(`Please Input A Valid File`);
         inputEl.value = '';
         if (previewBox) previewBox.innerHTML = '';
         return false;
     }
     if (file.size > maxMB * 1024 * 1024) {
-        // showModal(`\"${file.name}\" exceeds ${maxMB}MB.`);
-        showModal(`File too Big, [Max : ${maxMB}`);
+        // showMsg(`\"${file.name}\" exceeds ${maxMB}MB.`);
+        showMsg(`File too Big, [Max : ${maxMB}`);
         inputEl.value = '';
         if (previewBox) previewBox.innerHTML = '';
         return false;
@@ -273,7 +258,7 @@ async function submitForm() {
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
-        showModal('Your PDF has downloaded 🎉');
+        showMsg('Your PDF has downloaded 🎉');
 
         // 4) send email
         const formData = await collectFormData();
@@ -289,7 +274,7 @@ async function submitForm() {
 
     } catch (err) {
         console.error('Download error:', err);
-        showModal('❌ Failed to download PDF. Please try again.');
+        showMsg('❌ Failed to download PDF. Please try again.');
     }
 }
 

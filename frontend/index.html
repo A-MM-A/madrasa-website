@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="css/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 </head>
 
 
@@ -80,35 +81,22 @@
     <main>
         <!-- Hero -->
         <section class="hero" id="hero">
-            <!-- 1) Text area above -->
-            <div class="hero-text">
-                <h2>Commit to Qur’ān Memorisation</h2>
-                <p>Join our dedicated program to build strong foundations in Qur’ān recitation and Islamic character.
-                </p>
-            </div>
+            <div class="hero-gradient"></div>
+            <div class="hero-overlay">
+                <!-- Text area above -->
+                <div class="hero-text">
+                    <h2>Commit to Qur’ān Memorisation</h2>
+                    <p>Join our dedicated program to build strong foundations in Qur’ān recitation and Islamic
+                        character.</p>
+                </div>
 
-            <!-- 2) Image slideshow -->
-            <div class="hero-slides">
-                <div class="hero-slide active" style="background-image: url('media/slide1.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('media/slide2.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('media/slide3.jpg')"></div>
-                <div class="hero-slide" style="background-image: url('media/slide4.jpg')"></div>
-                <!-- add/remove slides here -->
-            </div>
-
-            <!-- 3) Dots for navigation -->
-            <div class="hero-dots" id="hero-dots"></div>
-
-            <!-- 4) Button area below -->
-            <div class="hero-buttons">
-                <a href="#" class="btn primary" onclick=" openEnrollModal(event)">Get Started</a>
-                <!-- <a href="#" class="btn outline" onclick="requestMpesaPay(1, 'malindi trip', '254707352862', 'hi()')">Learn More</a> -->
-                <a href="#" class="btn outline" onclick="sendEmail({
-    to: 'asadmuftah8@gmail.com',
-    subject: 'Notice',
-    text: 'This is just a simple notice.'
-});
-">Learn More</a>
+                <!-- Buttons -->
+                <div class="hero-buttons">
+                    <a href="#" class="btn primary" onclick="openEnrollModal(event)">Get Started</a>
+                    <a href="#" class="btn outline"
+                        onclick="requestMpesaPay(1, 'malindi trip', '254707352862', 'hi()')">Learn More</a>
+                    <!-- <a href="#" class="btn outline" onclick="sendEmail({to: 'asadmuftah8@gmail.com',subject: 'Notice',text: 'This is just a simple notice.'});">Learn More</a> -->
+                </div>
             </div>
         </section>
 
@@ -180,43 +168,80 @@
         </div>
     </footer>
 
+
     <script>
-        //hero slide animation - in index page
         (function () {
-            const slides = document.querySelectorAll('.hero-slide');
-            const dotsContainer = document.getElementById('hero-dots');
+            const hero = document.getElementById('hero');
+            const imageCount = 46;
+            const baseURL = 'https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/';
+            let skipImages = [5, 7, 18, 22]; // optional blacklist
+            let images = [];
+
+            // Fill array with image URLs
+            for (let i = 1; i <= imageCount; i++) {
+                if (!skipImages.includes(i)) {
+                    images.push(`${baseURL}${i}.jpg`);
+                }
+            }
+
             let current = 0, timer;
 
-            // Create dots
-            slides.forEach((_, i) => {
-                const btn = document.createElement('button');
-                btn.addEventListener('click', () => goTo(i));
-                dotsContainer.appendChild(btn);
-            });
-
-            const dots = dotsContainer.querySelectorAll('button');
+            // function show(index) {
+            //     current = (index + images.length) % images.length;
+            //     hero.style.setProperty('--bg-image', `url('${images[current]}')`);
+            //     hero.style.backgroundImage = `url('${images[current]}')`;
+            //     hero.style.setProperty('--bg-image', `url('${images[current]}')`);
+            //     hero.style.setProperty('background-image', `url('${images[current]}')`);
+            //     hero.style.backgroundSize = "contain"; // ensure full image visible
+            // }
 
             function show(index) {
-                slides.forEach((s, i) => s.classList.toggle('active', i === index));
-                dots.forEach((d, i) => d.classList.toggle('active', i === index));
-                current = index;
+                current = (index + images.length) % images.length;
+
+                // Start fade out
+                hero.classList.add('fading');
+
+                // Wait for fade-out to finish before swapping
+                setTimeout(() => {
+                    hero.style.setProperty('--bg-image', `url('${images[current]}')`);
+                    // Fade back in
+                    hero.classList.remove('fading');
+                }, 1500); // match the CSS transition duration
             }
 
             function next() {
-                show((current + 1) % slides.length);
+                show(current + 1);
+            }
+            function prev() {
+                show(current - 1);
             }
 
-            function goTo(i) {
-                clearInterval(timer);
-                show(i);
-                timer = setInterval(next, 5000);
-            }
+            // Swipe detection
+            let startX = 0;
+            hero.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+            hero.addEventListener('touchend', e => {
+                let diff = e.changedTouches[0].clientX - startX;
+                if (diff > 50) prev();
+                if (diff < -50) next();
+            });
 
-            // Initialize
+            // Mouse drag for desktop
+            let isDown = false;
+            hero.addEventListener('mousedown', e => { isDown = true; startX = e.clientX; });
+            hero.addEventListener('mouseup', e => {
+                if (!isDown) return;
+                isDown = false;
+                let diff = e.clientX - startX;
+                if (diff > 50) prev();
+                if (diff < -50) next();
+            });
+
+            // Start slideshow
             show(0);
             timer = setInterval(next, 5000);
         })();
     </script>
+
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="script.js"></script>
 </body>

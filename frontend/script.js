@@ -89,7 +89,22 @@ function closePricingPopup() {
 
 
 
-
+function showMsg(message) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0'; overlay.style.left = '0';
+    overlay.style.width = '100%'; overlay.style.height = '100%';
+    overlay.style.background = 'rgba(0,0,0,0.4)';
+    overlay.style.display = 'flex'; overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center';
+    const box = document.createElement('div');
+    box.style.background = 'white'; box.style.color = 'var(--primary-green)';
+    box.style.padding = '1.5rem'; box.style.borderRadius = '8px';
+    box.style.maxWidth = '80%'; box.style.textAlign = 'center';
+    box.innerText = message;
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    setTimeout(() => document.body.removeChild(overlay), 3000);
+}
 
 
 
@@ -465,8 +480,8 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
     };
     document.getElementById(MODAL_IDS.successActionBtn).onclick = () => {
         // Run callback THEN redirect to redirectUrl
-        const ok = runSuccessCallback();
-        if (!ok) console.warn('Callback did not run or was not found.');
+        // const ok = runSuccessCallback();
+        // if (!ok) console.warn('Callback did not run or was not found.');
         // small delay so the callback has a chance to run (if async it should handle its own promises)
         setTimeout(() => {
             window.location.href = redirectUrl || 'courses.html';
@@ -528,35 +543,41 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
             });
 
 
-            hideModal(MODAL_IDS.waiting);
+
 
 
             if (paymentResult.paid) {
-                // Optional: If you have a collectFormData() or email endpoint, call it here
-                if (typeof window.collectFormData === 'function') {
-                    try {
-                        const formData = await window.collectFormData();
-                        if (formData) {
-                            // try to send email/pdf silently; backend might reject but we continue
-                            try {
-                                await fetch(`${BASE_URL.replace(/\/$/, '')}/api/email/email-pdf`, {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(formData)
-                                });
-                            } catch (e) { console.warn('Email step failed', e); }
-                        }
-                    } catch (e) { console.warn('collectFormData() failed', e); }
-                }
+                // // Optional: If you have a collectFormData() or email endpoint, call it here
+                // if (typeof window.collectFormData === 'function') {
+                //     try {
+                //         const formData = await window.collectFormData();
+                //         if (formData) {
+                //             // try to send email/pdf silently; backend might reject but we continue
+                //             try {
+                //                 await fetch(`${BASE_URL.replace(/\/$/, '')}/api/email/email-pdf`, {
+                //                     method: 'POST',
+                //                     headers: { 'Content-Type': 'application/json' },
+                //                     body: JSON.stringify(formData)
+                //                 });
+                //             } catch (e) { console.warn('Email step failed', e); }
+                //         }
+                //     } catch (e) { console.warn('collectFormData() failed', e); }
+                // }
+                showMsg("Payement Received, Please wait a few seconds...")
+
+                const ok = runSuccessCallback();
+                if (!ok) console.warn('Callback did not run or was not found.');
 
                 // show success modal
                 document.getElementById('successDetail').textContent = `Payment confirmed (${amount} KES). Thank you.`;
+                hideModal(MODAL_IDS.waiting);
                 showModal(MODAL_IDS.success);
                 return Promise.resolve(lastStatus);
             }
 
             // timed out or failure
             document.getElementById('failureDetail').textContent = lastStatus && lastStatus.msg ? lastStatus.msg : 'Timeout waiting for payment confirmation.';
+            hideModal(MODAL_IDS.waiting);
             showModal(MODAL_IDS.failure);
             throw new Error('Timeout or failed payment.');
         } catch (err) {
