@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Participants</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .participantContainer {
+            max-height: 1990px;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 15px;
+            background-color: #ffffffbd;
+            border-radius: 7px;
+            animation: zoomIn 0.6s ease-in-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .tableContainer {
+            /* max-height: 1895px;
+            max-width: 700px; */
+            margin-top: -10px;
+            padding: 0px;
+            background-color: #ffffffbd;
+            border-radius: 7px;
+            overflow-y: scroll;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0px;
+            border: 2px solid;
+            width: 100%;
+            min-width: max-content;
+        }
+
+        td {
+            border: 1px solid #000000ff;
+            padding: 7px;
+        }
+
+        th {
+            border: 1px solid #000000ff;
+            padding: 10px;
+            position: sticky;
+            color: #000000ff;
+            background-color: rgb(136, 163, 137);
+            top: 0px;
+        }
+
+        .siteHeader {
+            position: relative;
+            padding: 10px 20px;
+        }
+
+        .dashboardBtn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .dashboardButton {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3dad2a;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .dashboardButton:hover {
+            background-color: #0f6f18;
+        }
+
+        /* Refresh button */
+        .refreshButton {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: #9fc6f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .refreshButton:hover {
+            background-color: #0056b3;
+        }
+
+        .titleRow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .editBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .editBtn:hover {
+            background-color: #1e7e34;
+        }
+
+        .deleteBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .deleteBtn:hover {
+            background-color: #c82333;
+        }
+
+        /* Edit Popup */
+        .popupOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popupContent {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 350px;
+        }
+
+        .popupContent input,
+        .popupContent textarea {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 10px;
+        }
+
+        .popupContent button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .closePopup {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .savePopup {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Full-screen overlay */
+        #passwordOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Pop-up box */
+        #passwordBox {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        input[type="password"] {
+            padding: 8px;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Password Overlay -->
+    <div id="passwordOverlay">
+        <div id="passwordBox">
+            <h2>Enter Password</h2>
+            <input type="password" id="passwordInput" placeholder="Password">
+            <br>
+            <button onclick="checkPassword()">Submit</button>
+            <button onclick="window.location.href='index.html'">Cancel</button>
+            <p id="errorMsg" style="color:red; display:none;">Incorrect password. Try again.</p>
+        </div>
+    </div>
+
+
+
+    <header class="siteHeader">
+        <div class="dashboardBtn">
+            <h3><a class="dashboardButton" href="index.html">HOME</a></h3>
+        </div>
+    </header>
+
+    <div class="participantContainer">
+        <div class="titleRow">
+            <h2>Participant Details</h2>
+            <button class="refreshButton" id="refreshBtn">Refresh</button>
+        </div>
+
+
+        <div class="tableContainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Participant Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Mpesa Msg</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="participantsTableBody">
+                    <!-- Rows injected here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Edit Popup -->
+    <div class="popupOverlay" id="editPopup">
+        <div class="popupContent">
+            <h3>Edit Participant</h3>
+            <input type="text" id="editName" placeholder="Name">
+            <input type="number" id="editAge" placeholder="Age">
+            <input type="text" id="editAddress" placeholder="Address">
+            <input type="text" id="editPhone" placeholder="Phone">
+            <input type="email" id="editEmail" placeholder="Email">
+            <textarea id="editMpesa" placeholder="Mpesa Message"></textarea>
+            <button class="savePopup" onclick="saveEdit()">Save</button>
+            <button class="closePopup" onclick="closePopup()">Cancel</button>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.js"></script>
+    <script>
+
+
+        const correctPassword = "generation2025";
+
+        function checkPassword() {
+            const input = document.getElementById("passwordInput").value;
+            const errorMsg = document.getElementById("errorMsg");
+
+            if (input === correctPassword) {
+                document.getElementById("passwordOverlay").style.display = "none";
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+
+
+
+        /* ---------- Admin table client (replacement) ---------- */
+        console.log("DEBUG: admin script start (stable handlers)");
+
+        const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaWdna3FkZGJ5Z3B2bnZlaXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjQxMjAsImV4cCI6MjA3MDM0MDEyMH0.eDA5qFQKWlPDk6Z6N12yuhLPwxSJ_pavVy-N50A0xHk";
+
+        let supabaseClient;
+        try {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            console.log("DEBUG: Supabase client created ✅");
+        } catch (err) {
+            console.error("DEBUG: Error creating Supabase client:", err);
+        }
+
+        let currentRows = [];
+        let currentEditId = null;
+
+        // safe renderer (same as before)
+        function renderRows(rows) {
+            const tbody = document.getElementById("participantsTableBody");
+            tbody.innerHTML = "";
+
+            if (!rows || rows.length === 0) {
+                const tr = document.createElement("tr");
+                const td = document.createElement("td");
+                td.colSpan = 9;
+                td.style.textAlign = "center";
+                td.style.padding = "20px";
+                td.style.color = "#666";
+                td.textContent = "No participants to show";
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+                return;
+            }
+
+            rows.forEach((participant, index) => {
+                const tr = document.createElement("tr");
+
+                const tdIndex = document.createElement("td"); tdIndex.textContent = index + 1; tr.appendChild(tdIndex);
+                const tdName = document.createElement("td"); tdName.textContent = participant.participant_name || ""; tr.appendChild(tdName);
+                const tdAge = document.createElement("td"); tdAge.textContent = participant.participant_age ?? ""; tr.appendChild(tdAge);
+                const tdAddress = document.createElement("td"); tdAddress.textContent = participant.home_address || ""; tr.appendChild(tdAddress);
+                const tdPhone = document.createElement("td"); tdPhone.textContent = participant.participant_phone || ""; tr.appendChild(tdPhone);
+                const tdEmail = document.createElement("td"); tdEmail.textContent = participant.participant_email || ""; tr.appendChild(tdEmail);
+                const tdMpesa = document.createElement("td"); tdMpesa.textContent = participant.mpesa_message || ""; tr.appendChild(tdMpesa);
+                const tdDate = document.createElement("td");
+                const date = participant.created_at ? new Date(participant.created_at) : null;
+                tdDate.textContent = date ? date.toLocaleString("default", { day: "2-digit", month: "short" }) : "";
+                tr.appendChild(tdDate);
+
+                const tdActions = document.createElement("td");
+
+                const editBtn = document.createElement("button");
+                editBtn.className = "btn editBtn";
+                editBtn.type = "button";
+                editBtn.dataset.id = participant.id;
+                editBtn.textContent = "Edit";
+                tdActions.appendChild(editBtn);
+
+                const spacer = document.createTextNode(" ");
+                tdActions.appendChild(spacer);
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "btn deleteBtn";
+                deleteBtn.type = "button";
+                deleteBtn.dataset.id = participant.id;
+                deleteBtn.textContent = "Delete";
+                tdActions.appendChild(deleteBtn);
+
+                tr.appendChild(tdActions);
+                tbody.appendChild(tr);
+            });
+        }
+
+        // fetch function (keeps debug)
+        async function fetchParticipantsWithDebug() {
+            console.log("DEBUG: fetchParticipantsWithDebug start");
+
+            try {
+                const { data, error, status } = await supabaseClient
+                    .from("event_registrations")
+                    .select("*")
+                    .eq("confirmed", true)
+                    .order("created_at", { ascending: false })
+                    .limit(500);
+
+                console.log("DEBUG: supabase-js response -> status:", status, "error:", error, "data length:", (data && data.length) || 0);
+                if (error) {
+                    console.error("DEBUG: supabase-js error:", error);
+                    // continue: we still want to try to render any returned data or REST fallback
+                }
+
+                currentRows = Array.isArray(data) ? data : [];
+
+                if (currentRows.length > 0) {
+                    renderRows(currentRows);
+                    return;
+                }
+
+                // if empty, render empty row (renderRows handles it)
+                renderRows([]);
+                console.warn("DEBUG: No confirmed rows returned.");
+            } catch (err) {
+                console.error("DEBUG: fetchParticipantsWithDebug top-level error:", err);
+                renderRows([]);
+            }
+        }
+
+        /* ---------- Edit / Save / Delete behavior ---------- */
+
+        // open popup populated from currentRows
+        function openEditById(id) {
+            const row = currentRows.find(r => r.id === id);
+            if (!row) {
+                console.warn("openEditById: row not found for id:", id);
+                return;
+            }
+            currentEditId = id;
+            document.getElementById("editName").value = row.participant_name || "";
+            document.getElementById("editAge").value = row.participant_age ?? "";
+            document.getElementById("editAddress").value = row.home_address || "";
+            document.getElementById("editPhone").value = row.participant_phone || "";
+            document.getElementById("editEmail").value = row.participant_email || "";
+            document.getElementById("editMpesa").value = row.mpesa_message || "";
+            document.getElementById("editPopup").style.display = "flex";
+            console.log("DEBUG: opened edit popup for id:", id);
+        }
+
+        function closePopup() {
+            document.getElementById("editPopup").style.display = "none";
+            currentEditId = null;
+        }
+
+        async function saveEdit() {
+            if (!currentEditId) {
+                alert("No record selected to save.");
+                return;
+            }
+
+            const payload = {
+                participant_name: document.getElementById("editName").value || null,
+                participant_age: parseInt(document.getElementById("editAge").value) || null,
+                home_address: document.getElementById("editAddress").value || null,
+                participant_phone: document.getElementById("editPhone").value || null,
+                participant_email: document.getElementById("editEmail").value || null,
+                mpesa_message: document.getElementById("editMpesa").value || null
+            };
+
+            console.log("DEBUG: saving update", currentEditId, payload);
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from("event_registrations")
+                    .update(payload)
+                    .eq("id", currentEditId)
+                    .select();
+
+                if (error) {
+                    console.error("DEBUG: update error:", error);
+                    alert("Failed to save. See console for details.");
+                    return;
+                }
+
+                console.log("DEBUG: update success:", data);
+                closePopup();
+                await fetchParticipantsWithDebug();
+            } catch (err) {
+                console.error("DEBUG: saveEdit exception:", err);
+                alert("Unexpected error while saving. See console.");
+            }
+        }
+
+        async function deleteParticipant(id) {
+            if (!id) {
+                console.warn("deleteParticipant: missing id");
+                return;
+            }
+            if (!confirm("Mark this record as unconfirmed?")) return;
+
+            console.log("DEBUG: deleting (setting confirmed=false) id:", id);
+
+            try {
+                const payload = { confirmed: false };
+
+                // Use same pattern as saveEdit: update + .select() to get returned rows
+                const { data, error } = await supabaseClient
+                    .from("event_registrations")
+                    .update(payload)
+                    .eq("id", id)
+                    .select();
+
+                if (error) {
+                    console.error("DEBUG: delete(update) error:", error);
+                    alert("Failed to mark unconfirmed. See console for details.");
+                    return;
+                }
+
+                console.log("DEBUG: delete(update) success:", data);
+                // refresh list after successful update
+                await fetchParticipantsWithDebug();
+            } catch (err) {
+                console.error("DEBUG: deleteParticipant exception:", err);
+                alert("Unexpected error. See console.");
+            }
+        }
+
+        /* ---------- Robust UI event wiring (delegation + immediate attach) ---------- */
+        function attachUiHandlers() {
+            // Refresh button (attach immediately)
+            const refreshBtn = document.getElementById("refreshBtn");
+            if (refreshBtn) {
+                refreshBtn.addEventListener("click", () => {
+                    console.log("DEBUG: Refresh clicked");
+                    fetchParticipantsWithDebug();
+                });
+            } else {
+                console.warn("DEBUG: Refresh button not found");
+            }
+
+            // Delegate clicks on tbody for Edit/Delete
+            const tbody = document.getElementById("participantsTableBody");
+            if (tbody) {
+                tbody.addEventListener("click", (e) => {
+                    const target = e.target;
+                    if (target.matches(".editBtn")) {
+                        const id = target.dataset.id;
+                        openEditById(id);
+                    } else if (target.matches(".deleteBtn")) {
+                        const id = target.dataset.id;
+                        deleteParticipant(id);
+                    }
+                });
+            } else {
+                console.warn("DEBUG: participantsTableBody not found for delegation");
+            }
+
+            // Popup Save / Cancel buttons (attach by id/class)
+            const saveBtn = document.querySelector(".savePopup");
+            if (saveBtn) saveBtn.addEventListener("click", (ev) => { ev.preventDefault(); saveEdit(); });
+
+            const cancelBtn = document.querySelector(".closePopup");
+            if (cancelBtn) cancelBtn.addEventListener("click", (ev) => { ev.preventDefault(); closePopup(); });
+        }
+
+        // attach handlers when DOM is ready (works if script at bottom or top)
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", () => {
+                attachUiHandlers();
+                fetchParticipantsWithDebug();
+            });
+        } else {
+            // DOM already ready
+            attachUiHandlers();
+            fetchParticipantsWithDebug();
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>
+
+

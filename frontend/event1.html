@@ -286,7 +286,7 @@
 
         <header class="hero">
             <div class="hero-img">
-                <img src="./event_media/logo.png" alt="Event Flyer" />
+                <a href="events.html"><img src="./event_media/logo.png" alt="Event Flyer" /></a>
             </div>
             <img src="./event_media/essential.png" alt="The Essentials of Islam" />
             <p class="subtitle">For Sisters Only</p>
@@ -322,7 +322,7 @@
             <br />
             <h3>What You’ll Receive:</h3>
             <div class="icon-container">
-                <img src="./event_media/certificate.svg" class="icon" alt="Certificate Icon" />
+                <img src="./event_media/Certificate.svg" class="icon" alt="Certificate Icon" />
                 <p>Official Certificate </p>
             </div>
         </section>
@@ -365,7 +365,7 @@
                 <input type="number" id="participantAge" name="participantAge" required />
                 <small class="errorMessage"></small>
 
-                <label>Location</label>
+                <label>Address</label>
                 <input type="text" id="homeAddress" name="homeAddress" placeholder="(At least 5 characters)" />
                 <small class="errorMessage"></small>
 
@@ -448,9 +448,12 @@
         text-align: center;
         box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     ">
-            <h2 style="color: green; margin-bottom: 15px;">🎉 Congratulations!</h2>
+            <h2 style="color: green; margin-bottom: 15px;">Congratulations!</h2>
             <p>Your registration has been submitted successfully.</p>
-            <p>You will receive updates shortly.</p>
+            <p style="color: rgb(206, 120, 74);" >Do <strong>NOT</strong> Submit Multiple Times.</p>
+            <h3 style="color: green;" >Whats next:</h3>
+            <p><li>Please Arrive on Time.</li></p>
+            <p><li>Please Carry A NoteBook And A Pen.</li></p>
             <button id="doneButton" style="
             background: green;
             color: white;
@@ -467,150 +470,7 @@
 
 
 
-    <!-- <script>
-        (function () {
-            const form = document.getElementById("registrationForm");
-            if (!form) return console.warn("Form #registrationForm not found.");
-
-            // Find the button (works for button or input[type="submit"])
-            const btn = form.querySelector('button') || form.querySelector('input[type="submit"]');
-
-            // Ensure button won't perform native submit unexpectedly
-            if (btn) {
-                try { btn.type = 'button'; } catch (e) { /* ignore */ }
-                btn.onclick = null; // remove inline handlers if any
-            }
-
-            // Utility to clear all error messages
-            function clearErrors() {
-                const errorMessages = form.querySelectorAll(".errorMessage");
-                errorMessages.forEach(msg => msg.textContent = "");
-                const errorBox = document.getElementById("errorBox");
-                if (errorBox) errorBox.textContent = "";
-            }
-
-            // Validation function (keeps your original checks)
-            function validateFields() {
-                clearErrors();
-                let isValid = true;
-
-                // Name check
-                const name = document.getElementById("participantName");
-                if (!name || !/^[A-Za-z\s'-]+$/.test(name.value.trim())) {
-                    if (name && name.nextElementSibling) name.nextElementSibling.textContent = "Please enter a valid name.";
-                    isValid = false;
-                }
-
-                // Age check
-                const age = document.getElementById("participantAge");
-                const ageVal = age ? Number(age.value) : NaN;
-                if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
-                    if (age && age.nextElementSibling) age.nextElementSibling.textContent = "Enter a valid age between 10 and 100.";
-                    isValid = false;
-                }
-
-                // Location check (if filled)
-                const location = document.getElementById("homeAddress");
-                if (location && location.value.trim() && location.value.trim().length < 5) {
-                    if (location && location.nextElementSibling) location.nextElementSibling.textContent = "Location must be at least 5 characters.";
-                    isValid = false;
-                }
-
-                // Phone check
-                const phone = document.getElementById("participantPhone");
-                if (!phone || !/^\d{9,}$/.test(phone.value.trim())) {
-                    if (phone && phone.nextElementSibling) phone.nextElementSibling.textContent = "Enter a valid phone number.";
-                    isValid = false;
-                }
-
-                // Email check
-                const email = document.getElementById("participantEmail");
-                if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())) {
-                    if (email && email.nextElementSibling) email.nextElementSibling.textContent = "Enter a valid email address.";
-                    isValid = false;
-                }
-
-                // MPESA message check
-                const mpesa = document.getElementById("mpesaCode");
-                if (!mpesa || mpesa.value.trim().length < 10) {
-                    if (mpesa && mpesa.nextElementSibling) mpesa.nextElementSibling.textContent = "MPESA message is too short.";
-                    isValid = false;
-                }
-
-                return isValid;
-            }
-
-            // Handle successful submission UI (no redirect)
-            function showSubmittedState() {
-                // update hidden submission time if present
-                const submissionTimeISO = new Date().toISOString();
-                const hiddenTime = document.getElementById("submissionTime");
-                if (hiddenTime) hiddenTime.value = submissionTimeISO;
-
-                // Show simple "Submitted" message
-                const successBox = document.getElementById("successBox");
-                if (successBox) {
-                    successBox.textContent = "Submitted";
-                    successBox.style.color = "green";
-                    successBox.style.fontWeight = "600";
-                } else {
-                    // fallback: append a small message to the form
-                    const msg = document.createElement("div");
-                    msg.textContent = "Submitted";
-                    msg.style.color = "green";
-                    msg.style.fontWeight = "600";
-                    msg.style.marginTop = "12px";
-                    form.appendChild(msg);
-                }
-
-                // disable the submit button to prevent double clicks
-                if (btn) btn.disabled = true;
-            }
-
-            // Prevent actual navigation and run validation
-            function handleSubmit(event) {
-                if (event && typeof event.preventDefault === 'function') event.preventDefault();
-
-                // Run validations and show errors if any
-                const ok = validateFields();
-                if (!ok) {
-                    const errorBox = document.getElementById("errorBox");
-                    if (errorBox) {
-                        errorBox.textContent = "Please fix the errors and try again.";
-                        errorBox.style.color = "red";
-                    }
-                    return false;
-                }
-
-                // If valid — show simple Submitted message and STOP (no redirect, no form.submit())
-                showSubmittedState();
-
-                // Optional: build a payload and print to console (keeps things simple)
-                try {
-                    const payload = {
-                        participantName: document.getElementById("participantName").value.trim() || null,
-                        participantAge: Number(document.getElementById("participantAge").value) || null,
-                        homeAddress: (document.getElementById("homeAddress").value || "").trim() || null,
-                        participantPhone: (document.getElementById("participantPhone").value || "").trim() || null,
-                        participantEmail: (document.getElementById("participantEmail").value || "").trim() || null,
-                        mpesaMessage: (document.getElementById("mpesaCode").value || "").trim() || null,
-                        submissionTime: new Date().toISOString()
-                    };
-                    console.log("Registration payload:", payload);
-                } catch (e) {
-                    // ignore payload errors
-                }
-
-                return false;
-            }
-
-            // Attach handlers: prevent native submit (Enter key) and button click
-            form.addEventListener("submit", handleSubmit);
-            if (btn) btn.addEventListener("click", handleSubmit);
-        })();
-
-    </script> -->
-
+    
     <!-- add supabase client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
@@ -646,7 +506,7 @@
                 const age = document.getElementById("participantAge");
                 const ageVal = age ? Number(age.value) : NaN;
                 if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
-                    if (age && age.nextElementSibling) age.nextElementSibling.textContent = "Enter a valid age between 10 and 100.";
+                    if (age && age.nextElementSibling) age.nextElementSibling.textContent = "Enter a valid age.";
                     isValid = false;
                 }
 
@@ -678,27 +538,7 @@
             }
 
             // Show Submitted UI (no redirect)
-            // function showSubmittedState() {
-            //     const submissionTimeISO = new Date().toISOString();
-            //     const hiddenTime = document.getElementById("submissionTime");
-            //     if (hiddenTime) hiddenTime.value = submissionTimeISO;
-
-            //     const successBox = document.getElementById("successBox");
-            //     if (successBox) {
-            //         successBox.textContent = "Submitted";
-            //         successBox.style.color = "green";
-            //         successBox.style.fontWeight = "600";
-            //     } else {
-            //         const msg = document.createElement("div");
-            //         msg.textContent = "Submitted";
-            //         msg.style.color = "green";
-            //         msg.style.fontWeight = "600";
-            //         msg.style.marginTop = "12px";
-            //         form.appendChild(msg);
-            //     }
-            //     if (btn) btn.disabled = true;
-            // }
-
+            
             function showSubmittedState() {
                 const modal = document.getElementById("successModal");
                 if (modal) {
@@ -725,7 +565,7 @@
                     participant_phone: (document.getElementById("participantPhone").value || "").trim() || null,
                     participant_email: (document.getElementById("participantEmail").value || "").trim() || "",
                     mpesa_message: (document.getElementById("mpesaCode").value || "").trim() || "",
-                    confirmed: false  // default; you can update later from admin panel
+                    confirmed: true
                 };
             }
 

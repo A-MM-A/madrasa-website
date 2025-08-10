@@ -1,0 +1,41 @@
+/* Events Section */
+.events-section {
+    padding: 40px 20px;
+    background-color: #f4fdf6;
+    text-align: center;
+}
+
+
+/* Grid behaves like YouTube cards */
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    justify-items: center; /* Centers cards inside grid cells */
+}
+
+.event-card {
+    background: #e6f7ea;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    max-width: 350px; /* Keeps cards from stretching too wide */
+    width: 100%; /* Fill grid cell */
+}
+
+.event-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 600px) {
+    .event-image {
+        height: 150px;
+    }
+    .event-content h3 {
+        font-size: 1rem;
+    }
+}
