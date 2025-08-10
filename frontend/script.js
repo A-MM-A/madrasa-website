@@ -1,5 +1,5 @@
 //imports
-import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js"; // for mpesa webhook
+// import { io } from "https://cdn.socket.io/4.7.2/socket.io.esm.min.js"; // for mpesa webhook
 
 // backend location
 const BASE_URL = 'https://dar-al-arqam.onrender.com';
@@ -507,32 +507,10 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
                 throw new Error('No checkoutRequestID returned from backend.');
             }
 
-            // // Poll for payment status
-            // let paid = false;
-            // let lastStatus = null;
-            // for (let attempt = 0; attempt < MAX_POLL_ATTEMPTS; attempt++) {
-            //     // wait
-            //     await new Promise(r => setTimeout(r, POLL_INTERVAL_MS));
-            //     try {
-            //         const statusRes = await fetch(`${BASE_URL}/api/mpesa/payment-status?checkoutRequestID=${encodeURIComponent(checkoutRequestID)}`);
-            //         const statusJson = await statusRes.json();
-            //         lastStatus = statusJson;
-            //         if (statusJson && statusJson.paid) {
-            //             paid = true;
-            //             break;
-            //         }
-            //         // Optional: if backend returns an explicit failed status, break early
-            //         if (statusJson && statusJson.status && statusJson.status.toLowerCase() === 'failed') {
-            //             lastStatus = statusJson;
-            //             break;
-            //         }
-            //     } catch (e) {
-            //         console.warn('Poll error (ignored):', e);
-            //     }
-            // }
 
-            // ✅ NEW: Listen for webhook update instead of polling
-            // const socket = io(BASE_URL);
+            
+            // Listen for webhook update
+            let lastStatus = null;
             const socket = io(BASE_URL, { transports: ["websocket"] });
             socket.emit("joinPayment", checkoutRequestID);
 
