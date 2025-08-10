@@ -154,10 +154,11 @@ router.post('/email-pdf', async (req, res) => {
 // Generic email
 router.post('/send-email', async (req, res) => {
     try {
-        const { to, subject, text, attachments } = req.body;
+        const { to, cc, subject, text, attachments } = req.body;
         await transporter.sendMail({
             from: `"Dar al-Arqam" <${EMAIL_USER}>`,
             to, 
+            cc,
             subject, 
             text, 
             attachments

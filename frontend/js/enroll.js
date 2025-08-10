@@ -90,7 +90,7 @@ function nextStep() {
 
     if (!allValid) return;
 
-    currentStep ++;
+    currentStep++;
     showStep(currentStep);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -239,7 +239,7 @@ async function collectFormData() {
             reader.readAsDataURL(file);
         });
     }
-    
+
     data.photoBase64 = await readFileAsBase64(document.getElementById('photo'));
     data.birthCertBase64 = await readFileAsBase64(document.getElementById('birth'));
     data.repIDBase64 = await readFileAsBase64(document.getElementById('repID'));
@@ -274,6 +274,16 @@ async function submitForm() {
         a.remove();
         URL.revokeObjectURL(url);
         showModal('Your PDF has downloaded 🎉');
+
+        // 4) send email
+        const formData = await collectFormData();
+        const emailRes = await fetch(`${BASE_URL}/api/email/email-pdf`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        const emailJson = await emailRes.json();
+        if (!emailJson.sent) console.error('Email failed:', emailJson.error);
 
 
 

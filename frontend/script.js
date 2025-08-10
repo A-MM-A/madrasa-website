@@ -132,63 +132,63 @@ function closePricingPopup() {
 //     startPayment(phone);
 // });
 
-// Step 3: startPayment does the STK push and manages popups
-async function startPayment(phone) {
-    // show waiting
-    openWaiting();
-    try {
-        const paymentData = { phone, amount: 1, accountReference: 'DarAdmission-' + Date.now() };
-        const res = await fetch(`${BASE_URL}/api/mpesa/stkpush`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(paymentData)
-        });
-        const json = await res.json();
-        if (!json.status) throw new Error(json.msg || 'STK failed');
-        const checkoutID = json.checkoutRequestID;
+// // Step 3: startPayment does the STK push and manages popups
+// async function startPayment(phone) {
+//     // show waiting
+//     openWaiting();
+//     try {
+//         const paymentData = { phone, amount: 1, accountReference: 'DarAdmission-' + Date.now() };
+//         const res = await fetch(`${BASE_URL}/api/mpesa/stkpush`, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(paymentData)
+//         });
+//         const json = await res.json();
+//         if (!json.status) throw new Error(json.msg || 'STK failed');
+//         const checkoutID = json.checkoutRequestID;
 
-        // poll for up to 12 attempts:
-        for (let i = 0; i < 12; i++) {
-            await new Promise(r => setTimeout(r, 3000));
-            const stat = await fetch(
-                `${BASE_URL}/api/mpesa/payment-status?checkoutRequestID=${checkoutID}`
-            ).then(r => r.json());
+//         // poll for up to 12 attempts:
+//         for (let i = 0; i < 12; i++) {
+//             await new Promise(r => setTimeout(r, 3000));
+//             const stat = await fetch(
+//                 `${BASE_URL}/api/mpesa/payment-status?checkoutRequestID=${checkoutID}`
+//             ).then(r => r.json());
 
-            // success
-            if (stat.paid) {
+//             // success
+//             if (stat.paid) {
 
-                // send email
-                const formData = await collectFormData();
-                const emailRes = await fetch(`${BASE_URL}/api/email/email-pdf`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
-                const emailJson = await emailRes.json();
-                if (!emailJson.sent) console.error('Email failed:', emailJson.error);
+//                 // send email
+//                 const formData = await collectFormData();
+//                 const emailRes = await fetch(`${BASE_URL}/api/email/email-pdf`, {
+//                     method: 'POST',
+//                     headers: { 'Content-Type': 'application/json' },
+//                     body: JSON.stringify(formData)
+//                 });
+//                 const emailJson = await emailRes.json();
+//                 if (!emailJson.sent) console.error('Email failed:', emailJson.error);
 
-                closeWaiting();
-                openSuccess();
+//                 closeWaiting();
+//                 openSuccess();
 
-                // download choice
-                const dl = document.getElementById('downloadPdf');
-                dl.onclick = () => {
-                    closeSuccess();
-                    // download via your existing /generate-pdf endpoint:
-                    submitForm();
-                    dl.disabled = true;
-                };
-                return;
-            }
-        }
+//                 // download choice
+//                 const dl = document.getElementById('downloadPdf');
+//                 dl.onclick = () => {
+//                     closeSuccess();
+//                     // download via your existing /generate-pdf endpoint:
+//                     submitForm();
+//                     dl.disabled = true;
+//                 };
+//                 return;
+//             }
+//         }
 
-        // timeout
-        throw new Error('Timeout waiting for payment');
-    } catch (err) {
-        console.error(err);
-        closeWaiting();
-        openFailure();
-    }
-}
+//         // timeout
+//         throw new Error('Timeout waiting for payment');
+//     } catch (err) {
+//         console.error(err);
+//         closeWaiting();
+//         openFailure();
+//     }
+// }
 
 // // Step 4: retries
 // document.getElementById('retryPay').addEventListener('click', () => {
@@ -508,7 +508,7 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
             }
 
 
-            
+
             // Listen for webhook update
             let lastStatus = null;
             const socket = io(BASE_URL, { transports: ["websocket"] });
@@ -530,7 +530,7 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
 
             hideModal(MODAL_IDS.waiting);
 
-            
+
             if (paymentResult.paid) {
                 // Optional: If you have a collectFormData() or email endpoint, call it here
                 if (typeof window.collectFormData === 'function') {
@@ -566,6 +566,69 @@ async function requestMpesaPay(amount, accountReference, support, onSuccess, red
         }
     }
 
+}
+
+
+
+// -------------------------------------   Email function --------------------------------------
+/**
+ * 
+    sendEmail({
+        to: 'someone@example.com',
+        subject: 'Notice',
+        text: 'This is just a simple notice.'
+    });
+ * 
+    const fileInput = document.querySelector('#fileUpload');
+    sendEmail({
+        to: 'someone@example.com',
+        subject: 'Report',
+        text: 'Here is the report.',
+        attachments: Array.from(fileInput.files) // from an <input type="file" id="fileUpload">
+    });
+
+ *  
+ */
+async function sendEmail({ to, cc, subject, text, attachments }) {
+    try {
+        let options = {
+            method: 'POST',
+        };
+
+        if (attachments && attachments.length > 0) {
+            // Use FormData for file uploads
+            const formData = new FormData();
+            formData.append('to', to);
+            if (cc) formData.append('cc', cc);
+            formData.append('subject', subject);
+            formData.append('text', text);
+
+            attachments.forEach((file, index) => {
+                formData.append(`attachments`, file);
+            });
+
+            options.body = formData;
+
+        } else {
+            // Use JSON for plain text emails
+            options.headers = { 'Content-Type': 'application/json' };
+            options.body = JSON.stringify({ to, cc, subject, text });
+        }
+
+        const response = await fetch(`${BASE_URL}/api/email/send-email`, options);
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || 'Failed to send email');
+        }
+
+        console.log('Email sent successfully:', data);
+        return data;
+
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw error;
+    }
 }
 
 

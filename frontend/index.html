@@ -46,7 +46,7 @@
         </div>
     </header>
 
-    
+
 
     <!-- enroll now pop up -->
     <div id="enrollModal" class="modal">
@@ -102,7 +102,13 @@
             <!-- 4) Button area below -->
             <div class="hero-buttons">
                 <a href="#" class="btn primary" onclick=" openEnrollModal(event)">Get Started</a>
-                <a href="#" class="btn outline" onclick="requestMpesaPay(1, 'malindi trip', '254707352862', 'hi()')">Learn More</a>
+                <!-- <a href="#" class="btn outline" onclick="requestMpesaPay(1, 'malindi trip', '254707352862', 'hi()')">Learn More</a> -->
+                <a href="#" class="btn outline" onclick="sendEmail({
+    to: 'asadmuftah8@gmail.com',
+    subject: 'Notice',
+    text: 'This is just a simple notice.'
+});
+">Learn More</a>
             </div>
         </section>
 
