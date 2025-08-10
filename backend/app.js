@@ -2,6 +2,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
 
 const app = express();
 app.use(cors());
@@ -15,6 +17,35 @@ const emailRouter = require('./routes/email');
 const mpesaRouter = require('./routes/mpesa');
 
 
+
+// ─── CREATE HTTP SERVER AND SOCKET.IO ─────────────────────────────────────────────
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*", // or your frontend URL
+        methods: ["GET", "POST"]
+    }
+});
+
+// Attach io so routes can use it
+app.set('io', io);
+
+// Socket.IO connection handling
+io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+
+    socket.on('joinPayment', (checkoutRequestID) => {
+        socket.join(checkoutRequestID);
+        console.log(`Client joined room: ${checkoutRequestID}`);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected:', socket.id);
+    });
+});
+
+
+
 // ─── MOUNT ROUTES ────────────────────────────────────────────────────────────────
 app.use('/api/pdf', pdfRouter);
 app.use('/api/email', emailRouter);
@@ -24,7 +55,7 @@ app.use('/api/mpesa', mpesaRouter);
 
 // ─── START THE SERVER ────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🛡️  Server running on port ${PORT}`);
 });
 
