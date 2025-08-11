@@ -5,17 +5,221 @@
 const BASE_URL = 'https://dar-al-arqam.onrender.com';
 
 // open menu toggle - all files
+// const menuToggle = document.getElementById('menu-toggle');
+// const mainNav = document.getElementById('main-nav');
+// menuToggle.addEventListener('click', () => {
+//     mainNav.classList.toggle('open');
+// });
+
+
+
 const menuToggle = document.getElementById('menu-toggle');
-const mainNav = document.getElementById('main-nav');
-menuToggle.addEventListener('click', () => {
-    mainNav.classList.toggle('open');
-});
+
+if (menuToggle) {
+    const popup = document.createElement('div');
+    popup.id = 'mobile-menu-popup';
+    Object.assign(popup.style, {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'rgba(190, 187, 187, 0.23)',
+        backdropFilter: 'blur(40px)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+        borderRadius: '12px',
+        padding: '1rem 1.5rem',
+        width: '90vw',
+        maxWidth: '320px',
+        display: 'none',
+        flexDirection: 'column',
+        zIndex: '9999',
+        maxHeight: '80vh',
+        overflowY: 'auto',
+        boxSizing: 'border-box',
+    });
+
+    // Globe icon absolute top-left inside popup
+    const globeLink = document.createElement('a');
+    globeLink.href = 'https://translate.google.com/translate?hl=en&sl=auto&tl=ar&u=https://dar-al-arqam.co.ke';
+    globeLink.title = 'Change Language';
+    Object.assign(globeLink.style, {
+        position: 'absolute',
+        top: '12px',
+        left: '12px',
+        width: '28px',
+        height: '28px',
+        display: 'inline-block',
+        cursor: 'pointer',
+    });
+
+    // Call your function on click and prevent default anchor behavior
+    // globeLink.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     ChangeLangArb();
+    // });
+
+   
+
+    const globeImg = document.createElement('img');
+    globeImg.src = 'media/lang.svg';
+    globeImg.alt = 'Globe Icon';
+    globeImg.style.width = '100%';
+    globeImg.style.height = '100%';
+    globeLink.appendChild(globeImg);
+    popup.appendChild(globeLink);
+
+
+    // Nav list container
+    const navList = document.createElement('ul');
+    Object.assign(navList.style, {
+        listStyle: 'none',
+        padding: '0',
+        margin: '1rem 0 1.5rem',  // leave space for globe top-left absolute
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.8rem',
+        fontSize: '1.3rem',
+        fontWeight: '600',
+        textAlign: 'center',
+    });
+
+    const navItems = [
+        { text: 'Home', href: 'index.html' },
+        { text: 'Courses', href: 'courses.html' },
+        { text: 'Teachers', href: 'teachers.html' },
+        { text: 'Events', href: 'events.html' },
+        { text: 'About Us', href: 'About.html' },
+        { text: 'Contact', href: 'contact.html' },
+    ];
+
+    // Get current path (last part of url)
+    const currentPath = window.location.pathname.split('/').pop();
+
+    navItems.forEach(({ text, href }) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = href;
+        a.textContent = text;
+        a.style.color = '#333';
+        a.style.textDecoration = 'none';
+        a.style.transition = 'color 0.3s';
+        a.style.display = 'block';
+        a.addEventListener('mouseenter', () => a.style.color = '#007BFF');
+        a.addEventListener('mouseleave', () => a.style.color = a.classList.contains('active') ? '#007BFF' : '#333');
+
+        // Highlight current page link
+        if ((href === '#' && currentPath === '') || href === currentPath) {
+            a.style.color = '#007BFF';
+            a.classList.add('active');
+        }
+
+        a.addEventListener('click', () => toggleMenu(false));
+        li.appendChild(a);
+        navList.appendChild(li);
+    });
+    popup.appendChild(navList);
+
+    // Bottom buttons container
+    const bottomButtons = document.createElement('div');
+    Object.assign(bottomButtons.style, {
+        marginTop: 'auto',
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: '0.75rem',
+    });
+
+    // Donate button
+    const donateBtn = document.createElement('a');
+    donateBtn.href = '#';
+    donateBtn.textContent = 'Donate';
+    donateBtn.className = 'btn donate';
+    Object.assign(donateBtn.style, {
+        backgroundColor: '#047857',
+        color: 'white',
+        padding: '0.6rem 1rem',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        fontWeight: '700',
+        cursor: 'pointer',
+        flex: '1',
+        textAlign: 'center',
+        userSelect: 'none',
+    });
+    donateBtn.addEventListener('click', () => toggleMenu(false));
+
+    // Enroll Now button
+    const enrollBtn = document.createElement('a');
+    enrollBtn.href = '#';
+    enrollBtn.textContent = 'Enroll Now';
+    enrollBtn.className = 'btn enroll';
+    Object.assign(enrollBtn.style, {
+        backgroundColor: '#d1fae5',
+        color: '#1f2937',
+        padding: '0.6rem 1rem',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        fontWeight: '700',
+        cursor: 'pointer',
+        flex: '1',
+        textAlign: 'center',
+        userSelect: 'none',
+    });
+    enrollBtn.setAttribute('onclick', 'openEnrollModal(event)');
+    enrollBtn.addEventListener('click', () => toggleMenu(false));
+
+    bottomButtons.appendChild(donateBtn);
+    bottomButtons.appendChild(enrollBtn);
+    popup.appendChild(bottomButtons);
+
+    document.body.appendChild(popup);
+
+    function toggleMenu(open) {
+        if (open === undefined) {
+            open = popup.style.display === 'none';
+        }
+        if (open) {
+            popup.style.display = 'flex';
+            menuToggle.textContent = '✕';
+            document.body.style.overflow = 'hidden';
+        } else {
+            popup.style.display = 'none';
+            menuToggle.textContent = '☰';
+            document.body.style.overflow = '';
+        }
+    }
+
+    menuToggle.addEventListener('click', () => toggleMenu());
+
+    // Close popup on clicking outside
+    window.addEventListener('click', e => {
+        if (popup.style.display === 'flex' && !popup.contains(e.target) && e.target !== menuToggle) {
+            toggleMenu(false);
+        }
+    });
+}
+
+
+// for future lang toggle
+function ChangeLangArb() {
+//   // Example: toggle between English and Arabic versions
+//   const currentUrl = window.location.href;
+//   if (currentUrl.includes('/ar/')) {
+//     // Switch to English version
+//     window.location.href = currentUrl.replace('/ar/', '/en/');
+//   } else {
+//     // Switch to Arabic version
+//     window.location.href = currentUrl.replace('/en/', '/ar/');
+//   }
+alert("Language Switch Not Yet Configured");
+
+}
 
 
 
-// ----------index page: start
-
-// slideshow js in index.html file
+// prevent zoom
+document.addEventListener('touchmove', function (event) {
+    if (event.scale !== 1) { event.preventDefault(); } // prevent pinch-zoom
+}, { passive: false });
 
 
 // enroll popup - in index page 
@@ -41,35 +245,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-
-// ----------index page: end
-
-
-
-
-//file preview - in enroll form
-// document.querySelectorAll('.file-preview').forEach(input => {
-//     input.addEventListener('change', function () {
-//         const previewId = this.dataset.preview;
-//         const previewBox = document.getElementById(previewId);
-//         const file = this.files[0];
-
-//         if (!file) return;
-
-//         const reader = new FileReader();
-//         reader.onload = function (e) {
-//             if (file.type.startsWith("image/")) {
-//                 previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-//             } else if (file.type === "application/pdf") {
-//                 previewBox.innerHTML = `<iframe src="${e.target.result}" width="100%" height="400px"></iframe>`;
-//             } else {
-//                 previewBox.innerHTML = `<p>Preview not supported for this file type.</p>`;
-//             }
-//         };
-//         reader.readAsDataURL(file);
-//     });
-// });
 
 
 

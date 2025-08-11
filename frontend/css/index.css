@@ -163,7 +163,10 @@
     /* adjust if title size changes */
     left: 1rem;
     max-width: 320px;
-    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-family: 'Cinzel', serif;
+    /* font-size: clamp(1.0rem, 3vw, 1.5rem); */
+    font-size: 1.3rem;
+    
     line-height: 1.4;
     color: rgb(231, 231, 231);
     text-shadow:
@@ -237,19 +240,21 @@
         position: absolute;
         top: 1rem;
         left: 1rem;
-        font-size: clamp(1rem, 5vw, 1.6rem);
+        font-size: clamp(1rem, 5vw, 1.3rem);
         max-width: calc(100% - 2rem);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin: 10px;
     }
-
+    
     .hero-text p {
         position: absolute;
         top: calc(1rem + 2.2rem); /* directly under h2 */
         left: 1rem;
-        font-size: 0.85rem;
+        font-size: 1rem;
         max-width: calc(100% - 2rem);
+        margin: 10px;
     }
 
     .hero-buttons {

@@ -48,6 +48,18 @@ a {
 }
 
 
+/* stop pull to refresh */
+html,
+body {
+    overscroll-behavior-y: contain;
+    touch-action: pan-x pan-y;
+}
+
+/* body {
+    position: fixed;
+    width: 100%;
+    overflow-x: hidden;
+} */
 
 
 
@@ -93,6 +105,10 @@ a {
 .site-nav ul {
     display: flex;
     gap: 1rem;
+}
+
+.site-nav li {
+    list-style: none;
 }
 
 .site-nav a {
@@ -375,6 +391,31 @@ a {
 }
 
 
+.footer-icon {
+    width: 20px; /* Slightly smaller if you want */
+    height: 20px;
+    vertical-align: middle; /* Align vertically with text */
+    margin-right: 8px; /* space between icon and text */
+    margin-bottom: 0; /* Remove big bottom margin */
+    transition: transform 0.2s ease-in-out;
+}
+
+.site-footer ul li {
+    margin-bottom: 0.5rem; /* space between list items */
+}
+
+.site-footer ul li a {
+    display: inline-flex; /* inline-flex aligns icon and text nicely */
+    align-items: center; /* vertically center icon and text */
+    gap: 6px; /* space between icon and text */
+}
+
+.footer-icon:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+}
+
 
 
 
@@ -508,7 +549,7 @@ a {
 .mpesa-logo {
     width: 120px;
     margin-bottom: 10px;
-} 
+}
 
 
 
@@ -542,4 +583,3 @@ a {
 .failmark {
     color: red;
 }
-
