@@ -85,11 +85,11 @@ if (menuToggle) {
 
     const navItems = [
         { text: 'Home', href: 'index.html' },
-        { text: 'Courses', href: 'courses.html' },
+        { text: 'Programs', href: 'programs.html' },
         { text: 'Teachers', href: 'teachers.html' },
         { text: 'Events', href: 'events.html' },
         { text: 'About Us', href: 'About.html' },
-        { text: 'Contact', href: 'contact.html' },
+        { text: 'News', href: 'news.html' },
     ];
 
     // Get current path (last part of url)
