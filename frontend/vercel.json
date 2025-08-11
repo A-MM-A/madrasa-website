@@ -1,6 +1,28 @@
 {
-  "rewrites": [
-    { "source": "/:path", "destination": "/:path.html" },
-    { "source": "/", "destination": "/index.html" }
-  ]
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/programs",
+            "destination": "/programs.html"
+        },
+        {
+            "source": "/teachers",
+            "destination": "/teachers.html"
+        },
+        {
+            "source": "/events",
+            "destination": "/events.html"
+        },
+        {
+            "source": "/about-us",
+            "destination": "/about.html"
+        },
+        {
+            "source": "/news",
+            "destination": "/news.html"
+        }
+    ]
 }
