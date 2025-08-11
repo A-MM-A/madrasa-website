@@ -49,11 +49,11 @@ a {
 
 
 /* stop pull to refresh */
-html,
+/* html,
 body {
     overscroll-behavior-y: contain;
     touch-action: pan-x pan-y;
-}
+} */
 
 /* body {
     position: fixed;
