@@ -217,9 +217,9 @@ alert("Language Switch Not Yet Configured");
 
 
 // prevent zoom
-document.addEventListener('touchmove', function (event) {
-    if (event.scale !== 1) { event.preventDefault(); } // prevent pinch-zoom
-}, { passive: false });
+// document.addEventListener('touchmove', function (event) {
+//     if (event.scale !== 1) { event.preventDefault(); } // prevent pinch-zoom
+// }, { passive: false });
 
 
 // enroll popup - in index page 
