@@ -686,7 +686,7 @@
                 const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
 
                 doc.setFontSize(14);
-                doc.text("Participants - Export", 40, 40);
+                doc.text("Participants ", 40, 40);
 
                 doc.autoTable({
                     startY: 64,
@@ -707,13 +707,15 @@
                     // allow line breaks inside long cells
                     didParseCell: function () { /* no-op */ }
                 });
-
+                
                 doc.save("participants.pdf");
                 console.log("DEBUG: PDF generated");
+                alert("PDF has been Downloaded");
             } catch (err) {
                 console.error("DEBUG: PDF generation failed:", err);
                 alert("Failed to generate PDF. Check console for details.");
             }
+
         }
 
     </script>
