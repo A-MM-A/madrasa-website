@@ -1,0 +1,256 @@
+/* Base styles (mobile-first) */
+.news-page {
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.4rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--primary-green);
+    padding-left: 8px;
+}
+
+/* Highlighted News */
+.highlight-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-card img {
+    width: 100%;
+    height: auto;
+}
+
+.highlight-content {
+    padding: 1rem;
+}
+
+.btn-read-more {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: var(--primary-green);
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+
+
+
+
+
+/* Multimedia Section Styles (keeping your changes but enhancing) */
+.multimedia {
+    background-color: #eaeaea;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.media-container {
+    overflow: hidden;
+    background-color: rgba(176, 199, 199, 0.453);
+    padding: 20px;
+    border-radius: 10px;
+    height: auto;
+    /* adjust height */
+}
+
+.media-gallery {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    grid-template-rows: repeat(4, 100px);
+    gap: 1rem;
+    /* column-count: 4; number of columns you want
+    column-gap: 1rem; */
+}
+
+/* Ratios */
+.img-1x1 {
+    grid-row-end: span 1;
+    grid-column-end: span 1;
+    aspect-ratio: 1 / 1;
+}
+
+.img-2x2 {
+    grid-row-end: span 2;
+    grid-column-end: span 2;
+    aspect-ratio: 1 / 1;
+}
+
+.img-2x1 {
+    grid-row-end: span 1;
+    grid-column-end: span 2;
+    aspect-ratio: 2 / 1;
+}
+
+.media-item {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.media-item img,
+.media-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* Zoom Modal */
+#zoom-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.15);
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#zoom-content {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 60%;
+    max-width: 900px;
+}
+
+#zoom-content img,
+#zoom-content video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#zoom-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: black;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+
+
+
+/* News Grid (mobile) */
+.news-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.news-image img {
+    width: 100%;
+    height: auto;
+}
+
+.news-content {
+    padding: 1rem;
+}
+
+.news-content a {
+    color: var(--primary-green);
+    text-decoration: underline;
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-zoom {
+    animation: zoomIn 0.6s ease-in-out;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.7s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+
+    /* Multimedia grid */
+    /* .media-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    } */
+
+    /* News Grid alternating layout */
+    .news-card {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .news-card:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .news-image,
+    .news-content {
+        flex: 1;
+    }
+
+    .news-image img {
+        height: 100%;
+        object-fit: cover;
+    }
+}
