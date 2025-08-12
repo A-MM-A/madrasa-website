@@ -3,6 +3,7 @@
 
 <head>
     <title>Participants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css" />
     <style>
         .participantContainer {
@@ -28,13 +29,14 @@
         }
 
         .tableContainer {
-            /* max-height: 1895px;
-            max-width: 700px; */
             margin-top: -10px;
             padding: 0px;
             background-color: #ffffffbd;
             border-radius: 7px;
-            overflow-y: scroll;
+            max-height: 80vh;
+            /* limit height for scrolling */
+            overflow-y: auto;
+            /* enable scroll inside container */
         }
 
         table {
@@ -57,7 +59,10 @@
             color: #000000ff;
             background-color: rgb(136, 163, 137);
             top: 0px;
+            z-index: 2;
         }
+
+
 
         .siteHeader {
             position: relative;
@@ -198,24 +203,80 @@
 
         /* Pop-up box */
         #passwordBox {
-            background: white;
+            /* background: white;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
+            width: 80vw;
+            height: 60vh;
             max-width: 700px;
-            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; */
+            background: linear-gradient(135deg, #ffffff, #f2f2f2);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 80vw;
+            height: 60vh;
+            max-width: 400px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         input[type="password"] {
-            padding: 8px;
+            padding: 10px;
             width: 100%;
-            margin: 10px 0;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
         }
 
         button {
-            padding: 8px 16px;
+            padding: 10px 20px;
             margin: 5px;
             cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #errorMsg {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        /* general mobile adjustments */
+        @media (max-width: 600px) {
+            .participantContainer {
+                margin: 18px;
+                padding: 12px;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+            }
+
+            .titleRow h2 {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -245,7 +306,11 @@
     <div class="participantContainer">
         <div class="titleRow">
             <h2>Participant Details</h2>
-            <button class="refreshButton" id="refreshBtn">Refresh</button>
+            <!-- <button class="refreshButton" id="refreshBtn">Refresh</button> -->
+            <div style="display:flex; gap:10px; align-items:center;">
+                <button class="refreshButton" id="refreshBtn">Refresh</button>
+                <button class="refreshButton" id="downloadBtn" title="Download table as PDF">Download PDF</button>
+            </div>
         </div>
 
 
@@ -269,6 +334,7 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 
     <!-- Edit Popup -->
@@ -289,6 +355,10 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.7/dist/umd/supabase.js"></script>
+    <!-- jsPDF + AutoTable for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+
     <script>
 
 
@@ -301,6 +371,8 @@
             if (input === correctPassword) {
                 document.getElementById("passwordOverlay").style.display = "none";
             } else {
+                document.getElementById("passwordInput").value = '';
+                document.getElementById("passwordInput").style.backgroundColor = '#e386408d';
                 errorMsg.style.display = "block";
             }
         }
@@ -515,16 +587,14 @@
 
         /* ---------- Robust UI event wiring (delegation + immediate attach) ---------- */
         function attachUiHandlers() {
-            // Refresh button (attach immediately)
-            const refreshBtn = document.getElementById("refreshBtn");
-            if (refreshBtn) {
-                refreshBtn.addEventListener("click", () => {
-                    console.log("DEBUG: Refresh clicked");
-                    fetchParticipantsWithDebug();
-                });
-            } else {
-                console.warn("DEBUG: Refresh button not found");
-            }
+            // wire Refresh + download button
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const refreshBtn = document.getElementById("refreshBtn");
+                if (refreshBtn) refreshBtn.addEventListener("click", fetchParticipantsWithDebug);
+                const downloadBtn = document.getElementById("downloadBtn");
+                if (downloadBtn) downloadBtn.addEventListener("click", generatePdf);
+            });
 
             // Delegate clicks on tbody for Edit/Delete
             const tbody = document.getElementById("participantsTableBody");
@@ -562,6 +632,81 @@
             attachUiHandlers();
             fetchParticipantsWithDebug();
         }
+
+        // attach download button now that DOM is ready
+        (function attachDownloadHandler() {
+            const downloadBtn = document.getElementById('downloadBtn');
+            if (downloadBtn) downloadBtn.addEventListener('click', generatePdf);
+        })();
+
+        // Generate PDF of currentRows (will fetch fresh if empty)
+        async function generatePdf() {
+            console.log("DEBUG: generatePdf start");
+
+            if (!Array.isArray(currentRows) || currentRows.length === 0) {
+                console.log("DEBUG: currentRows empty, fetching first...");
+                await fetchParticipantsWithDebug();
+            }
+
+            const rows = currentRows || [];
+            if (rows.length === 0) {
+                alert("No data to export.");
+                return;
+            }
+
+            // Build table head and body
+            const head = [["#", "Name", "Age", "Address", "Phone", "Email", "MPESA Message", "Date"]];
+            const body = rows.map((r, i) => {
+                const date = r.created_at ? new Date(r.created_at) : null;
+                const formattedDate = date ? date.toLocaleString("default", { day: "2-digit", month: "short", year: "numeric" }) : "";
+                return [
+                    String(i + 1),
+                    r.participant_name || "",
+                    r.participant_age != null ? String(r.participant_age) : "",
+                    r.home_address || "",
+                    r.participant_phone || "",
+                    r.participant_email || "",
+                    r.mpesa_message || "",
+                    formattedDate
+                ];
+            });
+
+            try {
+                // requires jspdf UMD + autotable plugin loaded on the page
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+
+                doc.setFontSize(14);
+                doc.text("Participants - Export", 40, 40);
+
+                doc.autoTable({
+                    startY: 64,
+                    head: head,
+                    body: body,
+                    styles: { fontSize: 10, cellPadding: 6, overflow: 'linebreak' },
+                    headStyles: { fillColor: [136, 163, 137], textColor: 0 },
+                    columnStyles: {
+                        0: { cellWidth: 28 },   // index
+                        1: { cellWidth: 120 },  // name
+                        2: { cellWidth: 40 },   // age
+                        3: { cellWidth: 160 },  // address
+                        4: { cellWidth: 90 },   // phone
+                        5: { cellWidth: 140 },  // email
+                        6: { cellWidth: 220 },  // mpesa (wraps)
+                        7: { cellWidth: 70 }    // date
+                    },
+                    // allow line breaks inside long cells
+                    didParseCell: function () { /* no-op */ }
+                });
+
+                doc.save("participants.pdf");
+                console.log("DEBUG: PDF generated");
+            } catch (err) {
+                console.error("DEBUG: PDF generation failed:", err);
+                alert("Failed to generate PDF. Check console for details.");
+            }
+        }
+
     </script>
 
 
@@ -571,5 +716,3 @@
 </body>
 
 </html>
-
-
