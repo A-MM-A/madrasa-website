@@ -89,7 +89,7 @@
                     <h2>Graduation Ceremony 2025</h2>
                     <p>Alhamdulillah, we celebrated our students’ achievements with a memorable event full of Qur’ān
                         recitation and nasheeds.</p>
-                    <a href="#" class="btn-read-more">Read More</a>
+                    <!-- <a href="#" class="btn-read-more">Read More</a> -->
                 </div>
             </div>
         </section>
@@ -106,8 +106,6 @@
                             <source src="media/intro.mp4" type="video/mp4">
                         </video>
                     </div>
-
-
                     <div class="media-item img-1x2">
                         <video autoplay muted loop playsinline>
                             <source src="media/intro.mp4" type="video/mp4">
@@ -191,7 +189,7 @@
                 <div class="news-content">
                     <h3>Ramadhan Program Launched</h3>
                     <p>Join our Ramadhan Qur’ān recitation and tafseer sessions daily after Asr prayer.</p>
-                    <a href="#">Read More</a>
+                    <!-- <a href="#">Read More</a> -->
                 </div>
             </article>
 
@@ -202,7 +200,6 @@
                 <div class="news-content">
                     <h3>Charity Drive for Orphans</h3>
                     <p>We distributed food and clothes to local orphanages with the help of our community.</p>
-                    <a href="#">Read More</a>
                 </div>
             </article>
 
@@ -213,7 +210,16 @@
                 <div class="news-content">
                     <h3>Qur’ān Competition Winners</h3>
                     <p>Congratulations to all participants and winners for their dedication to the Qur’ān.</p>
-                    <a href="#">Read More</a>
+                </div>
+            </article>
+
+            <article class="news-card animate-slide-up">
+                <div class="news-image">
+                    <img src="media/slide4.jpg" alt="News 3">
+                </div>
+                <div class="news-content">
+                    <h3>Qur’ān Competition Winners</h3>
+                    <p>Congratulations to all participants and winners for their dedication to the Qur’ān.</p>
                 </div>
             </article>
 
@@ -355,11 +361,45 @@
             }
         }, false);
 
+        // Prevent long-press save on images/videos, allow scroll gestures
         document.addEventListener('touchstart', function (e) {
-            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-                e.preventDefault();
-            }
-        }, { passive: false });
+            if (!(e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO')) return;
+
+            let startX = e.touches[0].clientX;
+            let startY = e.touches[0].clientY;
+            let moved = false;
+
+            // Timer for long press prevention
+            let timer = setTimeout(() => {
+                if (!moved) e.preventDefault(); // only block if finger is held still
+            }, 500);
+
+            const moveHandler = (ev) => {
+                const dx = Math.abs(ev.touches[0].clientX - startX);
+                const dy = Math.abs(ev.touches[0].clientY - startY);
+                if (dx > 10 || dy > 10) moved = true;
+
+                // If inside gallery, intercept horizontal swipes but let vertical scroll
+                if (e.target.closest('#gallery-scroll')) {
+                    if (dx > dy) {
+                        if (ev.cancelable) ev.preventDefault(); // horizontal gallery swipe
+                    }
+                }
+            };
+
+            const endHandler = () => {
+                clearTimeout(timer);
+                document.removeEventListener('touchmove', moveHandler);
+                document.removeEventListener('touchend', endHandler);
+                document.removeEventListener('touchcancel', endHandler);
+            };
+
+            document.addEventListener('touchmove', moveHandler, { passive: false });
+            document.addEventListener('touchend', endHandler, { passive: true });
+            document.addEventListener('touchcancel', endHandler, { passive: true });
+        }, { passive: true });
+
+
 
         function autoScroll() {
             gallery.scrollLeft += scrollSpeed * scrollDirection;
