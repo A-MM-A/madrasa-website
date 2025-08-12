@@ -377,6 +377,11 @@
             }
         }
 
+        document.getElementById("passwordInput").addEventListener("keydown", (e) => {
+            if (e.key === "Enter") checkPassword();
+        });
+
+
 
 
         /* ---------- Admin table client (replacement) ---------- */
