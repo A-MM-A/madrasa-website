@@ -280,7 +280,11 @@
 </head>
 
 <body>
-    <div class="container">
+
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <h1>Event NOT FOUND</h1>
+    </div>
+    <div class="container" style="display: none;">
         <a href="https://wa.me/254740600220" target="_blank" class="whatsapp-button"><img
                 src="./event_media/whatsapp.svg" class="whatsapp" alt="WhatsApp" /></a>
 
@@ -450,10 +454,14 @@
     ">
             <h2 style="color: green; margin-bottom: 15px;">Congratulations!</h2>
             <p>Your registration has been submitted successfully.</p>
-            <p style="color: rgb(206, 120, 74);" >Do <strong>NOT</strong> Submit Multiple Times.</p>
-            <h3 style="color: green;" >Whats next:</h3>
-            <p><li>Please Arrive on Time.</li></p>
-            <p><li>Please Carry A NoteBook And A Pen.</li></p>
+            <p style="color: rgb(206, 120, 74);">Do <strong>NOT</strong> Submit Multiple Times.</p>
+            <h3 style="color: green;">Whats next:</h3>
+            <p>
+                <li>Please Arrive on Time.</li>
+            </p>
+            <p>
+                <li>Please Carry A NoteBook And A Pen.</li>
+            </p>
             <button id="doneButton" style="
             background: green;
             color: white;
@@ -470,7 +478,7 @@
 
 
 
-    
+
     <!-- add supabase client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
@@ -538,7 +546,7 @@
             }
 
             // Show Submitted UI (no redirect)
-            
+
             function showSubmittedState() {
                 const modal = document.getElementById("successModal");
                 if (modal) {

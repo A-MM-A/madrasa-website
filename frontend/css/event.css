@@ -1,81 +1,4 @@
 /* Events Section */
-/* .events-section {
-    padding: 40px 20px;
-    background-color: #f4fdf6;
-    text-align: center;
-}
-
-.events-title {
-    font-size: 2rem;
-    color: #2e7d32;
-    margin-bottom: 30px;
-}
-
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.event-card {
-    height: auto;
-    background: #e6f7ea;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.event-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-}
-
-.event-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
-
-.event-content {
-    padding: 15px;
-    text-align: left;
-}
-
-.event-content h3 {
-    color: #1b5e20;
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-}
-
-.event-date {
-    color: #388e3c;
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-}
-
-.event-content p {
-    color: #444;
-    line-height: 1.4;
-}*/
-
-/* Responsive adjustments for small screens */
-/* @media (max-width: 600px) {
-    .event-image {
-        height: 150px;
-    }
-
-    .event-content h3 {
-        font-size: 1rem;
-    }
-}  */
-
-
-
-
-/* Events Section */
 .events-section {
     padding: 40px 20px;
     background-color: #f4fdf6;
@@ -93,28 +16,68 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    justify-items: center; /* Centers cards inside grid cells */
+    justify-items: center;
+    /* Centers cards inside grid cells */
 }
 
 .event-card {
     background: #e6f7ea;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    max-width: 350px; /* Keeps cards from stretching too wide */
-    width: 100%; /* Fill grid cell */
+    max-width: 350px;
+    /* Keeps cards from stretching too wide */
+    width: 100%;
+    /* Fill grid cell */
+}
+
+.event-card {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.sticker-red {
+    position: absolute;
+    top: 35px;
+    left: -35px;
+    background: #ff4d4de6;
+    color: white;
+    padding: 5px 60px;
+    font-size: 14px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transform: rotate(-40deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.sticker-green {
+    position: absolute;
+    top: 35px;
+    left: -35px;
+    background: #01a211e6;
+    color: white;
+    padding: 5px 60px;
+    font-size: 14px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    transform: rotate(-40deg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .event-card:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .event-image {
     width: 100%;
-    height: 180px; /* Square-ish shape */
+    height: 180px;
+    /* Square-ish shape */
     object-fit: cover;
 }
 
@@ -146,6 +109,7 @@
     .event-image {
         height: 150px;
     }
+
     .event-content h3 {
         font-size: 1rem;
     }
