@@ -611,6 +611,52 @@
             }
         }
 
+
+        /* ######## like button */
+        .like-btn {
+            transition: transform 0.2s;
+        }
+
+        .like-btn.liked {
+            content: url("icons/heart-fill.svg");
+            animation: bounce 0.3s;
+        }
+
+        .like-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #8f8f8f8d;
+            /* light gray */
+            padding: 4px 10px;
+            border-radius: 9999px;
+            /* pill shape */
+            font-size: 13px;
+            color: #555;
+            margin-top: 8px;
+            margin-left: auto;
+            /* push it to the right */
+            width: fit-content;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .like-pill:hover {
+            background: #8f8f8f48;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+        }
+
         .form-row {
             display: flex;
             gap: 8px;
@@ -741,28 +787,7 @@
 
 <body>
 
-    <!-- TOPBAR -->
-    <!-- <div class="topbar">
-        <div class="brand">
-            <a href="../index.html">
-                <img src="../media/logo.png" alt="logo">
-            </a>
-            <div>
-                <div class="event-title" id="topEventTitle">Islamic Youth Camp - [Boys Only]</div>
-                <div class="event-title-sub" id="eventDate">Aug 16-19, 2025 • Generation Of Peace</div>
-            </div>
-        </div> -->
-    <!-- Right side: small controls (optional) -->
-    <!-- <div style="display:flex;align-items:center;gap:8px">
-            <a href="../index.html">
-                <button
-                    style="border:none;padding:8px 10px;border-radius:999px;background:#80dc3d;box-shadow:var(--card-shadow);cursor:default"
-                    title="Event ID">
-                    HOME
-                </button>
-            </a>
-        </div>
-    </div> -->
+    <!-- HEADER -->
     <header class="siteHeader">
         <div class="headerContent"><a href="index.html">
                 <a href="../events.html"><img src="icons/logo.png" alt="Camp Logo" class="logo" /></a>
@@ -774,72 +799,6 @@
 
     <!-- MAIN -->
     <main class="page">
-
-
-
-        <!-- GALLERY SECTION -->
-        <!-- <section class="gallery-section" aria-labelledby="galleryHeading">
-            <div class="gallery-head">
-                <h3 id="galleryHeading">Event Gallery</h3>
-                <div style="display:flex;gap:8px;align-items:center">
-                    <span class="gallery-badge">Highlights</span>
-                </div>
-            </div> -->
-
-
-
-
-
-        <!-- <div class="gallery-grid" id="galleryGrid">
-
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomImage('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/event1.jpg')">
-                    <img src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/event1.jpg"
-                        alt="event photo 1">
-                </div>
-
-
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4')">
-                    <video autoplay muted loop playsinline preload="auto">
-                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4">Watch
-                            the video here</a>.
-                    </video>
-                    <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
-                </div>
-
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4')">
-                    <video autoplay muted loop playsinline preload="auto">
-                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4">Watch
-                            the video here</a>.
-                    </video>
-                    <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
-                </div>
-
-            </div> -->
-
-        <!-- </section> -->
-
-
-        <!-- Zoom Modal -->
-        <div id="zoom-modal">
-            <span id="zoom-close">×</span>
-            <div id="zoom-content"></div>
-        </div>
-
 
         <!-- 🖼️ Banner with overlay text -->
         <div class="event-banner">
@@ -866,9 +825,9 @@
                         </video>
                         <div class="play-overlay">▶</div>
                         <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
                     </div>
 
                     <div class="video-thumb"
@@ -880,9 +839,9 @@
                         </video>
                         <div class="play-overlay">▶</div>
                         <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
                     </div>
 
                     <div class="video-thumb"
@@ -894,9 +853,9 @@
                         </video>
                         <div class="play-overlay">▶</div>
                         <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
                     </div>
                 </div>
             </section>
@@ -915,6 +874,15 @@
                     Tip: Tap the yellow button to add your comment & rating.
                 </div>
             </section>
+
+        </div>
+
+        <!-- Zoom Modal -->
+        <div id="zoom-modal">
+            <span id="zoom-close">×</span>
+            <div id="zoom-content"></div>
+        </div>
+
 
     </main>
 
@@ -966,6 +934,7 @@
     <!-- TOAST -->
     <div class="toast" id="toast">Saved</div>
 
+    <!-- FOOTER -->
     <footer class="siteFooter">
         <p><strong>Follow Us:</strong></p>
         <div class="footerIconContainer">
@@ -1062,6 +1031,8 @@
                 closeZoomModal();
             }
         });
+
+
 
         /***** CONFIG  *****/
         const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
@@ -1245,12 +1216,41 @@
                 text.className = 'c-text';
                 text.textContent = item.feedback || '';
 
+                // --- Like button row ---
+                const likePill = document.createElement('div');
+                likePill.className = 'like-pill';
+
+                const likeBtn = document.createElement('img');
+                likeBtn.src = 'icons/heart-line.svg';
+                likeBtn.alt = 'Like';
+                likeBtn.style.width = '18px';
+                likeBtn.style.height = '18px';
+                likeBtn.style.cursor = 'pointer';
+                likeBtn.classList.add('like-btn');
+
+                const likeCount = document.createElement('span');
+                likeCount.className = 'like-count';
+                likeCount.textContent = '0 likes';
+
+                likePill.appendChild(likeBtn);
+                likePill.appendChild(likeCount);
+
                 body.appendChild(top);
                 body.appendChild(mid);
                 body.appendChild(text);
+                body.appendChild(likePill);
 
                 div.appendChild(avatar);
                 div.appendChild(body);
+
+                // Attach logic
+                likePill.addEventListener('click', async () => {
+                    await toggleFeedbackLike(item.id, likeBtn, likeCount, likePill);
+                });
+                // Initialize UI (count + liked state for this browser)
+                initLikeUI(item.id, likeBtn, likeCount, likePill);
+
+
 
                 commentsList.appendChild(div);
             });
@@ -1318,6 +1318,105 @@
         (function init() {
             fetchFeedbacks();
         })();
+
+
+        //   Toggle like on a feedback comment
+        async function toggleFeedbackLike(feedbackId, btn, countEl, pill) {
+            try {
+                // Check if already liked (we infer via CSS class)
+                const liked = btn.classList.contains('liked');
+                const clientId = getClientId();
+
+                if (!liked) {
+                    // Insert like tied to this browser
+                    const { error } = await supabase
+                        .from('feedback_likes')
+                        .insert([{ event_id: EVENT_ID, feedback_id: feedbackId, client_id: clientId }])
+                        .select('id')
+                        .single();
+                    // If unique violation occurs (already liked), just treat as liked
+                    if (error && error.code !== '23505') throw error;
+                    setLikeVisual(btn, pill, true);
+
+                } else {
+                    // Remove THIS browser’s like only
+                    const { error } = await supabase
+                        .from('feedback_likes')
+                        .delete()
+                        .eq('feedback_id', feedbackId)
+                        .eq('client_id', clientId);
+                    if (error) throw error;
+                    setLikeVisual(btn, pill, false);
+                }
+                // Refresh like count
+                fetchCommentLike(feedbackId, countEl);
+            } catch (err) {
+                console.error('toggleFeedbackLike error', err);
+                showToast('Like action failed');
+            }
+        }
+
+        // Fetch and display like count for a feedback comment
+        async function fetchCommentLike(feedbackId, countEl) {
+            try {
+                const { count, error } = await supabase
+                    .from('feedback_likes')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('feedback_id', feedbackId);
+                if (error) throw error;
+                countEl.textContent = `${count} like${count === 1 ? '' : 's'}`;
+            } catch (err) {
+                console.error('fetchCommentLike error', err);
+                countEl.textContent = '0 likes';
+            }
+        }
+
+        // Initialize like UI elements for a feedback comment
+        async function initLikeUI(feedbackId, btn, countEl, pill) {
+            // Update the count first
+            await fetchCommentLike(feedbackId, countEl);
+            // Check if THIS browser has liked it
+            try {
+                const clientId = getClientId();
+                const { data, error } = await supabase
+                    .from('feedback_likes')
+                    .select('id')
+                    .eq('feedback_id', feedbackId)
+                    .eq('client_id', clientId)
+                    .maybeSingle();
+                if (!error) {
+                    setLikeVisual(btn, pill, !!data);
+                }
+            } catch (e) {
+                console.warn('initLikeUI check failed', e);
+            }
+        }
+
+        // Persistent per-browser ID for anonymous likes
+        function getClientId() {
+            try {
+                let id = localStorage.getItem('iyc_client_id');
+                if (!id) {
+                    id = (crypto?.randomUUID?.() || Math.random().toString(36).slice(2));
+                    localStorage.setItem('iyc_client_id', id);
+                }
+                return id;
+            } catch {
+                // localStorage might be blocked; fall back to session-only ID
+                return (crypto?.randomUUID?.() || Math.random().toString(36).slice(2));
+            }
+        }
+
+        function setLikeVisual(btn, pill, liked) {
+            if (liked) {
+                btn.classList.add('liked');
+                if (pill) pill.classList.add('liked');
+            } else {
+                btn.classList.remove('liked');
+                if (pill) pill.classList.remove('liked');
+            }
+        }
+
     </script>
 
 </body>
