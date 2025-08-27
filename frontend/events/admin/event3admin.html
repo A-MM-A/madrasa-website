@@ -304,7 +304,7 @@
 
 
         <div class="participantContainer">
-            <h2>Tahfatul-Atfal (Tajwid) - Participant Details</h2>
+            <h2>Tuhfatul-Atfal (Tajwid) - Participant Details</h2>
             <div class="titleRow">
                 <!-- <button class="refreshButton" id="refreshBtn">Refresh</button> -->
                 <div style="display:flex; gap:10px; align-items:center;">
@@ -674,7 +674,7 @@
             }
 
             // Table head + body
-            const head = [["#", "Name", "Age", "Gender", "City/Area", "Phone", "Email", "Tajwid", "Referral", "Date"]];
+            const head = [["#", "Name", "Phone", "Email", "Age", "Gender", "City/Area", "Tajwid", "Referral", "Date"]];
             const body = rows.map((r, i) => {
                 const date = r.created_at ? new Date(r.created_at) : null;
                 const formattedDate = date ? date.toLocaleDateString("default", { day: "2-digit", month: "short", year: "numeric" }) : "";
@@ -697,7 +697,7 @@
                 const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
 
                 doc.setFontSize(13);
-                doc.text("Tahfatul-Atfal (Tajwid) - Participants", doc.internal.pageSize.getWidth() / 2, 40, { align: "center" });
+                doc.text("Tuhfatul-Atfal (Tajwid) - Participants", doc.internal.pageSize.getWidth() / 2, 40, { align: "center" });
 
                 doc.autoTable({
                     startY: 60,
@@ -708,12 +708,12 @@
                     columnStyles: {
                         0: { cellWidth: 25 },   // #
                         1: { cellWidth: 100 },  // Name
-                        5: { cellWidth: 85 },   // Phone
-                        6: { cellWidth: 130 },  // Email
-                        2: { cellWidth: 35 },   // Age
-                        3: { cellWidth: 55 },   // Gender
-                        4: { cellWidth: 100 },  // City/Area
-                        7: { cellWidth: 70 },   // Tajwid
+                        2: { cellWidth: 85 },   // Phone
+                        3: { cellWidth: 150 },  // Email
+                        4: { cellWidth: 35 },   // Age
+                        5: { cellWidth: 55 },   // Gender
+                        6: { cellWidth: 100 },  // City/Area
+                        7: { cellWidth: 50 },   // Tajwid
                         8: { cellWidth: 85 },   // Referral
                         9: { cellWidth: 65 }    // Date
                     },
