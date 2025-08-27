@@ -4,7 +4,7 @@
 <head>
     <title>Participants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../style.css" />
     <style>
         body {
             background-color: rgb(65, 65, 65);
@@ -60,7 +60,7 @@
         th {
             border: 1px solid #000000ff;
             padding: 10px;
-            position: sticky;
+            /* position: sticky; */
             color: #000000ff;
             background-color: rgb(136, 163, 137);
             top: 0px;
@@ -255,7 +255,7 @@
 
         /* general mobile adjustments */
         @media (max-width: 600px) {
-            
+
 
             .participantContainer {
                 margin: 40px 18px;
@@ -287,7 +287,7 @@
             <input type="password" id="passwordInput" placeholder="Password">
             <br>
             <button type="submit" onclick="checkPassword()">Submit</button>
-            <button onclick="window.location.href='teachers.html'">Cancel</button>
+            <button onclick="window.location.href='../../teachers.html'">Cancel</button>
             <p id="errorMsg" style="color:red; display:none;">Incorrect password. Try again.</p>
         </div>
     </div>
@@ -296,7 +296,7 @@
 
     <header class="siteHeader">
         <div class="dashboardBtn">
-            <h3><a class="dashboardButton" href="index.html">HOME</a></h3>
+            <h3><a class="dashboardButton" href="../../index.html">HOME</a></h3>
         </div>
     </header>
 
@@ -304,11 +304,11 @@
 
 
         <div class="participantContainer">
-            <h2>Participant Details</h2>
+            <h2>Tahfatul-Atfal (Tajwid) - Participant Details</h2>
             <div class="titleRow">
                 <!-- <button class="refreshButton" id="refreshBtn">Refresh</button> -->
                 <div style="display:flex; gap:10px; align-items:center;">
-                    <button class="refreshButton" id="refreshBtn">Refresh</button>
+                    <!-- <button class="refreshButton" id="refreshBtn">Refresh</button> -->
                     <button class="refreshButton" id="downloadBtn" title="Download table as PDF">Download PDF</button>
                 </div>
             </div>
@@ -320,11 +320,13 @@
                         <tr>
                             <th>#</th>
                             <th>Participant Name</th>
-                            <th>Age</th>
-                            <th>Address</th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th>Mpesa Msg</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Tajwid Experience</th>
+                            <th>Referal</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
@@ -343,11 +345,13 @@
         <div class="popupContent">
             <h3>Edit Participant</h3>
             <input type="text" id="editName" placeholder="Name">
-            <input type="number" id="editAge" placeholder="Age">
-            <input type="text" id="editAddress" placeholder="Address">
             <input type="text" id="editPhone" placeholder="Phone">
             <input type="email" id="editEmail" placeholder="Email">
-            <textarea id="editMpesa" placeholder="Mpesa Message"></textarea>
+            <input type="number" id="editAge" placeholder="Age">
+            <input type="text" id="editGender" placeholder="Gender">
+            <input type="text" id="editAddress" placeholder="Address">
+            <input type="text" id="editTajwid" placeholder="Tajwid Experience">
+            <input type="text" id="editReferral" placeholder="Referral">
             <button class="savePopup" onclick="saveEdit()">Save</button>
             <button class="closePopup" onclick="closePopup()">Cancel</button>
         </div>
@@ -363,7 +367,7 @@
     <script>
 
 
-        const correctPassword = "generation2025";
+        const correctPassword = "dar-atfal-2025";
 
         function checkPassword() {
             const input = document.getElementById("passwordInput").value;
@@ -428,11 +432,13 @@
 
                 const tdIndex = document.createElement("td"); tdIndex.textContent = index + 1; tr.appendChild(tdIndex);
                 const tdName = document.createElement("td"); tdName.textContent = participant.participant_name || ""; tr.appendChild(tdName);
-                const tdAge = document.createElement("td"); tdAge.textContent = participant.participant_age ?? ""; tr.appendChild(tdAge);
-                const tdAddress = document.createElement("td"); tdAddress.textContent = participant.home_address || ""; tr.appendChild(tdAddress);
                 const tdPhone = document.createElement("td"); tdPhone.textContent = participant.participant_phone || ""; tr.appendChild(tdPhone);
                 const tdEmail = document.createElement("td"); tdEmail.textContent = participant.participant_email || ""; tr.appendChild(tdEmail);
-                const tdMpesa = document.createElement("td"); tdMpesa.textContent = participant.mpesa_message || ""; tr.appendChild(tdMpesa);
+                const tdAge = document.createElement("td"); tdAge.textContent = participant.participant_age ?? ""; tr.appendChild(tdAge);
+                const tdGender = document.createElement("td"); tdGender.textContent = participant.participant_gender ?? ""; tr.appendChild(tdGender);
+                const tdAddress = document.createElement("td"); tdAddress.textContent = participant.participant_address || ""; tr.appendChild(tdAddress);
+                const tdTajwid = document.createElement("td"); tdTajwid.textContent = participant.participant_tajwid || ""; tr.appendChild(tdTajwid);
+                const tdReferal = document.createElement("td"); tdReferal.textContent = participant.participant_referral || ""; tr.appendChild(tdReferal);
                 const tdDate = document.createElement("td");
                 const date = participant.created_at ? new Date(participant.created_at) : null;
                 tdDate.textContent = date ? date.toLocaleString("default", { day: "2-digit", month: "short" }) : "";
@@ -507,11 +513,13 @@
             }
             currentEditId = id;
             document.getElementById("editName").value = row.participant_name || "";
-            document.getElementById("editAge").value = row.participant_age ?? "";
-            document.getElementById("editAddress").value = row.home_address || "";
             document.getElementById("editPhone").value = row.participant_phone || "";
             document.getElementById("editEmail").value = row.participant_email || "";
-            document.getElementById("editMpesa").value = row.mpesa_message || "";
+            document.getElementById("editAge").value = row.participant_age ?? "";
+            document.getElementById("editGender").value = row.participant_gender ?? "";
+            document.getElementById("editAddress").value = row.participant_address || "";
+            document.getElementById("editTajwid").value = row.participant_tajwid || "";
+            document.getElementById("editReferral").value = row.participant_referral || "";
             document.getElementById("editPopup").style.display = "flex";
             console.log("DEBUG: opened edit popup for id:", id);
         }
@@ -529,11 +537,13 @@
 
             const payload = {
                 participant_name: document.getElementById("editName").value || null,
-                participant_age: parseInt(document.getElementById("editAge").value) || null,
-                home_address: document.getElementById("editAddress").value || null,
                 participant_phone: document.getElementById("editPhone").value || null,
                 participant_email: document.getElementById("editEmail").value || null,
-                mpesa_message: document.getElementById("editMpesa").value || null
+                participant_age: parseInt(document.getElementById("editAge").value) || null,
+                participant_gender: document.getElementById("editGender").value || null,
+                participant_address: document.getElementById("editAddress").value || null,
+                participant_tajwid: document.getElementById("editTajwid").value || null,
+                participant_referral: document.getElementById("editReferral").value || null,
             };
 
             console.log("DEBUG: saving update", currentEditId, payload);
@@ -663,51 +673,54 @@
                 return;
             }
 
-            // Build table head and body
-            const head = [["#", "Name", "Age", "Address", "Phone", "Email", "MPESA Message", "Date"]];
+            // Table head + body
+            const head = [["#", "Name", "Age", "Gender", "City/Area", "Phone", "Email", "Tajwid", "Referral", "Date"]];
             const body = rows.map((r, i) => {
                 const date = r.created_at ? new Date(r.created_at) : null;
-                const formattedDate = date ? date.toLocaleString("default", { day: "2-digit", month: "short", year: "numeric" }) : "";
+                const formattedDate = date ? date.toLocaleDateString("default", { day: "2-digit", month: "short", year: "numeric" }) : "";
                 return [
                     String(i + 1),
                     r.participant_name || "",
-                    r.participant_age != null ? String(r.participant_age) : "",
-                    r.home_address || "",
                     r.participant_phone || "",
                     r.participant_email || "",
-                    r.mpesa_message || "",
+                    r.participant_age != null ? String(r.participant_age) : "",
+                    r.participant_gender || "",
+                    r.participant_address || "",
+                    r.participant_tajwid || "",
+                    r.participant_referral || "",
                     formattedDate
                 ];
             });
 
             try {
-                // requires jspdf UMD + autotable plugin loaded on the page
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
 
-                doc.setFontSize(14);
-                doc.text("Participants ", 40, 40);
+                doc.setFontSize(13);
+                doc.text("Tahfatul-Atfal (Tajwid) - Participants", doc.internal.pageSize.getWidth() / 2, 40, { align: "center" });
 
                 doc.autoTable({
-                    startY: 64,
+                    startY: 60,
                     head: head,
                     body: body,
-                    styles: { fontSize: 10, cellPadding: 6, overflow: 'linebreak' },
-                    headStyles: { fillColor: [136, 163, 137], textColor: 0 },
+                    styles: { fontSize: 9, cellPadding: 4, overflow: "linebreak", halign: "center", valign: "middle" },
+                    headStyles: { fillColor: [136, 163, 137], textColor: 0, halign: "center" },
                     columnStyles: {
-                        0: { cellWidth: 28 },   // index
-                        1: { cellWidth: 120 },  // name
-                        2: { cellWidth: 40 },   // age
-                        3: { cellWidth: 160 },  // address
-                        4: { cellWidth: 90 },   // phone
-                        5: { cellWidth: 140 },  // email
-                        6: { cellWidth: 220 },  // mpesa (wraps)
-                        7: { cellWidth: 70 }    // date
+                        0: { cellWidth: 25 },   // #
+                        1: { cellWidth: 100 },  // Name
+                        5: { cellWidth: 85 },   // Phone
+                        6: { cellWidth: 130 },  // Email
+                        2: { cellWidth: 35 },   // Age
+                        3: { cellWidth: 55 },   // Gender
+                        4: { cellWidth: 100 },  // City/Area
+                        7: { cellWidth: 70 },   // Tajwid
+                        8: { cellWidth: 85 },   // Referral
+                        9: { cellWidth: 65 }    // Date
                     },
-                    // allow line breaks inside long cells
-                    didParseCell: function () { /* no-op */ }
+                    margin: { left: 20, right: 20 },
+                    tableWidth: "auto", // shrink to fit
                 });
-                
+
                 doc.save("participants.pdf");
                 console.log("DEBUG: PDF generated");
                 alert("PDF has been Downloaded");
@@ -715,7 +728,6 @@
                 console.error("DEBUG: PDF generation failed:", err);
                 alert("Failed to generate PDF. Check console for details.");
             }
-
         }
 
     </script>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta property="og:title" content="Dar Al Arqam – دار الأرقم">
+    <meta property="og:description"
+        content="For the Memorization of the Holy Quran and Islamic Education - لتحفيظ القران الكريم والتربية الإسلامية">
+    <meta property="og:image" content="https://dar-al-arqam.co.ke/media/slide1.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://dar-al-arqam.co.ke/">
+    <meta property="og:type" content="website">
+    <title>Tahfatul-Atfal Tajwid</title>
+
+    <link rel="shortcut icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
+    <link rel="icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: url('media/event3wall.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #3a3a3f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 480px;
+            padding-left: 3px;
+            padding-right: 3px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(to bottom, #bbbdbd, #004364aa);
+            color: rgb(218, 254, 255);
+            padding: 1rem 1rem;
+            border-radius: 0 0 1rem 1rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .logo img {
+            width: 100px;
+            animation: zoomIn 1.2s ease-in-out;
+        }
+
+        .logo2 img {
+            width: 70px;
+            margin-left: 25px;
+            animation: zoomIn 1.2s ease-in-out;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+
+        .logo-separator {
+            color: black;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+
+
+        .subtitle {
+            font-size: 25px;
+            font-weight: 100;
+            letter-spacing: 2px;
+            font-family: 'Rubik Distressed', cursive;
+        }
+
+        .register-btn {
+            background: #0e560d;
+            color: rgb(218, 254, 255);
+            border: 2.5px solid #13927d;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #004d406d;
+        }
+
+        .section {
+            background: rgba(104, 137, 145, 0.544);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section h2 {
+            color: #028a73;
+            font-weight: 700;
+            border-bottom: 2px solid #006459;
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .icon-description p {
+            padding-left: 15px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .p-deco2 {
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        }
+
+
+        .topics li {
+            margin-bottom: 0.5rem;
+            list-style-type: none;
+            padding-left: 20px;
+            font-weight: 600;
+            font-size: 18px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        label {
+            padding-left: 10px;
+            margin-bottom: -13px;
+            font-weight: 500;
+        }
+
+        form input,
+        form select,
+        form button {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        form>h2 {
+            margin-bottom: -5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #fafafa;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #20b181;
+            background-color: #f5fdfb;
+        }
+
+        form button {
+            background: #089e85;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: #119191;
+        }
+
+        .errorMessage {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: #004d40;
+            color: white;
+            margin-top: 2rem;
+        }
+
+        .footer .social-icons {
+            margin: 1rem 0;
+        }
+
+        .footer .social-icons a {
+            margin: 0 0.5rem;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+
+        .contact-info {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+        }
+
+        .contact-info>p {
+            padding: 10px;
+        }
+
+        .footer-icon {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            margin-right: 6px;
+            margin-bottom: 40px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .footer-icon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+        }
+
+        .whatsapp {
+            height: 45px;
+            width: 45px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            color: rgba(243, 5, 5, 0.523);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="display: none; justify-content: center; align-items: center; height: 100vh;">
+        <h1>Event NOT FOUND</h1>
+    </div>
+
+
+
+    <div class="container" style="display: block;">
+
+        <!-- header -->
+        <header class="hero">
+
+            <div class="logo-container">
+                <div class="logo">
+                    <a href="../events.html">
+                        <img src="media/logo-daa.png" alt="Event Flyer" />
+                    </a>
+                </div>
+
+                <strong class="logo-separator">X</strong>
+
+                <div class="logo2">
+                    <a href="https://www.generationofpeace.co.ke/" target="_blank" title="Generation of Peace">
+                        <img src="media/logo-gop.png" alt="Event Flyer" />
+                    </a>
+                </div>
+            </div>
+
+
+            <img src="media/event3.jpg" alt="Tahfatul-Atfal Tajwid" />
+            <p class="subtitle">Tahfatul-Atfal Tajwid</p>
+            <a href="#register" class="register-btn">Register Now</a>
+        </header>
+
+
+        <!-- Event Details -->
+        <section class="section" id="event-details">
+            <h2>Event Details</h2>
+            <div class="icon-container">
+                <img src="media/icons/map.svg" class="icon" alt="Map icon" />
+                <div class="icon-description">
+                    <p>Dar Al-Arqam, Bondeni Mombasa</p>
+                    <p>(Next to OLA Petrol Station)</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <img src="media/icons/calendar.svg" class="icon" alt="Calendar icon" />
+                <div class="icon-description">
+                    <p>30th Aug 2025 - 7th Rabiul Awwal 1447</p>
+                    <p>Saturday</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <img src="media/icons/clock.svg" class="icon" alt="Clock icon" />
+                <div class="icon-description">
+                    <p>08:00 am – 12:30 pm</p>
+                </div>
+            </div>
+            <div class="icon-container">
+                <img src="media/icons/money.svg" class="icon" alt="Fee icon" />
+                <div class="icon-description">
+                    <p>FREE</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- More details -->
+        <section class="section">
+            <h2>Join us for:</h2>
+            <ul class="topics">
+                <li>A session on learning Tajwid</li>
+                <li>Covering the book:</li>
+                <li>"<i>Tuhfatul Atfal Katika Tajwidi ya Qur'an</i>"</li>
+
+            </ul>
+
+            <h2>Speaker:</h2>
+            <div class="speaker" style="text-align:center;">
+                <div class="icon-container">
+                    <div class="p-deco2">
+                        <p>Sheikh Hamza bin Sheikh Abdulrahman</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Registration Form -->
+        <section class="section" id="register">
+            <h2>Register Now</h2>
+            <form id="registrationForm">
+
+                <label>Full Name <span style="color: red;">*</span></label>
+                <input type="text" placeholder="E.g Muhammad Ali" id="participantName" name="participantName" required
+                    pattern="[A-Za-z\s'-]+" />
+                <small class="errorMessage"></small>
+
+                <label style="display: inline-flex; align-items: center; gap: 5px;">
+                    <img src="media/icons/whatsapp.svg" alt="whatsapp"
+                        style="width:20px; height:auto; margin-right: 5px;">
+                    Phone Number <span style="color:red;">*</span>
+                </label>
+                <input type="tel" placeholder="E.g 0722xxxxxx" id="participantPhone" name="participantPhone" required />
+                <small class="errorMessage"></small>
+
+
+                <label>Email Address</label>
+                <input type="email" placeholder="E.g example@mail.com" id="participantEmail" name="participantEmail"
+                    required />
+                <small class="errorMessage"></small>
+
+                <label>Age</label>
+                <input type="number" placeholder="E.g 18" id="participantAge" name="participantAge" required />
+                <small class="errorMessage"></small>
+
+                <label>Gender <span style="color: red;">*</span> </label>
+                <select id="participantGender" name="participantGender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <small class="errorMessage"></small>
+
+                <label>City / Area of Residence <span style="color: red;">*</span></label>
+                <input type="text" id="participantAddress" name="participantAddress" placeholder="E.g Majengo"
+                    required />
+                <small class="errorMessage"></small>
+
+                <label>Have you studied Tajwid before? <span style="color: red;">*</span> </label>
+                <select id="participantTajwid" name="participantTajwid" required>
+                    <option value="">Select Option</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+                <small class="errorMessage"></small>
+
+                <label>How did you hear about this event? <span style="color: red;">*</span> </label>
+                <select id="participantReferral" name="participantReferral" required>
+                    <option value="">Select Option</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="friend">Friend</option>
+                    <option value="Mosque">Mosque</option>
+                    <option value="other">Other</option>
+                </select>
+                <small class="errorMessage"></small>
+
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+
+        <!-- Contact Information -->
+        <section class="section">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <img src="media/icons/telephone.svg" class="icon" alt="Phone icon" />
+                <div>
+                    <p>+254 740 600 220</p>
+                    <p>+254 756 600 220</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <img src="media/icons/mail.svg" class="icon" alt="Mail icon" />
+                <p> daralarqam.ke@gmail.com</p>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+
+            <div class="social-icons">
+                <a href="https://youtube.com/@daralarqam.ke.111?si=MlqQ3Gv9TOuFzVuG" target="_blank" title="YouTube">
+                    <img src="media/icons/youtube.svg" class="footer-icon" alt="YouTube" />
+                </a>
+                <a href="https://www.tiktok.com/@daralarqam.ke?_t=ZM-8yiRXKnKMCM&_r=1" target="_blank" title="Tiktok">
+                    <img src="media/icons/tiktok.svg" class="footer-icon" alt="Tiktok" />
+                </a>
+                <a href="https://www.instagram.com/daralarqam.ke?igsh=NHN2a2FyODQzdDUx&utm_source=qr" target="_blank"
+                    title="Instagram">
+                    <img src="media/icons/instagram.svg" class="footer-icon" alt="Instagram" />
+                </a>
+                <a href="https://www.facebook.com/share/1FwkFMQWmY/" target="_blank" title="Facebook">
+                    <img src="media/icons/facebook.svg" class="footer-icon" alt="Facebook" />
+                </a>
+            </div>
+            <p>&copy; 2025 Dar Al-Arqam. All rights reserved.</p>
+        </footer>
+
+
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/254740600220" target="_blank" class="whatsapp-button">
+            <img src="media/icons/whatsapp.svg" class="whatsapp" alt="WhatsApp" />
+        </a>
+
+
+        <!-- Success Modal -->
+        <div id="successModal" style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    ">
+            <div style="
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        ">
+                <h2 style="color: green; margin-bottom: 15px;">Congratulations!</h2>
+                <p>Your registration has been submitted successfully.</p>
+                <p style="color: rgb(206, 120, 74);">Do <strong>NOT</strong> Submit Multiple Times.</p>
+                <h3 style="color: green;">Whats next:</h3>
+                <p>
+                    <li>Please Arrive on Time.</li>
+                </p>
+                <p>
+                    <li>Please Carry A NoteBook And A Pen.</li>
+                </p>
+                <button id="doneButton" style="
+                background: green;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                margin-top: 15px;
+                cursor: pointer;
+            ">
+                    Done
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <!-- add supabase client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script>
+        (function () {
+            // init supabase client
+            const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
+            const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaWdna3FkZGJ5Z3B2bnZlaXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjQxMjAsImV4cCI6MjA3MDM0MDEyMH0.eDA5qFQKWlPDk6Z6N12yuhLPwxSJ_pavVy-N50A0xHk";
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+
+
+            const form = document.getElementById("registrationForm");
+            if (!form) return console.warn("Form #registrationForm not found.");
+
+            const btn = form.querySelector('button') || form.querySelector('input[type="submit"]');
+            if (btn) { try { btn.type = 'button'; } catch (e) { } btn.onclick = null; }
+
+            function clearErrors() {
+                form.querySelectorAll(".errorMessage").forEach(m => m.textContent = "");
+                form.querySelectorAll("input, select").forEach(f => f.style.backgroundColor = "");
+                const errorBox = document.getElementById("errorBox");
+                if (errorBox) errorBox.textContent = "";
+            }
+
+            function validateFields() {
+                clearErrors();
+                let isValid = true;
+                let firstErrorField = null;
+
+                // Helper to set error
+                function setError(field, message) {
+                    if (!field) return;
+                    const errorMsg = field.nextElementSibling;
+                    if (errorMsg && errorMsg.classList.contains("errorMessage")) {
+                        errorMsg.textContent = message;
+                    }
+                    field.style.backgroundColor = " rgba(255, 0, 0, 0.1)"; // light red background
+                    if (!firstErrorField) firstErrorField = field; // remember the first invalid field
+                    isValid = false;
+                }
+
+                // Full Name
+                const name = document.getElementById("participantName");
+                if (!name || !/^[A-Za-z\s'-]+$/.test(name.value.trim())) {
+                    setError(name, "Please enter a valid name.");
+                }
+
+                // Phone Number
+                const phone = document.getElementById("participantPhone");
+                if (!phone || !/^\d{9,15}$/.test(phone.value.trim())) {
+                    setError(phone, "Enter a valid phone number (9–15 digits).");
+                }
+
+                // // Email
+                // const email = document.getElementById("participantEmail");
+                // if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())) {
+                //     setError(email, "Enter a valid email address.");
+                // }
+
+                // Age
+                // const age = document.getElementById("participantAge");
+                // const ageVal = age ? Number(age.value) : NaN;
+                // if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
+                //     setError(age, "Enter a valid age.");
+                // }
+
+                // Gender
+                const gender = document.getElementById("participantGender");
+                if (!gender || gender.value === "") {
+                    setError(gender, "Please select a gender.");
+                }
+
+                // City / Area
+                const address = document.getElementById("participantAddress");
+                if (!address || address.value.trim().length < 2) {
+                    setError(address, "Enter your city or area.");
+                }
+
+                // Tajwid
+                const tajwid = document.getElementById("participantTajwid");
+                if (!tajwid || tajwid.value === "") {
+                    setError(tajwid, "Please select an option.");
+                }
+
+                // Referral
+                const referral = document.getElementById("participantReferral");
+                if (!referral || referral.value === "") {
+                    setError(referral, "Please select how you heard about us.");
+                }
+
+                // If there is an error, scroll to the first invalid field
+                if (firstErrorField) {
+                    firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+                    firstErrorField.focus();
+                }
+
+                return isValid;
+            }
+
+            // Show Submitted UI
+            function showSubmittedState() {
+                const modal = document.getElementById("successModal");
+                if (modal) {
+                    modal.style.display = "flex"; // show popup
+                }
+
+                // Done button click → redirect to index.html
+                const doneBtn = document.getElementById("doneButton");
+                if (doneBtn) {
+                    doneBtn.addEventListener("click", () => {
+                        window.location.href = ".././events.html";
+                    });
+                }
+            }
+
+
+
+            // Build payload matching your table columns
+            function buildPayload() {
+                return {
+                    event_id: 3, // fixed event ID for this form
+                    participant_name: (document.getElementById("participantName").value || "").trim() || null,
+                    participant_phone: (document.getElementById("participantPhone").value || "").trim() || null,
+                    participant_email: (document.getElementById("participantEmail").value || "").trim() || null,
+                    participant_age: Number(document.getElementById("participantAge").value) || null,
+                    participant_gender: (document.getElementById("participantGender").value || "").trim() || null,
+                    participant_address: (document.getElementById("participantAddress").value || "").trim() || null,
+                    participant_tajwid: (document.getElementById("participantTajwid").value || "").trim() || null,
+                    participant_referral: (document.getElementById("participantReferral").value || "").trim() || null,
+                    confirmed: true
+                };
+            }
+
+            // Insert into Supabase
+            async function insertRegistration(row) {
+                // row must be an object (matching columns). We insert as single-item array.
+                try {
+                    const { data, error } = await supabase
+                        .from("event_registrations")
+                        .insert([row]);
+
+                    if (error) {
+                        console.error("Supabase insert error:", error);
+                        return { ok: false, error };
+                    }
+                    console.log("Supabase insert success:", data);
+                    return { ok: true, data };
+                } catch (err) {
+                    console.error("Unexpected insert error:", err);
+                    return { ok: false, error: err };
+                }
+            }
+
+            // Main submit handler
+            async function handleSubmit(e) {
+                if (e && typeof e.preventDefault === "function") e.preventDefault();
+
+                const valid = validateFields();
+                if (!valid) {
+                    const errorBox = document.getElementById("errorBox");
+                    if (errorBox) { errorBox.textContent = "Please fix the errors and try again."; errorBox.style.color = "red"; }
+                    return false;
+                }
+
+                const payload = buildPayload();
+                console.log("Payload to send:", payload);
+
+                // show small UI change (optional)
+                if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+
+                const res = await insertRegistration(payload);
+
+                if (res.ok) {
+                    showSubmittedState();
+                } else {
+                    // Show error to user and re-enable button
+                    const errorBox = document.getElementById("errorBox");
+                    if (errorBox) {
+                        errorBox.textContent = "Failed to submit. Try again later.";
+                        errorBox.style.color = "red";
+                    }
+                    if (btn) { btn.disabled = false; btn.textContent = "Submit"; }
+                }
+
+                return false;
+            }
+
+            form.addEventListener("submit", handleSubmit);
+            if (btn) btn.addEventListener("click", handleSubmit);
+        })();
+
+
+
+        document.querySelector('.register-btn').addEventListener('click', function (e) {
+            e.preventDefault(); // prevent the default jump
+            document.querySelector('#register').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+    </script>
+
+
+
+</body>
+
+</html>

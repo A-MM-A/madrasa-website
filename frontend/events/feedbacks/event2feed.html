@@ -2,13 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta property="og:title" content="Dar Al Arqam – دار الأرقم">
+    <meta property="og:description"
+        content="For the Memorization of the Holy Quran and Islamic Education - لتحفيظ القران الكريم والتربية الإسلامية">
+    <meta property="og:image" content="https://dar-al-arqam.co.ke/media/slide1.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://dar-al-arqam.co.ke/">
+    <meta property="og:type" content="website">
     <title>Event Feedback</title>
 
-    <!-- FAVICON -->
-    <link rel="shortcut icon" href="../media/logo.ico" type="image/x-icon">
-    <link rel="icon" href="../media/logo.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
+    <link rel="icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,189 +43,44 @@
         }
 
         body {
+            /* production-ready: minimal, responsive font stack */
             margin: 0;
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            background: var(--bg);
-            color: #112;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-tap-highlight-color: transparent;
+            font-family: Arial, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            background: url('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/mororo2.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
 
-        /* TOPBAR */
-        .topbar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 12px 16px;
-            background: linear-gradient(90deg, #fff, #fbfffb);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            max-height: 70px;
-        }
-
-        .brand {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .brand img {
-            width: 48px;
-            height: auto;
-        }
-
-        .event-title {
-            font-weight: 600;
-            font-size: 16px;
-            color: #0b3b2a;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 48vw;
-        }
-
-
-        .event-title-sub {
-            color: var(--muted);
-            font-size: 13px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 48vw;
-        }
-
-        /* MAIN LAYOUT */
-        main.page {
-            max-width: 1000px;
-            margin: 16px auto;
-            padding: 0 14px 80px;
-        }
-
-        /* SECTION 1: GALLERY */
-        .gallery-section {
-            background: linear-gradient(180deg, #fff, var(--accent-2));
-            border-radius: 14px;
-            padding: 14px;
-            overflow: visible;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 16px;
-            transform: translateZ(0);
-        }
-
-        .gallery-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .gallery-head h3 {
-            margin: 0;
-            font-size: 16px;
-            color: #09361f
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-
-        .thumb {
-            position: relative;
-            background: #e8f3ea;
-            height: 140px;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform .28s cubic-bezier(.2, .8, .2, 1), box-shadow .28s;
-        }
-
-        .thumb img,
-        .thumb video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .thumb::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.06));
-            pointer-events: none;
-        }
-
-        .thumb:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 30px rgba(2, 35, 15, 0.12);
-        }
-
-        /* Animated decorative badge */
-        .gallery-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 10px;
-            border-radius: 999px;
-            background: rgba(43, 122, 75, 0.12);
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 13px;
-            animation: float 4s ease-in-out infinite;
-            width: max-content;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0)
-            }
-
-            50% {
-                transform: translateY(-6px)
-            }
-
-            100% {
-                transform: translateY(0)
-            }
-        }
-
-
-        /* Zoom Modal */
+        /* Zoom Modal (enlarged media) */
         #zoom-modal {
             display: none;
             position: fixed;
+            inset: 0;
             z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(12px);
-            background: rgba(255, 255, 255, 0.15);
-            justify-content: center;
             align-items: center;
-            padding: 0;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        #zoom-modal.show {
+            display: flex;
         }
 
         #zoom-content {
-            background: #fff;
-            border-radius: 8px;
+            width: 86%;
+            height: 66%;
+            max-width: 1000px;
+            border-radius: 14px;
             overflow: hidden;
+            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 80%;
-            height: 60%;
-            max-width: 900px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
         }
 
         #zoom-content img,
@@ -226,26 +88,351 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            display: block;
         }
-
 
         #zoom-close {
             position: absolute;
-            top: 15px;
+            top: 18px;
             right: 20px;
-            inline-size: 40px;
-            block-size: 40px;
+            width: 44px;
+            height: 44px;
             display: grid;
             place-items: center;
-            background: rgba(255, 255, 255, .6);
             border-radius: 50%;
             color: #000;
-            cursor: pointer;
-            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
             font-size: 22px;
-            line-height: 1;
-            padding: 0;
-            font-weight: 600;
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .event-banner {
+            width: fit-content;
+            height: 85vh;
+            overflow: hidden;
+            background-image: url('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/camp%205th%20edition.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            justify-self: center;
+            border-radius: 0 0 100px 100px;
+            color: #fff;
+        }
+
+        /* Dark overlay for readability */
+        .event-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-content {
+            position: relative;
+            border-radius: 10px;
+            z-index: 1;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .gallery-section {
+            background: #ffffffb4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .gallery-section h2 {
+            color: #a89007;
+            padding: 10px;
+            padding-left: 35px;
+            font-size: xx-large;
+            border-bottom: solid 2px #a89007;
+        }
+
+        .banner-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .gallery img,
+        .gallery video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Ensure videos keep a standard 16:9 ratio and cover their box */
+        .video-thumb {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+            display: block;
+        }
+
+        .video-thumb .thumb-video {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+        }
+
+        .video-thumb .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 42px;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.25));
+            opacity: 0;
+            transition: opacity .16s ease;
+        }
+
+        .video-thumb:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .gallery img:hover,
+        .gallery video:hover {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+
+
+
+
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            width: 400px;
+            border-radius: 12px;
+            position: relative;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+            color: rgb(0, 0, 0);
+            background: rgba(253, 253, 253, 0.26);
+            border-radius: 90px;
+            padding: 0 13px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: rgba(255, 0, 0, 0.8);
+        }
+
+
+
+
+
+
+
+
+        input {
+            resize: none;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: none;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            min-height: 120px;
+            font-size: 1rem;
+        }
+
+
+
+
+
+
+
+
+
+
+        button {
+            padding: 12px;
+            background: #7f6f06;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #a89007;
+            transform: scale(1.05);
+        }
+
+        .siteHeader {
+            background-color: #fef9e7;
+            border-bottom: 2px solid #7f6f06;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        .headerContent {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 100px;
+            margin-right: 15px;
+        }
+
+        .siteTitle {
+            font-size: 28px;
+            color: #9b8914;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .siteFooter {
+            background-color: #fef9e7;
+            color: #7f6f06;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-top: 2px solid #7f6f06;
+            font-size: 14px;
+        }
+
+        .siteFooter p {
+            margin-top: -10px;
+            padding: 5px;
+        }
+
+        .footerIconContainer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: -5px;
+            margin-bottom: 20px;
+            justify-self: center;
+            gap: 20px;
+        }
+
+        .footerIcon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 6px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .footerIcon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            border-radius: 50%;
+        }
+
+        .footerLink {
+            color: #7f6f06;
+        }
+
+        .contactContainer {
+            display: flex;
+            max-width: 400px;
+            justify-self: center;
+            justify-content: space-around;
+            gap: 10px;
+            margin-top: -10px;
+            padding: 5px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
 
@@ -269,7 +456,7 @@
         .feedback-head h3 {
             margin: 0;
             font-size: 16px;
-            color: #09361f;
+            color: #a89007;
         }
 
         .comments-list {
@@ -280,7 +467,7 @@
         }
 
         .comment {
-            background: linear-gradient(180deg, #ffffff, #fbfffb);
+            background: linear-gradient(180deg, #ffffff, #fff9da);
             border-radius: 10px;
             padding: 12px;
             box-shadow: 0 6px 18px rgba(4, 12, 8, 0.04);
@@ -302,12 +489,12 @@
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #d7f1e1, #bfe8d0);
+            background: linear-gradient(135deg, #eee8c6, #fcf5d1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            color: #06402a;
+            color: #d1c05d;
             flex-shrink: 0;
         }
 
@@ -324,7 +511,7 @@
 
         .c-name {
             font-weight: 700;
-            color: #0b3b2a;
+            color: #5f5101;
             margin-right: 10px;
         }
 
@@ -348,7 +535,7 @@
 
         .c-text {
             margin-top: 8px;
-            color: #243436;
+            color: #5f5101;
             line-height: 1.5;
             white-space: pre-wrap;
         }
@@ -368,6 +555,7 @@
             border-radius: 999px;
             background: var(--accent);
             color: #fff;
+            background-color: #a89007;
             border: none;
             font-size: 10px;
             letter-spacing: 3px;
@@ -430,13 +618,14 @@
             }
         }
 
+
         /* ######## like button */
         .like-btn {
             transition: transform 0.2s;
         }
 
         .like-btn.liked {
-            content: url("icons/heart-fill.svg");
+            content: url("../media/icons/heart-fill.svg");
             animation: bounce 0.3s;
         }
 
@@ -461,6 +650,18 @@
 
         .like-pill:hover {
             background: #8f8f8f48;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
         }
 
         .form-row {
@@ -593,85 +794,97 @@
 
 <body>
 
-    <!-- TOPBAR -->
-    <div class="topbar">
-        <div class="brand">
-            <a href="../index.html">
-                <img src="../media/logo.png" alt="logo">
-            </a>
-            <div>
-                <div class="event-title" id="topEventTitle">The Essentials of Islam - [Sisters Only]</div>
-                <div class="event-title-sub" id="eventDate">Aug 12-14, 2025 • Dar Al-Arqam</div>
-            </div>
+    <!-- HEADER -->
+    <header class="siteHeader">
+        <div class="headerContent">
+                <a href="../../events.html">
+                    <img src="../media/logo-gop.png" alt="Camp Logo" class="logo" />
+                </a>
+                <h1 class="siteTitle">Islamic Youth Camp - 5th Edition</h1>
         </div>
-        <!-- Right side: small controls (optional) -->
-        <div style="display:flex;align-items:center;gap:8px">
-            <a href="../index.html">
-                <button
-                    style="border:none;padding:8px 10px;border-radius:999px;background:#80dc3d;box-shadow:var(--card-shadow);cursor:default"
-                    title="Event ID">
-                    HOME
-                </button>
-            </a>
-        </div>
-    </div>
+    </header>
+
 
 
     <!-- MAIN -->
     <main class="page">
 
-        <!-- GALLERY SECTION -->
-        <section class="gallery-section" aria-labelledby="galleryHeading">
-            <div class="gallery-head">
-                <h3 id="galleryHeading">Event Gallery</h3>
-                <div style="display:flex;gap:8px;align-items:center">
-                    <span class="gallery-badge">Highlights</span>
-                </div>
+        <!-- 🖼️ Banner with overlay text -->
+        <div class="event-banner">
+            <div class="banner-content">
+                <h1>Islamic Youth Camp 5th Edition</h1>
+                <h1>Highlights</h1>
+                <p>The camp brought together young Muslims for days of learning, faith, and fun — with Qur’an, Seera,
+                    Akhlaq, sports, and life skills workshops that built unity, growth, and lasting friendships.</p>
             </div>
+        </div>
 
-            <div class="gallery-grid" id="galleryGrid">
+        <div class="container">
 
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomImage('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/event1.jpg')">
-                    <img src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/event1.jpg"
-                        alt="event photo 1">
-                </div>
+            <!-- 📸 Event Gallery -->
+            <section class="gallery-section">
+                <h2>Event Gallery</h2>
+                <div class="gallery">
+                    <div class="video-thumb"
+                        onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video1.mp4')">
+                        <video class="thumb-video" muted autoplay loop playsinline>
+                            <source
+                                src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video1.mp4"
+                                type="video/mp4">
+                        </video>
+                        <div class="play-overlay">▶</div>
+                        <div
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
+                    </div>
 
+                    <div class="video-thumb"
+                        onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video2.mp4')">
+                        <video class="thumb-video" muted autoplay loop playsinline>
+                            <source
+                                src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video2.mp4"
+                                type="video/mp4">
+                        </video>
+                        <div class="play-overlay">▶</div>
+                        <div
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
+                    </div>
 
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4')">
-                    <video autoplay muted loop playsinline preload="auto">
-                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day1.mp4">Watch
-                            the video here</a>.
-                    </video>
-                    <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
+                    <div class="video-thumb"
+                        onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video3.mp4')">
+                        <video class="thumb-video" muted autoplay loop playsinline>
+                            <source
+                                src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid2/video3.mp4"
+                                type="video/mp4">
+                        </video>
+                        <div class="play-overlay">▶</div>
+                        <div
+                            style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                            ▶ VIDEO
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="thumb" title="Click to view"
-                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4')">
-                    <video autoplay muted loop playsinline preload="auto">
-                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4"
-                            type="video/mp4">
-                        Your browser does not support the video tag.
-                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid1/day2.mp4">Watch
-                            the video here</a>.
-                    </video>
-                    <div
-                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
-                        ▶ VIDEO
-                    </div>
+            <!-- FEEDBACKS -->
+            <section class="feedback-section" aria-labelledby="feedbackHeading">
+                <div class="feedback-head">
+                    <h3 id="feedbackHeading">Event Feedback</h3>
+                    <div class="muted small" id="feedbackCount">0 comments</div>
                 </div>
 
-            </div>
+                <div class="comments-list" id="commentsList">
+                    <!-- comments inserted here by JS -->
+                </div>
+                <div style="margin-top:10px;color:var(--muted);font-size:13px">
+                    Tip: Tap the yellow button to add your comment & rating.
+                </div>
+            </section>
 
-        </section>
-
+        </div>
 
         <!-- Zoom Modal -->
         <div id="zoom-modal">
@@ -679,21 +892,6 @@
             <div id="zoom-content"></div>
         </div>
 
-
-        <!-- FEEDBACKS -->
-        <section class="feedback-section" aria-labelledby="feedbackHeading">
-            <div class="feedback-head">
-                <h3 id="feedbackHeading">Event Feedback</h3>
-                <div class="muted small" id="feedbackCount">0 comments</div>
-            </div>
-
-            <div class="comments-list" id="commentsList">
-                <!-- comments inserted here by JS -->
-            </div>
-            <div style="margin-top:10px;color:var(--muted);font-size:13px">
-                Tip: Tap the green button to add your comment & rating.
-            </div>
-        </section>
 
     </main>
 
@@ -745,13 +943,52 @@
     <!-- TOAST -->
     <div class="toast" id="toast">Saved</div>
 
+    <!-- FOOTER -->
+    <footer class="siteFooter">
+        <p><strong>Follow Us:</strong></p>
+        <div class="footerIconContainer">
+            <div><a href="https://www.facebook.com/share/1FwkFMQWmY/"><img src="../media/icons/facebook.svg"
+                        class="footerIcon" /></a></div>
+            <div><a href="https://www.instagram.com/generation_of_peace_kenya?igsh=MXFvemgwMmlqanR3Mw=="><img
+                        src="../media/icons/instagram.svg" class="footerIcon" /></a></div>
+            <div><a href="https://www.tiktok.com/@generation_of_peace?_t=ZM-8yRYi2r2v8n&_r=1"><img
+                        src="../media/icons/tiktok.svg" class="footerIcon" /></a></div>
+            <div><a href="https://youtube.com/@generationofpeace7663?si=-2xQdGRVDNRCdg_N"><img
+                        src="../media/icons/youtube.svg" class="footerIcon" /></a></div>
+        </div>
+
+        <a href="https://islamicyouthcamp.co.ke/events.html" class="footerLink">Home</a>
+        <br><br>
+        <a href="https://islamicyouthcamp.co.ke/privacy policy.html" class="footerLink">Privacy Policy</a>
+        <br><br>
+        <a href="https://islamicyouthcamp.co.ke/terms and conditions.html" class="footerLink">Terms & Conditions</a>
+        <br><br><br><br>
+
+        <p><strong>Contact Us:</strong></p>
+        <div class="contactContainer">
+            <div class="icon2Placement">
+                <div class="placement2">USTADH MUKHTAR</div>
+                <div class="placement2">+254715477222</div>
+            </div>
+            <div class="icon2Placement">
+                <div class="placement2">USTADH SALIM ALI</div>
+                <div class="placement2">+254721967020</div>
+            </div>
+            <div class="icon2Placement">
+                <div class="placement2">MUHAMMAD IMAM</div>
+                <div class="placement2">+254796046878</div>
+            </div>
+        </div>
+        <br>
+        <p>peacegeneration2015@gmail.com</p>
+        <p>Generation Of Peace - Mombasa, Kenya</p>
+    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
     <script>
-
-        // zoom functions
-
+        // Zoom functions
         function openZoomImage(imageSrc) {
             const modal = document.getElementById('zoom-modal');
             const content = document.getElementById('zoom-content');
@@ -759,44 +996,57 @@
             modal.style.display = 'flex';
         }
 
-        document.getElementById('zoom-close').onclick = function () {
-            document.getElementById('zoom-modal').style.display = 'none';
-            document.getElementById('zoom-content').innerHTML = '';
-        }
-
-        window.onclick = function (event) {
-            const modal = document.getElementById('zoom-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                document.getElementById('zoom-content').innerHTML = '';
-            }
-        }
-
         function openZoomVideo(videoSrc) {
             const modal = document.getElementById('zoom-modal');
             const content = document.getElementById('zoom-content');
-            content.innerHTML = `<video src="${videoSrc}" controls autoplay></video>`;
+            // clear previous
+            content.innerHTML = '';
+            // create video element with sound enabled
+            const v = document.createElement('video');
+            v.src = videoSrc;
+            v.controls = true;
+            v.autoplay = true;
+            v.playsInline = true;
+            v.muted = false; // enable sound in enlarged player
+            v.style.width = '100%';
+            v.style.height = '100%';
+            content.appendChild(v);
             modal.style.display = 'flex';
+            // try to play (user initiated by click so should succeed)
+            v.play().catch(() => { });
         }
 
-        document.getElementById('zoom-close').onclick = function () {
-            document.getElementById('zoom-modal').style.display = 'none';
-            document.getElementById('zoom-content').innerHTML = ''; // remove video to stop sound
-        }
-
-        window.onclick = function (event) {
+        function closeZoomModal() {
             const modal = document.getElementById('zoom-modal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                document.getElementById('zoom-content').innerHTML = '';
+            const content = document.getElementById('zoom-content');
+            if (content) {
+                const v = content.querySelector('video');
+                if (v && !v.paused) {
+                    try { v.pause(); } catch (e) { }
+                }
+                content.innerHTML = '';
             }
+            if (modal) modal.style.display = 'none';
         }
 
+        // close button
+        const zoomCloseBtn = document.getElementById('zoom-close');
+        if (zoomCloseBtn) zoomCloseBtn.addEventListener('click', closeZoomModal);
 
-        /***** CONFIG - REPLACE THESE *****/
+        // close when clicking outside zoom content
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('zoom-modal');
+            if (modal && event.target === modal) {
+                closeZoomModal();
+            }
+        });
+
+
+
+        /***** CONFIG  *****/
         const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaWdna3FkZGJ5Z3B2bnZlaXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjQxMjAsImV4cCI6MjA3MDM0MDEyMH0.eDA5qFQKWlPDk6Z6N12yuhLPwxSJ_pavVy-N50A0xHk";
-        const EVENT_ID = 1;
+        const EVENT_ID = 2;
         /**********************************/
 
         // init supabase client
@@ -815,25 +1065,22 @@
         const starPicker = document.getElementById('starPicker');
         const ratingPreview = document.getElementById('ratingPreview');
 
-        // LIGHTBOX refs
-        const lightbox = document.getElementById('lightbox');
-        const lightClose = document.getElementById('lightClose');
-        const lightContent = document.getElementById('lightContent');
-
-
 
         /*******************
          * STARS INTERACTIVE
          *******************/
         let selectedRating = 0;
-        starPicker.querySelectorAll('.star-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                selectedRating = Number(btn.dataset.value);
-                updateStarPicker(selectedRating);
+        if (starPicker) {
+            starPicker.querySelectorAll('.star-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectedRating = Number(btn.dataset.value);
+                    updateStarPicker(selectedRating);
+                });
             });
-        });
+        }
 
         function updateStarPicker(val) {
+            if (!starPicker) return;
             starPicker.querySelectorAll('.star-btn').forEach(b => {
                 b.classList.toggle('active', Number(b.dataset.value) <= val);
             });
@@ -843,35 +1090,42 @@
         /*******************
          * MODAL open/close
          *******************/
-        openAddBtn.addEventListener('click', () => {
-            openModal();
-        });
+        if (openAddBtn) {
+            openAddBtn.addEventListener('click', () => {
+                openModal();
+            });
+        }
 
         function openModal() {
+            if (!modalOverlay) return;
             modalOverlay.classList.add('open');
             modalOverlay.setAttribute('aria-hidden', 'false');
             // reset
-            inputName.value = '';
-            inputFeedback.value = '';
+            if (inputName) inputName.value = '';
+            if (inputFeedback) inputFeedback.value = '';
             selectedRating = 0;
             updateStarPicker(0);
-            setTimeout(() => inputName.focus(), 160);
+            setTimeout(() => { if (inputName) inputName.focus(); }, 160);
         }
 
         function closeModal() {
+            if (!modalOverlay) return;
             modalOverlay.classList.remove('open');
             modalOverlay.setAttribute('aria-hidden', 'true');
         }
 
         // close on overlay click
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) closeModal();
+            });
+        }
 
         /*******************
          * Toast helper
          *******************/
         function showToast(text = 'Saved') {
+            if (!toast) return;
             toast.textContent = text;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 2200);
@@ -905,17 +1159,19 @@
         }
 
         function renderNoDataNotice(msg) {
+            if (!commentsList) return;
             commentsList.innerHTML = `<div style="color:var(--muted);padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfffb)">${msg}</div>`;
-            feedbackCount.textContent = '0 comments';
+            if (feedbackCount) feedbackCount.textContent = '0 comments';
         }
 
         function renderComments(items) {
+            if (!commentsList) return;
             commentsList.innerHTML = '';
-            if (!items.length) {
+            if (!items || !items.length) {
                 renderNoDataNotice('No comments yet — Be the first to add feedback!');
                 return;
             }
-            feedbackCount.textContent = items.length + (items.length === 1 ? ' comment' : ' comments');
+            if (feedbackCount) feedbackCount.textContent = items.length + (items.length === 1 ? ' comment' : ' comments');
 
             items.forEach(item => {
                 const div = document.createElement('div');
@@ -932,7 +1188,7 @@
                 top.className = 'c-top';
 
                 const mid = document.createElement('div');
-                top.className = 'c-top';
+                mid.className = 'c-top';
 
                 const left = document.createElement('div');
                 left.style.display = 'flex';
@@ -974,7 +1230,7 @@
                 likePill.className = 'like-pill';
 
                 const likeBtn = document.createElement('img');
-                likeBtn.src = 'icons/heart-line.svg';
+                likeBtn.src = '../media/icons/heart-line.svg';
                 likeBtn.alt = 'Like';
                 likeBtn.style.width = '18px';
                 likeBtn.style.height = '18px';
@@ -1012,56 +1268,58 @@
         /*******************
          * PUBLISH comment
          *******************/
-        publishBtn.addEventListener('click', async () => {
-            const name = inputName.value.trim();
-            const feedback = inputFeedback.value.trim();
-            const rating = selectedRating || null;
+        if (publishBtn) {
+            publishBtn.addEventListener('click', async () => {
+                const name = (inputName && inputName.value || '').trim();
+                const feedback = (inputFeedback && inputFeedback.value || '').trim();
+                const rating = selectedRating || null;
 
-            // simple validation
-            if (!name) {
-                showToast('Please enter your name');
-                inputName.focus();
-                return;
-            }
-            if (!feedback) {
-                showToast('Please write your feedback');
-                inputFeedback.focus();
-                return;
-            }
-            // rating can be null per your schema but check constraints if needed
-            if (rating !== null && (rating < 1 || rating > 5)) {
-                showToast('Rating must be 1–5');
-                return;
-            }
-            publishBtn.disabled = true;
-            publishBtn.textContent = 'Publishing...';
+                // simple validation
+                if (!name) {
+                    showToast('Please enter your name');
+                    if (inputName) inputName.focus();
+                    return;
+                }
+                if (!feedback) {
+                    showToast('Please write your feedback');
+                    if (inputFeedback) inputFeedback.focus();
+                    return;
+                }
+                // rating can be null per your schema but check constraints if needed
+                if (rating !== null && (rating < 1 || rating > 5)) {
+                    showToast('Rating must be 1–5');
+                    return;
+                }
+                publishBtn.disabled = true;
+                publishBtn.textContent = 'Publishing...';
 
-            try {
-                // Insert into supabase
-                const payload = {
-                    event_id: EVENT_ID,
-                    name,
-                    rating,
-                    feedback
-                };
-                const { data, error } = await supabase
-                    .from('feedbacks')
-                    .insert([payload]);
+                try {
+                    // Insert into supabase
+                    const payload = {
+                        event_id: EVENT_ID,
+                        name,
+                        rating,
+                        feedback
+                    };
+                    const { data, error } = await supabase
+                        .from('feedbacks')
+                        .insert([payload]);
 
-                if (error) throw error;
+                    if (error) throw error;
 
-                showToast('Comment published');
-                closeModal();
-                // refresh list
-                await fetchFeedbacks();
-            } catch (err) {
-                console.error('publish error', err);
-                showToast('Publish failed');
-            } finally {
-                publishBtn.disabled = false;
-                publishBtn.textContent = 'Publish';
-            }
-        });
+                    showToast('Comment published');
+                    closeModal();
+                    // refresh list
+                    await fetchFeedbacks();
+                } catch (err) {
+                    console.error('publish error', err);
+                    showToast('Publish failed');
+                } finally {
+                    publishBtn.disabled = false;
+                    publishBtn.textContent = 'Publish';
+                }
+            });
+        }
 
         /*******************
          * INIT
@@ -1069,6 +1327,7 @@
         (function init() {
             fetchFeedbacks();
         })();
+
 
         //   Toggle like on a feedback comment
         async function toggleFeedbackLike(feedbackId, btn, countEl, pill) {

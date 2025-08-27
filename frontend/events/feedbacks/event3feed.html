@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta property="og:title" content="Dar Al Arqam – دار الأرقم">
+    <meta property="og:description"
+        content="For the Memorization of the Holy Quran and Islamic Education - لتحفيظ القران الكريم والتربية الإسلامية">
+    <meta property="og:image" content="https://dar-al-arqam.co.ke/media/slide1.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://dar-al-arqam.co.ke/">
+    <meta property="og:type" content="website">
+    <title>Event Feedback</title>
+
+    <link rel="shortcut icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
+    <link rel="icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Inline CSS (mobile-first) -->
+    <style>
+        :root {
+            --bg: #f7f9fb;
+            --panel: #ffffff;
+            --muted: #6b7280;
+            --accent: #2b7a4b;
+            /* primary green */
+            --accent-2: #eaf6ef;
+            --card-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+            --glass: rgba(255, 255, 255, 0.6);
+            --toast-bg: rgba(0, 0, 0, 0.85);
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            /* remove default spacing */
+            padding: 0;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, #ffffff, #3387c3d9);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #112;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            background: linear-gradient(90deg, #fff, #73ccadb5);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            max-height: 70px;
+        }
+
+        .brand {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .brand img {
+            width: 48px;
+            height: auto;
+        }
+
+        .event-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #0b3b2a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 48vw;
+        }
+
+
+        .event-title-sub {
+            color: var(--muted);
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 48vw;
+        }
+
+        /* MAIN LAYOUT */
+        main.page {
+            max-width: 1000px;
+            margin: 16px auto;
+            padding: 0 14px 80px;
+        }
+
+        /* SECTION 1: GALLERY */
+        .gallery-section {
+            background: linear-gradient(270deg, #cbdcca, #3387c3d9);
+            border-radius: 14px;
+            padding: 14px;
+            overflow: visible;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 16px;
+            transform: translateZ(0);
+        }
+
+        .gallery-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-head h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #09361f
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .thumb {
+            position: relative;
+            background: #e8f3ea;
+            height: 140px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .28s cubic-bezier(.2, .8, .2, 1), box-shadow .28s;
+        }
+
+        .thumb img,
+        .thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .thumb::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.06));
+            pointer-events: none;
+        }
+
+        .thumb:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(2, 35, 15, 0.12);
+        }
+
+        /* Animated decorative badge */
+        .gallery-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            background: rgba(190, 205, 196, 0.12);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 13px;
+            animation: float 4s ease-in-out infinite;
+            width: max-content;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-6px)
+            }
+
+            100% {
+                transform: translateY(0)
+            }
+        }
+
+
+        /* Zoom Modal */
+        #zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.15);
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+        #zoom-content {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 60%;
+            max-width: 900px;
+        }
+
+        #zoom-content img,
+        #zoom-content video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+
+        #zoom-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            inline-size: 40px;
+            block-size: 40px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .6);
+            border-radius: 50%;
+            color: #000;
+            cursor: pointer;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            font-size: 22px;
+            line-height: 1;
+            padding: 0;
+            font-weight: 600;
+        }
+
+
+        /* SECTION 2: FEEDBACKS */
+        .feedback-section {
+            background: linear-gradient(180deg, #e5f4e4, #3387c300);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: var(--card-shadow);
+            min-height: 220px;
+        }
+
+        .feedback-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .feedback-head h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #09361f;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .comment {
+            background: linear-gradient(90deg, #ffffff00, #99c599fe);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 6px 18px rgba(4, 12, 8, 0.04);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            position: relative;
+            overflow: hidden;
+            transform-origin: left center;
+            transition: transform .18s, box-shadow .18s;
+        }
+
+        .comment:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(2, 10, 6, 0.06);
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d7f1e1, #bfe8d0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #06402a;
+            flex-shrink: 0;
+        }
+
+        .c-body {
+            flex: 1;
+        }
+
+        .c-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .c-name {
+            font-weight: 700;
+            color: #0b3b2a;
+            margin-right: 10px;
+        }
+
+        .c-time {
+            font-size: 12px;
+            color: var(--muted);
+            margin-left: 6px;
+        }
+
+        .star-row {
+            display: inline-flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .star {
+            font-size: 20px;
+            color: #ffd166;
+            filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.5));
+        }
+
+        .c-text {
+            margin-top: 8px;
+            color: #243436;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        /* Floating add button */
+        .fab {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 120;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px;
+            height: 40px;
+            min-width: 56px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 10px;
+            letter-spacing: 3px;
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.16s ease, box-shadow 0.2s ease;
+        }
+
+        .fab i {
+            font-size: 20px;
+        }
+
+        /* Hover effect */
+        .fab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Pressed effect */
+        .fab:active {
+            transform: scale(0.96);
+        }
+
+        /* Modal (centered) for add comment */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            display: none;
+            z-index: 150;
+            align-items: center;
+            justify-content: center;
+            background: rgba(6, 8, 10, 0.45);
+            padding: 18px;
+        }
+
+        .modal-overlay.open {
+            display: flex
+        }
+
+        .modal-card {
+            width: 100%;
+            max-width: 720px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 24px 60px rgba(2, 8, 10, 0.12);
+            animation: slideUp .18s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(8px);
+                opacity: 0
+            }
+
+            to {
+                transform: none;
+                opacity: 1
+            }
+        }
+
+        /* ######## like button */
+        .like-btn {
+            transition: transform 0.2s;
+        }
+
+        .like-btn.liked {
+            content: url("../media/icons/heart-fill.svg");
+            animation: bounce 0.3s;
+        }
+
+        .like-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #8f8f8f8d;
+            /* light gray */
+            padding: 4px 10px;
+            border-radius: 9999px;
+            /* pill shape */
+            font-size: 13px;
+            color: #555;
+            margin-top: 8px;
+            margin-left: auto;
+            /* push it to the right */
+            width: fit-content;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .like-pill:hover {
+            background: #8f8f8f48;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .form-row input[type="text"],
+        textarea {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #e6e9eb;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .publish-btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* interactive star selector */
+        .star-picker {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .star-btn {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fbfbfb;
+            border: 1px solid #efefef;
+            font-size: 16px;
+            transition: transform .12s, background .12s;
+        }
+
+        .star-btn:hover {
+            transform: translateY(-4px)
+        }
+
+        .star-btn.active {
+            background: linear-gradient(135deg, #ffd76a, #ffb84d);
+            color: #2b1a00;
+            box-shadow: 0 6px 18px rgba(255, 160, 32, 0.12);
+        }
+
+        /* small helper */
+        .muted {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .small {
+            font-size: 13px
+        }
+
+        /* toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 92px;
+            background: var(--toast-bg);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+            z-index: 400;
+        }
+
+        .toast.show {
+            display: block;
+            animation: toastIn .18s;
+        }
+
+        @keyframes toastIn {
+            from {
+                transform: translate(-50%, 10px);
+                opacity: 0
+            }
+
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1
+            }
+        }
+
+        /* desktop tweaks */
+        @media(min-width:920px) {
+            main.page {
+                padding: 0 20px 120px
+            }
+
+            .gallery-grid {
+                gap: 14px;
+            }
+
+            .thumb {
+                height: 160px;
+                border-radius: 14px;
+            }
+
+            .comment {
+                padding: 16px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="brand">
+            <a href="../../index.html">
+                <img src="../media/logo-daa.png" alt="logo">
+            </a>
+            <div>
+                <div class="event-title" id="topEventTitle">Tahfatul-Atfal Tajwid</div>
+                <div class="event-title-sub" id="eventDate">Aug 30, 2025 • Dar Al-Arqam</div>
+            </div>
+        </div>
+        <!-- Right side: small controls (optional) -->
+        <div style="display:flex;align-items:center;gap:8px">
+            <a href="../../events.html">
+                <button
+                    style="border:none;padding:8px 10px;border-radius:999px;background:#80dc3d;box-shadow:var(--card-shadow);cursor:default"
+                    title="Event ID">
+                    HOME
+                </button>
+            </a>
+        </div>
+    </div>
+
+
+    <!-- MAIN -->
+    <main class="page">
+
+        <!-- GALLERY SECTION -->
+        <section class="gallery-section" aria-labelledby="galleryHeading">
+            <div class="gallery-head">
+                <h3 id="galleryHeading">Event Gallery</h3>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <span class="gallery-badge">Highlights</span>
+                </div>
+            </div>
+
+            <div class="gallery-grid" id="galleryGrid">
+
+                <div class="thumb" title="Click to view"
+                    onclick="openZoomImage('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/event3.jpg')">
+                    <img src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/event3.jpg"
+                        alt="event photo 1">
+                </div>
+
+
+                <!-- <div class="thumb" title="Click to view"
+                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day1.mp4')">
+                    <video autoplay muted loop playsinline preload="auto">
+                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day1.mp4"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day1.mp4">Watch
+                            the video here</a>.
+                    </video>
+                    <div
+                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                        ▶ VIDEO
+                    </div>
+                </div>
+
+                <div class="thumb" title="Click to view"
+                    onclick="openZoomVideo('https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day2.mp4')">
+                    <video autoplay muted loop playsinline preload="auto">
+                        <source src="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day2.mp4"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                        <a href="https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/events/eventid3/day2.mp4">Watch
+                            the video here</a>.
+                    </video>
+                    <div
+                        style="position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,0.5);color:#fff;padding:6px;border-radius:8px;font-size:13px">
+                        ▶ VIDEO
+                    </div>
+                </div> -->
+
+            </div>
+
+        </section>
+
+
+        <!-- Zoom Modal -->
+        <div id="zoom-modal">
+            <span id="zoom-close">×</span>
+            <div id="zoom-content"></div>
+        </div>
+
+
+        <!-- FEEDBACKS -->
+        <section class="feedback-section" aria-labelledby="feedbackHeading">
+            <div class="feedback-head">
+                <h3 id="feedbackHeading">Event Feedback</h3>
+                <div class="muted small" id="feedbackCount">0 comments</div>
+            </div>
+
+            <div class="comments-list" id="commentsList">
+                <!-- comments inserted here by JS -->
+            </div>
+            <div style="margin-top:10px;color:var(--muted);font-size:13px">
+                Tip: Tap the green button to add your comment & rating.
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING ADD BUTTON -->
+    <button class="fab" id="openAdd" title="Add Comment">
+        <i class="fa-solid fa-comment"></i> Add Feedback
+    </button>
+
+    <!-- ADD COMMENT MODAL -->
+    <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-label="Add comment">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                <h3 style="margin:0">Add Feedback</h3>
+                <button onclick="closeModal()"
+                    style="background:none;border:none;font-size:20px;cursor:pointer">✕</button>
+            </div>
+
+            <div class="form-row">
+                <label style="min-width:64px;color:var(--muted);">Name</label>
+                <input id="inputName" type="text" placeholder="Your full name" />
+            </div>
+
+            <div class="form-row" style="align-items:center">
+                <label style="min-width:64px;color:var(--muted);">Rating</label>
+                <div class="star-picker" id="starPicker">
+                    <button class="star-btn" data-value="1">★</button>
+                    <button class="star-btn" data-value="2">★</button>
+                    <button class="star-btn" data-value="3">★</button>
+                    <button class="star-btn" data-value="4">★</button>
+                    <button class="star-btn" data-value="5">★</button>
+                </div>
+                <div style="margin-left:10px" class="muted small" id="ratingPreview">0/5</div>
+            </div>
+
+            <div class="form-row" style="flex-direction:column;align-items:stretch;">
+                <label style="color:var(--muted);margin-bottom:6px">Feedback</label>
+                <textarea id="inputFeedback"
+                    placeholder="Write your thoughts, what you liked, suggestions..."></textarea>
+            </div>
+
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+                <button onclick="closeModal()"
+                    style="background:#f3f4f6;border:none;padding:10px 14px;border-radius:8px;cursor:pointer">Cancel</button>
+                <button class="publish-btn" id="publishBtn">Publish</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">Saved</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script>
+
+        // zoom functions
+
+        function openZoomImage(imageSrc) {
+            const modal = document.getElementById('zoom-modal');
+            const content = document.getElementById('zoom-content');
+            content.innerHTML = `<img src="${imageSrc}" alt="Zoomed Image">`;
+            modal.style.display = 'flex';
+        }
+
+        document.getElementById('zoom-close').onclick = function () {
+            document.getElementById('zoom-modal').style.display = 'none';
+            document.getElementById('zoom-content').innerHTML = '';
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('zoom-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.getElementById('zoom-content').innerHTML = '';
+            }
+        }
+
+        function openZoomVideo(videoSrc) {
+            const modal = document.getElementById('zoom-modal');
+            const content = document.getElementById('zoom-content');
+            content.innerHTML = `<video src="${videoSrc}" controls autoplay></video>`;
+            modal.style.display = 'flex';
+        }
+
+        document.getElementById('zoom-close').onclick = function () {
+            document.getElementById('zoom-modal').style.display = 'none';
+            document.getElementById('zoom-content').innerHTML = ''; // remove video to stop sound
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('zoom-modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.getElementById('zoom-content').innerHTML = '';
+            }
+        }
+
+
+        /***** CONFIG - REPLACE THESE *****/
+        const SUPABASE_URL = "https://dsiggkqddbygpvnveiwv.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzaWdna3FkZGJ5Z3B2bnZlaXd2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3NjQxMjAsImV4cCI6MjA3MDM0MDEyMH0.eDA5qFQKWlPDk6Z6N12yuhLPwxSJ_pavVy-N50A0xHk";
+        const EVENT_ID = 3;
+        /**********************************/
+
+        // init supabase client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ELEMENT refs
+        const commentsList = document.getElementById('commentsList');
+        const feedbackCount = document.getElementById('feedbackCount');
+        const toast = document.getElementById('toast');
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const openAddBtn = document.getElementById('openAdd');
+        const publishBtn = document.getElementById('publishBtn');
+        const inputName = document.getElementById('inputName');
+        const inputFeedback = document.getElementById('inputFeedback');
+        const starPicker = document.getElementById('starPicker');
+        const ratingPreview = document.getElementById('ratingPreview');
+
+        // LIGHTBOX refs
+        const lightbox = document.getElementById('lightbox');
+        const lightClose = document.getElementById('lightClose');
+        const lightContent = document.getElementById('lightContent');
+
+
+
+        /*******************
+         * STARS INTERACTIVE
+         *******************/
+        let selectedRating = 0;
+        starPicker.querySelectorAll('.star-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedRating = Number(btn.dataset.value);
+                updateStarPicker(selectedRating);
+            });
+        });
+
+        function updateStarPicker(val) {
+            starPicker.querySelectorAll('.star-btn').forEach(b => {
+                b.classList.toggle('active', Number(b.dataset.value) <= val);
+            });
+            ratingPreview.textContent = (val || 0) + '/5';
+        }
+
+        /*******************
+         * MODAL open/close
+         *******************/
+        openAddBtn.addEventListener('click', () => {
+            openModal();
+        });
+
+        function openModal() {
+            modalOverlay.classList.add('open');
+            modalOverlay.setAttribute('aria-hidden', 'false');
+            // reset
+            inputName.value = '';
+            inputFeedback.value = '';
+            selectedRating = 0;
+            updateStarPicker(0);
+            setTimeout(() => inputName.focus(), 160);
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            modalOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        // close on overlay click
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        /*******************
+         * Toast helper
+         *******************/
+        function showToast(text = 'Saved') {
+            toast.textContent = text;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        /*******************
+         * FETCH & RENDER COMMENTS
+         *******************/
+        async function fetchFeedbacks() {
+            if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+                console.warn('Supabase config missing — replace SUPABASE_URL and SUPABASE_ANON_KEY.');
+                renderNoDataNotice('Supabase not configured');
+                return;
+            }
+
+            try {
+                // fetch only this EVENT_ID
+                const { data, error } = await supabase
+                    .from('feedbacks')
+                    .select('id, name, rating, feedback, created_at')
+                    .eq('event_id', EVENT_ID)
+                    .order('rating', { ascending: false });
+
+                if (error) throw error;
+
+                renderComments(data || []);
+            } catch (err) {
+                console.error('fetchFeedbacks error', err);
+                renderNoDataNotice('Failed to load feedbacks');
+            }
+        }
+
+        function renderNoDataNotice(msg) {
+            commentsList.innerHTML = `<div style="color:var(--muted);padding:14px;border-radius:10px;background:linear-gradient(180deg,#fff,#fbfffb)">${msg}</div>`;
+            feedbackCount.textContent = '0 comments';
+        }
+
+        function renderComments(items) {
+            commentsList.innerHTML = '';
+            if (!items.length) {
+                renderNoDataNotice('No comments yet — Be the first to add feedback!');
+                return;
+            }
+            feedbackCount.textContent = items.length + (items.length === 1 ? ' comment' : ' comments');
+
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'comment';
+
+                const avatar = document.createElement('div');
+                avatar.className = 'avatar';
+                avatar.textContent = (item.name || 'U').split(' ').map(n => n[0] || '').slice(0, 2).join('').toUpperCase();
+
+                const body = document.createElement('div');
+                body.className = 'c-body';
+
+                const top = document.createElement('div');
+                top.className = 'c-top';
+
+                const mid = document.createElement('div');
+                top.className = 'c-top';
+
+                const left = document.createElement('div');
+                left.style.display = 'flex';
+                left.style.alignItems = 'center';
+                left.style.gap = '10px';
+
+                const nameEl = document.createElement('div');
+                nameEl.className = 'c-name';
+                nameEl.textContent = item.name || 'Anonymous';
+
+                const timeEl = document.createElement('div');
+                timeEl.className = 'c-time';
+                const date = new Date(item.created_at || Date.now());
+                timeEl.textContent = date.toLocaleString();
+
+                left.appendChild(nameEl);
+                // left.appendChild(timeEl);
+
+                const stars = document.createElement('div');
+                stars.className = 'star-row';
+                const r = Number(item.rating) || 0;
+                for (let i = 1; i <= 5; i++) {
+                    const s = document.createElement('span');
+                    s.className = 'star';
+                    s.innerHTML = i <= r ? '★' : '☆';
+                    stars.appendChild(s);
+                }
+
+                top.appendChild(left);
+                top.appendChild(stars);
+                mid.appendChild(timeEl);
+
+                const text = document.createElement('div');
+                text.className = 'c-text';
+                text.textContent = item.feedback || '';
+
+                // --- Like button row ---
+                const likePill = document.createElement('div');
+                likePill.className = 'like-pill';
+
+                const likeBtn = document.createElement('img');
+                likeBtn.src = '../media/icons/heart-line.svg';
+                likeBtn.alt = 'Like';
+                likeBtn.style.width = '18px';
+                likeBtn.style.height = '18px';
+                likeBtn.style.cursor = 'pointer';
+                likeBtn.classList.add('like-btn');
+
+                const likeCount = document.createElement('span');
+                likeCount.className = 'like-count';
+                likeCount.textContent = '0 likes';
+
+                likePill.appendChild(likeBtn);
+                likePill.appendChild(likeCount);
+
+                body.appendChild(top);
+                body.appendChild(mid);
+                body.appendChild(text);
+                body.appendChild(likePill);
+
+                div.appendChild(avatar);
+                div.appendChild(body);
+
+                // Attach logic
+                likePill.addEventListener('click', async () => {
+                    await toggleFeedbackLike(item.id, likeBtn, likeCount, likePill);
+                });
+                // Initialize UI (count + liked state for this browser)
+                initLikeUI(item.id, likeBtn, likeCount, likePill);
+
+
+
+                commentsList.appendChild(div);
+            });
+        }
+
+        /*******************
+         * PUBLISH comment
+         *******************/
+        publishBtn.addEventListener('click', async () => {
+            const name = inputName.value.trim();
+            const feedback = inputFeedback.value.trim();
+            const rating = selectedRating || null;
+
+            // simple validation
+            if (!name) {
+                showToast('Please enter your name');
+                inputName.focus();
+                return;
+            }
+            if (!feedback) {
+                showToast('Please write your feedback');
+                inputFeedback.focus();
+                return;
+            }
+            // rating can be null per your schema but check constraints if needed
+            if (rating !== null && (rating < 1 || rating > 5)) {
+                showToast('Rating must be 1–5');
+                return;
+            }
+            publishBtn.disabled = true;
+            publishBtn.textContent = 'Publishing...';
+
+            try {
+                // Insert into supabase
+                const payload = {
+                    event_id: EVENT_ID,
+                    name,
+                    rating,
+                    feedback
+                };
+                const { data, error } = await supabase
+                    .from('feedbacks')
+                    .insert([payload]);
+
+                if (error) throw error;
+
+                showToast('Comment published');
+                closeModal();
+                // refresh list
+                await fetchFeedbacks();
+            } catch (err) {
+                console.error('publish error', err);
+                showToast('Publish failed');
+            } finally {
+                publishBtn.disabled = false;
+                publishBtn.textContent = 'Publish';
+            }
+        });
+
+        /*******************
+         * INIT
+         *******************/
+        (function init() {
+            fetchFeedbacks();
+        })();
+
+        //   Toggle like on a feedback comment
+        async function toggleFeedbackLike(feedbackId, btn, countEl, pill) {
+            try {
+                // Check if already liked (we infer via CSS class)
+                const liked = btn.classList.contains('liked');
+                const clientId = getClientId();
+
+                if (!liked) {
+                    // Insert like tied to this browser
+                    const { error } = await supabase
+                        .from('feedback_likes')
+                        .insert([{ event_id: EVENT_ID, feedback_id: feedbackId, client_id: clientId }])
+                        .select('id')
+                        .single();
+                    // If unique violation occurs (already liked), just treat as liked
+                    if (error && error.code !== '23505') throw error;
+                    setLikeVisual(btn, pill, true);
+
+                } else {
+                    // Remove THIS browser’s like only
+                    const { error } = await supabase
+                        .from('feedback_likes')
+                        .delete()
+                        .eq('feedback_id', feedbackId)
+                        .eq('client_id', clientId);
+                    if (error) throw error;
+                    setLikeVisual(btn, pill, false);
+                }
+                // Refresh like count
+                fetchCommentLike(feedbackId, countEl);
+            } catch (err) {
+                console.error('toggleFeedbackLike error', err);
+                showToast('Like action failed');
+            }
+        }
+
+        // Fetch and display like count for a feedback comment
+        async function fetchCommentLike(feedbackId, countEl) {
+            try {
+                const { count, error } = await supabase
+                    .from('feedback_likes')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('feedback_id', feedbackId);
+                if (error) throw error;
+                countEl.textContent = `${count} like${count === 1 ? '' : 's'}`;
+            } catch (err) {
+                console.error('fetchCommentLike error', err);
+                countEl.textContent = '0 likes';
+            }
+        }
+
+        // Initialize like UI elements for a feedback comment
+        async function initLikeUI(feedbackId, btn, countEl, pill) {
+            // Update the count first
+            await fetchCommentLike(feedbackId, countEl);
+            // Check if THIS browser has liked it
+            try {
+                const clientId = getClientId();
+                const { data, error } = await supabase
+                    .from('feedback_likes')
+                    .select('id')
+                    .eq('feedback_id', feedbackId)
+                    .eq('client_id', clientId)
+                    .maybeSingle();
+                if (!error) {
+                    setLikeVisual(btn, pill, !!data);
+                }
+            } catch (e) {
+                console.warn('initLikeUI check failed', e);
+            }
+        }
+
+        // Persistent per-browser ID for anonymous likes
+        function getClientId() {
+            try {
+                let id = localStorage.getItem('iyc_client_id');
+                if (!id) {
+                    id = (crypto?.randomUUID?.() || Math.random().toString(36).slice(2));
+                    localStorage.setItem('iyc_client_id', id);
+                }
+                return id;
+            } catch {
+                // localStorage might be blocked; fall back to session-only ID
+                return (crypto?.randomUUID?.() || Math.random().toString(36).slice(2));
+            }
+        }
+
+        function setLikeVisual(btn, pill, liked) {
+            if (liked) {
+                btn.classList.add('liked');
+                if (pill) pill.classList.add('liked');
+            } else {
+                btn.classList.remove('liked');
+                if (pill) pill.classList.remove('liked');
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
