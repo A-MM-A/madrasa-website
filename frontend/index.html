@@ -98,6 +98,8 @@
                         character.</p>
                 </div>
 
+                <!-- slide show by js -->
+
                 <!-- Buttons -->
                 <div class="hero-buttons">
                     <a href="#" class="btn primary" onclick="openEnrollModal(event)">Get Started</a>
@@ -191,9 +193,13 @@
     </footer>
 
 
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
+    
     <script>
         (function () {
             const hero = document.getElementById('hero');
+
             const imageCount = 46;
             const baseURL = 'https://9uetbnkctqcjnah0.public.blob.vercel-storage.com/home/hero/';
             let skipImages = [5, 7, 18, 22]; // optional blacklist
@@ -207,27 +213,43 @@
             }
 
             let current = 0, timer;
+            let preloaded = {};
+
+            // Preload a single image
+            function preloadImage(url) {
+                if (preloaded[url]) return;
+                const img = new Image();
+                img.src = url;
+                img.onload = () => preloaded[url] = true;
+                img.onerror = () => preloaded[url] = false; // still mark to avoid retries
+            }
+
+            // Preload the next N images ahead of current
+            function preloadNext(n = 2) {
+                for (let i = 1; i <= n; i++) {
+                    let idx = (current + i) % images.length;
+                    preloadImage(images[idx]);
+                }
+            }
 
             function show(index) {
                 current = (index + images.length) % images.length;
+                let url = images[current];
 
                 // Start fade out
                 hero.classList.add('fading');
 
-                // Wait for fade-out to finish before swapping
                 setTimeout(() => {
-                    hero.style.setProperty('--bg-image', `url('${images[current]}')`);
-                    // Fade back in
+                    hero.style.setProperty('--bg-image', `url('${url}')`);
                     hero.classList.remove('fading');
-                }, 1500); // match the CSS transition duration
+
+                    // After showing, preload next few
+                    preloadNext(3);
+                }, 1500); // match your CSS transition
             }
 
-            function next() {
-                show(current + 1);
-            }
-            function prev() {
-                show(current - 1);
-            }
+            function next() { show(current + 1); }
+            function prev() { show(current - 1); }
 
             // Swipe detection
             let startX = 0;
@@ -249,14 +271,15 @@
                 if (diff < -50) next();
             });
 
-            // Start slideshow
-            show(0);
+            // Start slideshow with first image
+            preloadImage(images[0]); // ensure first one loads
+            hero.style.setProperty('--bg-image', `url('${images[0]}')`);
+            preloadNext(3); // preload next few
+
             timer = setInterval(next, 5000);
         })();
     </script>
 
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-    <script src="script.js"></script>
 </body>
 
 </html>
