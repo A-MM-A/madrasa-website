@@ -7,12 +7,12 @@
     <meta property="og:title" content="Dar Al Arqam – دار الأرقم">
     <meta property="og:description"
         content="For the Memorization of the Holy Quran and Islamic Education - لتحفيظ القران الكريم والتربية الإسلامية">
-    <meta property="og:image" content="https://dar-al-arqam.co.ke/events/media/event3banner.jpg">
+    <meta property="og:image" content="https://dar-al-arqam.co.ke/events/media/event4banner.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://dar-al-arqam.co.ke/">
     <meta property="og:type" content="website">
-    <title>Tuhfatul-Atfal Tajwid</title>
+    <title>Kids Seerah Workshop</title>
 
     <link rel="shortcut icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
     <link rel="icon" href="https://dar-al-arqam.co.ke/media/logo.ico" type="image/x-icon">
@@ -34,7 +34,7 @@
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: url('media/event3wall.jpg') no-repeat center center fixed;
+            background: url('media/event4wall.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #3a3a3f;
             margin: 0;
@@ -162,28 +162,41 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+
+        /* registration form */
+        fieldset {
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+
+        legend {
+            font-weight: bold;
+            padding: 0 10px;
+            font-size: 15px;
+            color: #333;
+            background-color: #6bd8eb;
+            border-radius: 5px;
         }
 
         label {
-            padding-left: 10px;
-            margin-bottom: -13px;
+            display: block;
+            margin-top: 15px;
             font-weight: 500;
+            color: #222;
         }
 
-        form input,
-        form select,
-        form button {
-            padding: 0.75rem;
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        form>h2 {
-            margin-bottom: -5px;
+            border-radius: 6px;
+            font-size: 0.95em;
+            box-sizing: border-box;
         }
 
         textarea {
@@ -195,24 +208,71 @@
             background-color: #fafafa;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #20b181;
-            background-color: #f5fdfb;
-        }
-
-        form button {
+        button {
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             background: #089e85;
             color: white;
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        form button:hover {
+        button:hover {
             background: #119191;
         }
+
+        .payment-info {
+            background-color: #e9f5ff;
+            /* very light blue */
+            border: 1px solid #b3d9ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            /* center li */
+        }
+
+        .payment-info-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #09cb20;
+            margin-bottom: 12px;
+        }
+
+        .payment-info-label img {
+            width: 70px;
+            height: auto;
+        }
+
+        .payment-info li {
+            list-style: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #222;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 425px) {
+            .payment-info-label {
+                font-size: 15px;
+                gap: 5px;
+            }
+
+            .payment-info-label img {
+                width: 50px;
+            }
+
+            .payment-info li {
+                font-size: 1em;
+            }
+        }
+
+
 
         .errorMessage {
             color: red;
@@ -271,6 +331,8 @@
             border-radius: 50%;
         }
 
+
+        /* whatsapp button */
         .whatsapp {
             height: 45px;
             width: 45px;
@@ -324,7 +386,7 @@
 
 <body>
 
-    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
+    <div style="display: none; justify-content: center; align-items: center; flex-direction: column; height: 100vh;">
         <h1>Event Not Found</h1>
         <a href="../">
             <button style="padding: 10px 20px; border: none; background: #028433; color: white; border-radius: 10px;">
@@ -335,7 +397,7 @@
 
 
 
-    <div class="container" style="display: none;">
+    <div class="container" style="display: block;">
 
         <!-- header -->
         <header class="hero">
@@ -343,7 +405,7 @@
             <div class="logo-container">
                 <div class="logo">
                     <a href="../events.html">
-                        <img src="media/logo-daa.png" alt="Event Flyer" />
+                        <img src="media/logo-daa.png" alt="DAA LOGO" />
                     </a>
                 </div>
 
@@ -351,14 +413,14 @@
 
                 <div class="logo2">
                     <a href="https://www.generationofpeace.co.ke/" target="_blank" title="Generation of Peace">
-                        <img src="media/logo-gop.png" alt="Event Flyer" />
+                        <img src="media/logo-gop.png" alt="GOP LOGO" />
                     </a>
                 </div>
             </div>
 
 
-            <img src="media/event3.jpg" alt="Tuhfatul-Atfal Tajwid" />
-            <p class="subtitle">Tuhfatul-Atfal Tajwid</p>
+            <img src="media/event4.jpg" alt="Kids Seerah Workshop" />
+            <p class="subtitle">Kids Seerah Workshop</p>
             <a href="#register" class="register-btn">Register Now</a>
         </header>
 
@@ -376,20 +438,20 @@
             <div class="icon-container">
                 <img src="media/icons/calendar.svg" class="icon" alt="Calendar icon" />
                 <div class="icon-description">
-                    <p>30th Aug 2025 - 7th Rabiul Awwal 1447</p>
+                    <p>6th Sep 2025 - 13th Rabiul Awwal 1447</p>
                     <p>Saturday</p>
                 </div>
             </div>
             <div class="icon-container">
                 <img src="media/icons/clock.svg" class="icon" alt="Clock icon" />
                 <div class="icon-description">
-                    <p>08:00 am – 12:30 pm</p>
+                    <p>02:00 pm – 06:00 pm</p>
                 </div>
             </div>
             <div class="icon-container">
                 <img src="media/icons/money.svg" class="icon" alt="Fee icon" />
                 <div class="icon-description">
-                    <p>FREE</p>
+                    <p>Ksh. <strong>500</strong></p>
                 </div>
             </div>
         </section>
@@ -397,87 +459,153 @@
 
         <!-- More details -->
         <section class="section">
-            <h2>Join us for:</h2>
+            <h2>Activities:</h2>
             <ul class="topics">
-                <li>A session on learning Tajwid</li>
-                <li>Covering the book:</li>
-                <li>"<i>Tuhfatul Atfal Katika Tajwidi ya Qur'an</i>"</li>
-
+                <li> ● Seerah Stories & Life Lessons</li>
+                <li> ● Arts, Crafts & Coloring</li>
+                <li> ● Interactive Quizzes & Games</li>
+                <li> ● Nasheeds & Short Surah Recitations</li>
+                <li> ● Learning Du′as & Sannah Habits</li>
             </ul>
 
-            <h2>Speaker:</h2>
+            <!--<h2>Speaker:</h2>
             <div class="speaker" style="text-align:center;">
                 <div class="icon-container">
                     <div class="p-deco2">
                         <p>Sheikh Hamza bin Sheikh Abdulrahman</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
 
 
         <!-- Registration Form -->
         <section class="section" id="register">
-            <h2>Register Now</h2>
+            <h2>Registration Form</h2>
             <form id="registrationForm">
 
-                <label>Full Name <span style="color: red;">*</span></label>
-                <input type="text" placeholder="E.g Muhammad Ali" id="participantName" name="participantName" required
-                    pattern="[A-Za-z\s'-]+" />
-                <small class="errorMessage"></small>
+                <!-- 1. Parent/Guardian Information -->
+                <fieldset>
+                    <legend>Parent / Guardian Information</legend>
 
-                <label style="display: inline-flex; align-items: center; gap: 5px;">
-                    <img src="media/icons/whatsapp.svg" alt="whatsapp"
-                        style="width:20px; height:auto; margin-right: 5px;">
-                    Phone Number <span style="color:red;">*</span>
-                </label>
-                <input type="tel" placeholder="E.g 0722xxxxxx" id="participantPhone" name="participantPhone" required />
-                <small class="errorMessage"></small>
+                    <label>Full Name <span style="color:red">*</span></label>
+                    <input type="text" name="parentName" placeholder="E.g. Muhammad Ali" pattern="[A-Za-z\s'-]+" />
+                    <small class="errorMessage"></small>
 
+                    <label>Phone Number <span style="color:red">*</span></label>
+                    <input type="tel" name="parentPhone" placeholder="E.g. 0722xxxxxx" />
+                    <small class="errorMessage"></small>
 
-                <label>Email Address</label>
-                <input type="email" placeholder="E.g example@mail.com" id="participantEmail" name="participantEmail"
-                    required />
-                <small class="errorMessage"></small>
+                    <label>WhatsApp Number (Optional)</label>
+                    <input type="tel" name="parentWhatsapp" placeholder="E.g. 0722xxxxxx" />
+                    <small class="errorMessage"></small>
 
-                <label>Age</label>
-                <input type="number" placeholder="E.g 18" id="participantAge" name="participantAge" required />
-                <small class="errorMessage"></small>
+                    <label>Email Address (Optional)</label>
+                    <input type="email" name="parentEmail" placeholder="E.g. example@mail.com" />
+                    <small class="errorMessage"></small>
+                </fieldset>
 
-                <label>Gender <span style="color: red;">*</span> </label>
-                <select id="participantGender" name="participantGender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                <small class="errorMessage"></small>
+                <!-- 2. Child Information -->
+                <fieldset>
+                    <legend>Child Information</legend>
 
-                <label>City / Area of Residence <span style="color: red;">*</span></label>
-                <input type="text" id="participantAddress" name="participantAddress" placeholder="E.g Majengo"
-                    required />
-                <small class="errorMessage"></small>
+                    <label>Child's Full Name <span style="color:red">*</span></label>
+                    <input type="text" name="childName" placeholder="E.g. Ali Muhammad" />
+                    <small class="errorMessage"></small>
 
-                <label>Have you studied Tajwid before? <span style="color: red;">*</span> </label>
-                <select id="participantTajwid" name="participantTajwid" required>
-                    <option value="">Select Option</option>
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-                <small class="errorMessage"></small>
+                    <label>Age <span style="color:red">*</span></label>
+                    <select name="childAge">
+                        <option value="">Select Age</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <small class="errorMessage"></small>
 
-                <label>How did you hear about this event? <span style="color: red;">*</span> </label>
-                <select id="participantReferral" name="participantReferral" required>
-                    <option value="">Select Option</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="whatsapp">WhatsApp</option>
-                    <option value="friend">Friend</option>
-                    <option value="Mosque">Mosque</option>
-                    <option value="other">Other</option>
-                </select>
-                <small class="errorMessage"></small>
+                    <label>Gender <span style="color:red">*</span></label>
+                    <select name="childGender">
+                        <option value="">Select Gender</option>
+                        <option value="boy">Boy</option>
+                        <option value="girl">Girl</option>
+                    </select>
+                    <small class="errorMessage"></small>
 
+                    <label>Madrasa Attended</label>
+                    <input type="text" name="childMadrasa" placeholder="E.g. Al-Falah Madrasa" />
+                    <small class="errorMessage"></small>
+
+                    <label>School Attended</label>
+                    <input type="text" name="childSchool" placeholder="E.g. Greenfield Primary" />
+                    <small class="errorMessage"></small>
+                </fieldset>
+
+                <!-- 3. Emergency Contact -->
+                <fieldset>
+                    <legend>Emergency Contact</legend>
+
+                    <label>Name</label>
+                    <input type="text" name="emergencyName" placeholder="E.g. Aunty Aisha" />
+                    <small class="errorMessage"></small>
+
+                    <label>Phone Number</label>
+                    <input type="tel" name="emergencyPhone" placeholder="E.g. 0722xxxxxx" />
+                    <small class="errorMessage"></small>
+                </fieldset>
+
+                <!-- 4. Special Needs / Allergies -->
+                <fieldset>
+                    <legend>Special Needs / Allergies</legend>
+                    <textarea name="specialNeeds" rows="3" placeholder="Please specify if any"></textarea>
+                </fieldset>
+
+                <!-- 5. How did you hear about this ? -->
+                <fieldset>
+                    <legend>How did you hear about this?</legend>
+                    <select name="referral">
+                        <option value="">Select Option</option>
+                        <option value="poster">Poster / Flyer</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="socialMedia">Facebook / Instagram</option>
+                        <option value="friend">Friend / Relative</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <small class="errorMessage"></small>
+                </fieldset>
+
+                <!-- 6. Consent & Agreement -->
+                <fieldset>
+                    <legend>Consent & Agreement</legend>
+                    <label>
+                        I consent to my child’s participation in the workshop and agree that photos/videos taken may be
+                        used for educational and promotional purposes.
+                    </label>
+                    <input style="width: 20px; height: 20px; display: block; margin: 0 auto;" type="checkbox"
+                        name="consent" />
+                    <small style="margin-top: 10px;" class="errorMessage"></small>
+                </fieldset>
+
+                <!-- 7. Payment Confirmation -->
+                <fieldset>
+                    <legend>Payment Confirmation</legend>
+                    <div class="payment-info">
+                        <label class="payment-info-label">
+                            <img src="media/icons/mpesa.svg" alt="">
+                            : Send Money
+                        </label>
+                        <li>0740600220 - FATMA BASHEIKH</li>
+                    </div>
+                    <label>Enter M-Pesa Transaction Code <span style="color:red">*</span></label>
+                    <textarea name="mpesaCode"
+                        placeholder="E.g. THX1XX2X3X3 Confirmed. Ksh 500.00 paid to FATMA BASHEIKH. on 00/0/25 at 0:00 PM. New M-PESA balance is Ksh 0.00. Transaction cost, Ksh0.00."
+                        style="height: 150px; font-size: 12px;"></textarea>
+                    <small class="errorMessage"></small>
+                </fieldset>
 
                 <button type="submit">Submit</button>
+
             </form>
         </section>
 
@@ -489,7 +617,7 @@
                 <img src="media/icons/telephone.svg" class="icon" alt="Phone icon" />
                 <div>
                     <p>+254 740 600 220</p>
-                    <p>+254 756 600 220</p>
+                    <p>+254 715 477 222</p>
                 </div>
             </div>
             <div class="contact-info">
@@ -550,10 +678,10 @@
                 <p style="color: rgb(206, 120, 74);">Do <strong>NOT</strong> Submit Multiple Times.</p>
                 <h3 style="color: green;">Whats next:</h3>
                 <p>
-                    <li>Please Arrive on Time.</li>
+                    <li>Please Bring your Child on Time.</li>
                 </p>
                 <p>
-                    <li>Please Carry A NoteBook And A Pen.</li>
+                    <li>Please Contact us for any inquiries.</li>
                 </p>
                 <button id="doneButton" style="
                 background: green;
@@ -596,7 +724,7 @@
 
             function clearErrors() {
                 form.querySelectorAll(".errorMessage").forEach(m => m.textContent = "");
-                form.querySelectorAll("input, select").forEach(f => f.style.backgroundColor = "");
+                form.querySelectorAll("input, select, textarea").forEach(f => f.style.backgroundColor = "");
                 const errorBox = document.getElementById("errorBox");
                 if (errorBox) errorBox.textContent = "";
             }
@@ -613,61 +741,60 @@
                     if (errorMsg && errorMsg.classList.contains("errorMessage")) {
                         errorMsg.textContent = message;
                     }
-                    field.style.backgroundColor = " rgba(255, 0, 0, 0.1)"; // light red background
-                    if (!firstErrorField) firstErrorField = field; // remember the first invalid field
+                    field.style.backgroundColor = "rgba(255, 0, 0, 0.1)"; // light red background
+                    if (!firstErrorField) firstErrorField = field;
                     isValid = false;
                 }
 
-                // Full Name
-                const name = document.getElementById("participantName");
-                if (!name || !/^[A-Za-z\s'-]+$/.test(name.value.trim())) {
-                    setError(name, "Please enter a valid name.");
+                // Parent Full Name
+                const parentName = document.querySelector("[name='parentName']");
+                if (!parentName || !/^[A-Za-z\s'-]+$/.test(parentName.value.trim())) {
+                    setError(parentName, "Please enter a valid name.");
                 }
 
-                // Phone Number
-                const phone = document.getElementById("participantPhone");
-                if (!phone || !/^\d{9,15}$/.test(phone.value.trim())) {
-                    setError(phone, "Enter a valid phone number (9–15 digits).");
+                // Parent Phone Number
+                const parentPhone = document.querySelector("[name='parentPhone']");
+                if (!parentPhone || !/^\d{9,15}$/.test(parentPhone.value.trim())) {
+                    setError(parentPhone, "Enter a valid phone number.");
                 }
 
-                // // Email
-                // const email = document.getElementById("participantEmail");
-                // if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email.value.trim())) {
-                //     setError(email, "Enter a valid email address.");
-                // }
-
-                // Age
-                // const age = document.getElementById("participantAge");
-                // const ageVal = age ? Number(age.value) : NaN;
-                // if (!age || !age.value || isNaN(ageVal) || ageVal < 10 || ageVal > 100) {
-                //     setError(age, "Enter a valid age.");
-                // }
-
-                // Gender
-                const gender = document.getElementById("participantGender");
-                if (!gender || gender.value === "") {
-                    setError(gender, "Please select a gender.");
+                // Child Full Name
+                const childName = document.querySelector("[name='childName']");
+                if (!childName || childName.value.trim().length < 2) {
+                    setError(childName, "Please enter a valid name.");
                 }
 
-                // City / Area
-                const address = document.getElementById("participantAddress");
-                if (!address || address.value.trim().length < 2) {
-                    setError(address, "Enter your city or area.");
+                // Child Age
+                const childAge = document.querySelector("[name='childAge']");
+                if (!childAge || childAge.value === "") {
+                    setError(childAge, "Please select your child’s age.");
                 }
 
-                // Tajwid
-                const tajwid = document.getElementById("participantTajwid");
-                if (!tajwid || tajwid.value === "") {
-                    setError(tajwid, "Please select an option.");
+                // Child Gender
+                const childGender = document.querySelector("[name='childGender']");
+                if (!childGender || childGender.value === "") {
+                    setError(childGender, "Please select a gender.");
                 }
 
                 // Referral
-                const referral = document.getElementById("participantReferral");
+                const referral = document.querySelector("[name='referral']");
                 if (!referral || referral.value === "") {
-                    setError(referral, "Please select how you heard about us.");
+                    setError(referral, "Please select an option.");
                 }
 
-                // If there is an error, scroll to the first invalid field
+                // Consent checkbox
+                const consent = document.querySelector("[name='consent']");
+                if (!consent || !consent.checked) {
+                    setError(consent, "You must give consent to continue.");
+                }
+
+                // M-Pesa Transaction Code
+                const mpesaCode = document.querySelector("[name='mpesaCode']");
+                if (!mpesaCode || mpesaCode.value.trim().length < 5) {
+                    setError(mpesaCode, "Please enter a valid M-Pesa transaction code.");
+                }
+
+                // Scroll to first invalid field
                 if (firstErrorField) {
                     firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
                     firstErrorField.focus();
@@ -697,15 +824,31 @@
             // Build payload matching your table columns
             function buildPayload() {
                 return {
-                    event_id: 3, // fixed event ID for this form
-                    participant_name: (document.getElementById("participantName").value || "").trim() || null,
-                    participant_phone: (document.getElementById("participantPhone").value || "").trim() || null,
-                    participant_email: (document.getElementById("participantEmail").value || "").trim() || null,
-                    participant_age: Number(document.getElementById("participantAge").value) || null,
-                    participant_gender: (document.getElementById("participantGender").value || "").trim() || null,
-                    participant_address: (document.getElementById("participantAddress").value || "").trim() || null,
-                    participant_tajwid: (document.getElementById("participantTajwid").value || "").trim() || null,
-                    participant_referral: (document.getElementById("participantReferral").value || "").trim() || null,
+                    event_id: 4, // fixed event ID for this form
+
+                    // Parent / Guardian
+                    participant_name: (document.querySelector("[name='parentName']").value || "").trim() || null,
+                    participant_phone: (document.querySelector("[name='parentPhone']").value || "").trim() || null,
+                    participant_wa_phone: (document.querySelector("[name='parentWhatsapp']").value || "").trim() || null,
+                    participant_email: (document.querySelector("[name='parentEmail']").value || "").trim() || null,
+
+                    // Child
+                    childs_name: (document.querySelector("[name='childName']").value || "").trim() || null,
+                    childs_age: Number(document.querySelector("[name='childAge']").value) || null,
+                    childs_gender: (document.querySelector("[name='childGender']").value || "").trim() || null,
+                    childs_madrasa: (document.querySelector("[name='childMadrasa']").value || "").trim() || null,
+                    childs_school: (document.querySelector("[name='childSchool']").value || "").trim() || null,
+
+                    // Emergency
+                    emergency_name: (document.querySelector("[name='emergencyName']").value || "").trim() || null,
+                    emergency_phone: (document.querySelector("[name='emergencyPhone']").value || "").trim() || null,
+
+                    // Other
+                    special_needs: (document.querySelector("[name='specialNeeds']").value || "").trim() || null,
+                    participant_referral: (document.querySelector("[name='referral']").value || "").trim() || null,
+                    form_consent: document.querySelector("[name='consent']").checked || false,
+                    payment_msg: (document.querySelector("[name='mpesaCode']").value || "").trim() || null,
+
                     confirmed: true
                 };
             }
@@ -740,6 +883,7 @@
                     if (errorBox) { errorBox.textContent = "Please fix the errors and try again."; errorBox.style.color = "red"; }
                     return false;
                 }
+                console.log("Payload to send:");
 
                 const payload = buildPayload();
                 console.log("Payload to send:", payload);

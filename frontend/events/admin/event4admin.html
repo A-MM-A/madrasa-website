@@ -203,7 +203,6 @@
             outline: none;
         }
 
-
         /* Buttons */
         .popupContent button {
             padding: 10px 16px;
@@ -245,8 +244,6 @@
                 transform: scale(1);
             }
         }
-
-
 
         /* Full-screen overlay */
         #passwordOverlay {
@@ -406,53 +403,81 @@
         // ------------------------------- details to change ---------------------------   
         // #############################################################################
 
-        let EventTitle = "Tuhfatul Atfal (Tajwid) - Participants";
-        const event_id = 3;
+        let EventTitle = "Seerah Workshop (Kids) - Participants";
+        const event_id = 4;
         let pdfFontSize = 7;
-        const correctPassword = "dar-atfal-2025";
+        const correctPassword = "seerah-2025-kids";
 
         let expectedColumns = [
             "participant_name",
             "participant_phone",
+            "participant_wa_phone",
             "participant_email",
-            "participant_age",
-            "participant_gender",
-            "participant_address",
-            "participant_tajwid",
-            "participant_referral"
+            "childs_name",
+            "childs_age",
+            "childs_gender",
+            "childs_madrasa",
+            "childs_school",
+            "emergency_name",
+            "emergency_phone",
+            "special_needs",
+            "participant_referral",
+            "form_consent",
+            "payment_msg"
         ];
 
         let columnsNames = [
-            "Name",
-            "Phone",
-            "Email",
+            "Parent Name",
+            "Parent Phone",
+            "WhatsApp",
+            "Parent Email",
+            "Child's Name",
             "Age",
             "Gender",
-            "Address",
-            "Tajwid",
-            "Referral"
+            "Madrasa",
+            "School",
+            "Emergency Name",
+            "Emergency Phone",
+            "Special Needs",
+            "Referral",
+            "Consent",
+            "Payment Message"
         ];
 
         let editFieldTypes = [
-            "text",      // Name
-            "text",      // Phone
-            "email",    // Email
-            "number",    // Age
-            "text",      // Gender
-            "text",      // Address
-            "text",      // Tajwid
-            "text"       // Referral
+            "text",      // Parent Name
+            "text",      // Parent Phone
+            "text",      // Parent WhatsApp
+            "email",     // Parent Email
+            "text",      // Child Name
+            "number",    // Child Age
+            "text",      // Child Gender
+            "text",      // Child Madrasa
+            "text",      // Child School
+            "text",      // Emergency Contact Name
+            "text",      // Emergency Contact Phone
+            "textarea",  // Special Needs
+            "text",      // Referral
+            "checkbox",  // Consent
+            "textarea"   // Payment Message
         ];
 
-        let pdfColumnWidths = [         // do 780 / columns
-            120,     // Name
-            110,     // Phone
-            150,     // Email
-            40,     // Age
-            50,     // Gender
-            100,     // Address
-            90,     // Tajwid
-            90      // Referral
+        let pdfColumnWidths = [
+            50,     // Parent Name
+            47,     // Parent Phone
+            45,     // Parent WhatsApp
+            70,     // Parent Email
+            50,     // Child's Name
+            30,     // Child's Age
+            30,     // Child's Gender
+            45,     // Child's Madrasa
+            45,     // Child's School
+            50,     // Emergency Contact Name
+            47,     // Emergency Contact Phone
+            70,    // Special Needs
+            45,    // Participant Referral
+            25,    // Form Consent
+            100,    // Payment Message
         ];
 
         // #############################################################################
@@ -1033,7 +1058,7 @@
 
                 // Build columnStyles dynamically
                 const columnStyles = {};
-                columnStyles[0] = { cellWidth: 20 }; // index "#"
+                columnStyles[0] = { cellWidth: 10 }; // index "#"
                 expectedColumns.forEach((col, idx) => {
                     const width = pdfColumnWidths[idx] || "auto"; // fallback to auto width
                     columnStyles[idx + 1] = { cellWidth: width };
